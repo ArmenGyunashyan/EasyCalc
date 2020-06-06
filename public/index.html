@@ -16,18 +16,25 @@ Skripte
 -->
 
 <script>
-    console.log("Das wird auch ausgeführt!");
-</script>
-
-
-
-<script>
     const btn_style = document.getElementById("stylebutton");
     const stylesheet = document.getElementById("sheet");
 
     if(document.cookie.length <= 0) {
         document.cookie = "style=hell";
+    } else {
+        var kekse = document.cookie.split(";");
+        var includes = false;
+            for(i = 0; i < kekse.length; i++) {
+                if(kekse[i].includes("style")) {
+                    includes = true;
+                }
+            }
+            if(includes == false) {
+                document.cookie = "style=hell";
+            }
     }
+
+    
         
     setStyle(getStyle());
 
