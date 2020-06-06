@@ -9,10 +9,12 @@ html, body {
     margin-top: 0px;
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 16px;
-    background-color: #181818;
+    background-color: #454545;
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
+    margin-left: 5px;
     color: gray;
     font-size: 40pt;
     font-family: 'Orbitron', 'SansSerif';
@@ -20,27 +22,28 @@ h1, h2, h3, h4, h5, h6 {
 
 .fixed-size {
     margin: 0 auto;
-    background-color: #151515;
+    background-color: #303030;
     max-width: 960px;
 }
 
-/*---------------------------------------------- Ab hier beginnt unser CSS code*/
-body
+p
 {
-    background-color: #454545;
-    margin-left: 150px;
-    margin-right: 150px;
+    font-size: 10pt;
+    font-family: SansSerif;
+    color: grey;
 }
 
-.navbar
+/*---------------------------------------------- Ab hier beginnt unser CSS code*/
+/* Navbar Style */
+
+.header .navbar
 {
     float: right;
 }
 
-.navbar > ul > li
+.header .navbar > ul > li
 {
     display: inline-block;
-    float: left;
     color: gray;
     font-size: 20pt;
     font-family: 'Orbitron', 'SansSerif';
@@ -48,41 +51,44 @@ body
     margin:7px;
 }
 
-li a
+.header li a
 {
     color: gray;
     font-family:'Orbitron', 'SansSerif';
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.header li a:hover:not(.active) {
   color: lightgray;
 }
 
-hr
+.header hr
 {
-    margin-top: 20px;
+    margin-top: 15px;
     border:none;
     height:1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 470, from(white), to(#454545));
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 570, from(white), to(#303030));
 }
 
-.switch
+/* Switch Style */
+
+.header .switch
 {
+    margin-top: 5px;
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
 
-.switch input
+.header .switch input
 {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-.slider
+.header .slider
 {
     position: absolute;
     cursor: pointer;
@@ -90,12 +96,12 @@ hr
     left: 0;
     right: 0;
     bottom: 0;
-    background-color:#303030;
+    background-color:#454545;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-.slider:before
+.header .slider:before
 {
     position: absolute;
     content:"";
@@ -108,24 +114,124 @@ hr
     transition: .4s;
 }
 
-input:checked + .slider {
-    background-color: #303030;
+.header input:checked + .slider {
+    background-color: #40b9a8;
 }
 
-input:focus + .slider {
+.header input:focus + .slider {
     box-shadow: 0 0 1px #454545;
 }
 
-input:checked + .slider:before {
+.header input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
 
-.slider.round {
+.header .slider.round {
     border-radius: 34px;
 }
 
-.slider.round:before {
+.header .slider.round:before {
     border-radius: 50%;
+}
+
+/* Flip-Card Style */
+
+.rechner
+{
+    font-size: 30pt;
+    text-align: center;
+}
+
+.flip-card
+{
+    background-color: transparent;
+    width: 290px;
+    height: 290px;
+    perspective: 1000px;
+    float: left;
+    margin-left: 22px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.flip-card-front
+{
+    background-color: #303030;
+    color: lightgray;
+}
+
+.flip-card-back
+{
+    background-color: #303030;
+    color: lightgray;
+    transform: rotateY(180deg);
+}
+
+.flip-card-header
+{
+    margin-top: 20px;
+    color: gray;
+    font-size: 20pt;
+    font-family: 'Orbitron', 'SansSerif';
+}
+
+.flip-card-text
+{
+    margin-top: 20px;
+    font-size: 10pt;
+    font-family: 'Orbitron', 'SansSerif'
+}
+
+.flip-card-image
+{
+    width:290px;
+    height:290px;
+}
+
+/* Footer Style */
+
+.footer
+{
+    position: absolute;
+    bottom: 0;
+    height: 80px;
+    margin-top: 40px;
+}
+
+.footer-header
+{
+    font-size: 15pt;
+    margin-left: 0;
+}
+
+.footer-line
+{
+    width: 960px;
+    border:none;
+    height:1px;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 570, from(white), to(#303030));
 }
