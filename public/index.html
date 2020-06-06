@@ -2,20 +2,33 @@
 <html>
 <head>
     <title>Test</title>
-    <link rel="stylesheet" id="sheet" href="css/default.css">
+    <link rel="stylesheet" id="sheet" href="css/dark.css">
 </head>
 <body>
-    <div><h1>EasyConvert</h1></div>
-    <p></p>
-    <button id="stylebutton">Change Style</button>
+    <div>
+        <h1>EasyCalc</h1>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html"> HOME</a></li>
+                <li><a href="kurs.html">KURS</a></li>
+                <li><a href="formeln.html">FORMELN</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </div>
+        <hr>
+    </div>
 </body>
 <!--
 ===================================
 Skripte
 ===================================
 -->
-
 <script>
+   /* // FIXME: Cookies funktionieren nicht
     const btn_style = document.getElementById("stylebutton");
     const stylesheet = document.getElementById("sheet");
 
@@ -33,9 +46,6 @@ Skripte
                 document.cookie = "style=hell";
             }
     }
-
-    
-        
     setStyle(getStyle());
 
     btn_style.onclick = function() {
@@ -75,7 +85,6 @@ Skripte
                 }
             }
             return null;
-        }
-
+        }*/
 </script>
 </html>
