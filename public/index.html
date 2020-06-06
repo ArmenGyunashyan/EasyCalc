@@ -1,8 +1,74 @@
 <!DOCTYPE html>
+<html>
 <head>
-    <title></title>
+    <title>Test</title>
+    <link rel="stylesheet" id="sheet" href="css/default.css">
 </head>
 <body>
-    <h1>Hallo</h1>
+    <div><h1>EasyConvert</h1></div>
     <p></p>
+    <button id="stylebutton">Change Style</button>
 </body>
+<!--
+===================================
+Skripte
+===================================
+-->
+
+<script>
+    console.log("Das wird auch ausgeführt!");
+</script>
+
+
+
+<script>
+    const btn_style = document.getElementById("stylebutton");
+    const stylesheet = document.getElementById("sheet");
+
+    if(document.cookie.length <= 0) {
+        document.cookie = "style=hell";
+    }
+        
+    setStyle(getStyle());
+
+    btn_style.onclick = function() {
+
+        if(getStyle() == "style=hell") {
+            stylesheet.href="css/dark.css";
+            document.cookie = "style=dunkel";
+            
+        } else {
+            stylesheet.href="css/default.css";
+            document.cookie = "style=hell";
+            
+        }
+        
+        };
+
+        function setStyle(string) {
+            
+            if(string == "style=hell") {
+            stylesheet.href="css/default.css";
+          
+        } else {
+            stylesheet.href="css/dark.css";
+            
+        }
+        
+        
+        }
+
+        function getStyle() {
+            //Cookie-String wird in ein Array umgwandelt und nach dem Schlüsselwort 'style' durchsucht [=hell || =dunkel]
+            var kekse = document.cookie.split(";");
+            for(i = 0; i < kekse.length; i++) {
+                if(kekse[i].includes("style")) {
+                    //Die Rückgabe ist nun ' style=[...]'. Das Leerzeichen am Anfang muss entfernt werden.
+                    return kekse[i].substring(1, kekse[i].length);
+                }
+            }
+            return null;
+        }
+
+</script>
+</html>

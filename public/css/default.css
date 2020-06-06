@@ -1,0 +1,29 @@
+@import url("https://meyerweb.com/eric/tools/css/reset/reset.css");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+
+body, *, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin-top: 0px;
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 16px;
+    background-color: lightgray;
+    
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: gray;
+    font-size: 40pt;
+    font-family: 'Orbitron', 'SansSerif';
+}
+
+.fixed-size {
+    margin: 0 auto;
+    background-color: white;
+    max-width: 960px;
+}
+
+/*---------------------------------------------- Ab hier beginnt unser CSS code*/
+
