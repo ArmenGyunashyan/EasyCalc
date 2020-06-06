@@ -7,6 +7,16 @@ const bodyParser = require('body-parser'); // Zum Extrahieren von Html-Form-Date
 //Variablen für die Session-------------------
 const username = 'root';
 const password = 'admin';
+const users = [
+    {
+        username: "root",
+        password: "admin"
+    },
+    {
+        username: "test",
+        password: "test"
+    }
+];
 //--------------------------------------------
 
 
@@ -43,19 +53,20 @@ app.post('/login.html/auth', function(req, res) {
 });
 //--------------------------------------------------
 /*
-app.get('/', function(req, res) {
-    if(req.session.loggedin) {
-        console.log(res.session.username);
+app.use('/', (req, res) => {
+    if(res.session.loggedin) {
+    res.render('index.js', {username: res.session.username});
     }
-    res.end();
 });
 */
-
-
+app.get('/kurs.html', function(req, res) {
+    console.log("Du hast was geoposttet");
+    res.redirect('/login.html');
+});
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Der Prot wird aus der Umgebungsvariable gelesen (wärend der Entwicklung ist er 5000 (Development))
+// Der Port wird aus der Umgebungsvariable gelesen (wärend der Entwicklung ist er 5000 (Development))
 const PORT = process.env.PORT || 5000;
-// Der Prot wird festgelegt
+// Der Port wird festgelegt
 app.listen(PORT, () => console.log(`Server startet on Port ${PORT}`));
