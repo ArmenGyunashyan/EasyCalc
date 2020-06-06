@@ -1,2 +1,2 @@
 # Webanwendungen
-Projekt Webanwendung - Dennis und Armen
+Projekt Webanwendung - Dennis & Armen
