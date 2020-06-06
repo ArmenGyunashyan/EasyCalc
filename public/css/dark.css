@@ -67,7 +67,7 @@ p
     margin-top: 15px;
     border:none;
     height:1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 570, from(white), to(#303030));
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
 
 /* Switch Style */
@@ -233,5 +233,5 @@ p
     width: 960px;
     border:none;
     height:1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 570, from(white), to(#303030));
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
