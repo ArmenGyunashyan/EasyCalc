@@ -25,4 +25,13 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 960px;
 }
 
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    border: 1px solid red;
+}
+
 /*---------------------------------------------- Ab hier beginnt unser CSS code*/

@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
+    <title>Home</title>
     <link rel="stylesheet" id="sheet" href="css/dark.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body  class="fixed-size">
+<body>
 <header class="header" >
-    <div>
+    <div class="fixed-size">
         <h1>EasyCalc</h1>
         <label class="switch">
             <input type="checkbox">
             <span class="slider round"></span>
         </label>
         <div class="navbar">
-            <ul>
-                <li><a href="index.html"> HOME</a></li>
-                <li><a href="kurs.html">KURS</a></li>
-                <li><a href="formeln.html">FORMELN</a></li>
-                <li><a href="login.html">LOGIN</a></li>
-            </ul>
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="kurs.html">KURS</a></li>
+                    <li><a href="formeln.html">FORMELN</a></li>
+                    <li><a href="login.html">LOGIN</a></li>
+                 </ul>
+            </nav>
         </div>
         <hr>
     </div>
 </header>
+<section class="fixed-size">
 <!--
 ===================================
 Flip Cards
 ===================================
 -->
-<h1 class="rechner">Rechner</h1>
+<h1 class="flip-card-header">Rechner</h1>
 <div class="flip-card">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Maßeinheiten</h1>
+        <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
+            <h1 class="flip-card-title">Maßeinheiten</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -45,8 +49,8 @@ Flip Cards
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Währungen</h1>
+        <div class="flip-card-back" onclick="window.location='waehrungen-rechner.html'">
+            <h1 class="flip-card-title">Währungen</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -56,8 +60,8 @@ Flip Cards
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Strom</h1>
+        <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
+            <h1 class="flip-card-title">Strom</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -67,24 +71,61 @@ Flip Cards
 Charts
 ===================================
 -->
-<h1>Hier kommt das Kuchendiagramm</h1>
+<div id="chartContainer" class="chart fixed-size"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!--
 ===================================
 Footer
 ===================================
 -->
-
-<footer class="footer">
-    <hr class="footer-line">
-    <h1 class="footer-header">Impressum</h1>
+</section>
+<div>
+<footer class="footer fixed-size">
+    <hr>
+    <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
     <p>Dennis & Armen</p>
     <p>Münsterstraße 999 Bocholt</p>
     <p>WHS</p>
 </footer>
+</div>
 </body>
+
 <!--
 ===================================
-Skripte
+Chart Skript: CanvasJS
+===================================
+-->
+<script>
+    window.onload = function() {
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            backgroundColor: "transparent",
+            color: "red",
+            title: {
+                text: "So häufig wurden die Rechner benutzt",
+                fontFamily: "Orbitron",
+                fontColor: "lightgray",
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                yValueFormatString: "#\"\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    {y: 1000, color:"#179180", indexLabelFontColor: "lightgray", label: "Maßeinheitenrechner"},
+                    {y: 250, color:"#2b6059", indexLabelFontColor: "lightgray", label: "Stromrechner"},
+                    {y: 400, color: "#0f4f46", indexLabelFontColor: "lightgray", label: "Währungsrechner"},
+                ]
+            }]
+        });
+        chart.render();
+
+    }
+</script>
+<!--
+===================================
+Cookies Skript
 ===================================
 -->
 <script>
