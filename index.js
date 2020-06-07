@@ -96,7 +96,6 @@ app.post('/login.html/auth', function(req, res) {
 //--------------------------------------------------
 
 function isAuth(req, res, next) {
-    //if(!sess.loggedin) {
     if(!req.session.loggedin) {
         next();
     } else {
@@ -109,8 +108,21 @@ app.get('/login.html', isAuth);
 
 //--------------------------------------------------
 
+app.get('/', function(req, res) {
+    res.render('index', {username: req.session.username});
+});
+
+app.get('/logout', function(req, res, done) {
+    req.session.loggedin = false;
+    req.session.username = null;
+    req.session.password = null;
+    res.redirect('/');
+    done();
+});
+
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));
+app.set('view engine', 'ejs');
 
 // Der Port wird aus der Umgebungsvariable gelesen (wärend der Entwicklung ist er 5000 (Development))
 const PORT = process.env.PORT || 5000;

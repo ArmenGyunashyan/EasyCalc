@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+    <link rel="stylesheet" id="sheet" href="css/dark.css">
+</head>
+<body  class="fixed-size">
+<header class="header" >
+    <div>
+        <h1>EasyCalc</h1>
+        <label class="switch">
+            <input type="checkbox">
+            <span class="slider round"></span>
+        </label>
+        <div class="navbar">
+            <ul>
+                <li><a href="index.html"> HOME</a></li>
+                <li><a href="kurs.html">KURS</a></li>
+                <li><a href="formeln.html">FORMELN</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+                <li><% if(username) { %>
+                    <a href="logout">LOGOUT</a>
+               <% } else { %>
+                    <a href="login.html">LOGIN</a>
+                <% } %></li>
+            </ul>
+        </div>
+        <hr>
+    </div>
+</header>
+<!--
+===================================
+Flip Cards
+===================================
+-->
+<h1 class="rechner">Rechner</h1>
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
+        </div>
+        <div class="flip-card-back">
+            <h1 class="flip-card-header">Maßeinheiten</h1>
+            <p class="flip-card-text">Text</p>
+        </div>
+    </div>
+</div>
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
+        </div>
+        <div class="flip-card-back">
+            <h1 class="flip-card-header">Währungen</h1>
+            <p class="flip-card-text">Text</p>
+        </div>
+    </div>
+</div>
+<div class="flip-card">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
+        </div>
+        <div class="flip-card-back">
+            <h1 class="flip-card-header">Strom</h1>
+            <p class="flip-card-text">Text</p>
+        </div>
+    </div>
+</div>
+<!--
+===================================
+Charts
+===================================
+-->
+<h1>Hier kommt das Kuchendiagramm</h1>
+<!--
+===================================
+Footer
+===================================
+-->
+
+<footer class="footer">
+    <hr class="footer-line">
+    <h1 class="footer-header">Impressum</h1>
+    <p>Dennis & Armen</p>
+    <p>Münsterstraße 999 Bocholt</p>
+    <p>WHS</p>
+</footer>
+</body>
+<!--
+===================================
+Skripte
+===================================
+-->
+<script>
+   /* // FIXME: Cookies funktionieren nicht
+    const btn_style = document.getElementById("stylebutton");
+    const stylesheet = document.getElementById("sheet");
+
+    if(document.cookie.length <= 0) {
+        document.cookie = "style=hell";
+    } else {
+        var kekse = document.cookie.split(";");
+        var includes = false;
+            for(i = 0; i < kekse.length; i++) {
+                if(kekse[i].includes("style")) {
+                    includes = true;
+                }
+            }
+            if(includes == false) {
+                document.cookie = "style=hell";
+            }
+    }
+    setStyle(getStyle());
+
+    btn_style.onclick = function() {
+
+        if(getStyle() == "style=hell") {
+            stylesheet.href="css/dark.css";
+            document.cookie = "style=dunkel";
+
+        } else {
+            stylesheet.href="css/default.css";
+            document.cookie = "style=hell";
+
+        }
+
+        };
+
+        function setStyle(string) {
+            
+            if(string == "style=hell") {
+            stylesheet.href="css/default.css";
+          
+        } else {
+            stylesheet.href="css/dark.css";
+            
+        }
+        
+        
+        }
+
+        function getStyle() {
+            //Cookie-String wird in ein Array umgwandelt und nach dem Schlüsselwort 'style' durchsucht [=hell || =dunkel]
+            var kekse = document.cookie.split(";");
+            for(i = 0; i < kekse.length; i++) {
+                if(kekse[i].includes("style")) {
+                    //Die Rückgabe ist nun ' style=[...]'. Das Leerzeichen am Anfang muss entfernt werden.
+                    return kekse[i].substring(1, kekse[i].length);
+                }
+            }
+            return null;
+        }*/
+</script>
+</html>
