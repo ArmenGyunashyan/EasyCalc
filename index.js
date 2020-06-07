@@ -3,10 +3,16 @@ const express = require('express'); // Express-Framework
 const path = require('path'); // Keiine Ahnung (wird aber bei fast allem benötigt)
 const session = require('express-session'); // Session-Unterstützung für das Login-System. (Alle Infoematiionen über einen Nutzer sind später im Session-Objekt)
 const bodyParser = require('body-parser'); // Zum Extrahieren von Html-Form-Daten (Formulardaten aus z.B. Inputfeldern)
+//const passport = require('passport');
+/*
+const initializePassport = rewuire('./passport-config');
+initializePassport(passport);
+*/
+
 
 //Variablen für die Session-------------------
-const username = 'root';
-const password = 'admin';
+const username = 'root'; //veraltet
+const password = 'admin'; //veraltet
 const users = [
     {
         username: "root",
@@ -17,6 +23,11 @@ const users = [
         password: "test"
     }
 ];
+var sess = {
+    cookie: null,
+    loggedin: false,
+    username: null
+}; //Die aktuelle Session (wenn vorhanden)
 //--------------------------------------------
 
 
@@ -41,6 +52,7 @@ app.post('/login.html/auth', function(req, res) {
         if(user == username && pw == password) { // Überprüft Login-Daten auf Übereinstimmung
             req.session.loggedin = true;
             req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wiie ein globaler Cookie)
+            sess = req.session;
             res.redirect('/');
         } else {
             res.send('Passwort oder Nutzername falsch!');
@@ -51,18 +63,30 @@ app.post('/login.html/auth', function(req, res) {
 		response.end();
     }
 });
+
 //--------------------------------------------------
-/*
-app.use('/', (req, res) => {
-    if(res.session.loggedin) {
-    res.render('index.js', {username: res.session.username});
+function checkAuth() {
+    if(sess) {
+        console.log(sess.username + " is logged in");
+        return true;
     }
-});
-*/
-app.get('/kurs.html', function(req, res) {
-    console.log("Du hast was geoposttet");
-    res.redirect('/login.html');
-});
+    return false;
+}
+
+function requireLogin(req, res, done){
+    if (sess.loggedin) {
+      var postLoginRedirectUrl = req.originalUrl;
+      // store this url somehow (session or query params?)
+      console.log('angemeldet');
+      res.redirect('/');
+      done();
+    } else {
+      done();
+    }
+}
+
+app.get('/login.html', requireLogin);
+
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));
 
