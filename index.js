@@ -1,13 +1,10 @@
 //Imports (da es JS ist, sind es Variablen)
 const express = require('express'); // Express-Framework
-const path = require('path'); // Keiine Ahnung (wird aber bei fast allem benötigt)
+const path = require('path'); // Keine Ahnung (wird aber bei fast allem benötigt)
 const session = require('express-session'); // Session-Unterstützung für das Login-System. (Alle Infoematiionen über einen Nutzer sind später im Session-Objekt)
 const bodyParser = require('body-parser'); // Zum Extrahieren von Html-Form-Daten (Formulardaten aus z.B. Inputfeldern)
-//const passport = require('passport');
-/*
-const initializePassport = rewuire('./passport-config');
-initializePassport(passport);
-*/
+
+
 
 
 //Variablen für die Session-------------------
@@ -37,7 +34,7 @@ const app = express();
 //Login-Funktionen----------------------------------
 
 app.use(session({
-    secret: 'secret',
+    secret: 'secret', //Hier kommt eigentlich ein Hashwert hin
     resave: true,
     saveUninitialized: true
 }));
@@ -48,11 +45,42 @@ app.use(bodyParser.json());
 app.post('/login.html/auth', function(req, res) {
     var user = req.body.username; //Auslesen der Variable 'username' aus dem Body des Http-Requests (hier als -> var res)
     var pw = req.body.password; //Auslesen der Variable 'password' aus dem Body des Http-Requests (hier als -> var res)
+
+    var userDbIndex = -1; //Speicherort des Users in der UserDB (hier nur ein cosnt Array)
+
+    if(user && pw) {
+        for(i=0;i<users.length;i++) {
+            if(users[i].username == user) {
+                userDbIndex = i;
+            }
+        }
+
+        if(userDbIndex > -1) { //Username in der DB (Array) gefunden
+            if(user == users[userDbIndex].username && pw == users[userDbIndex].password) {
+                req.session.loggedin = true;
+            req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wiie ein globaler Cookie)
+            sess = req.session;
+            
+            res.redirect('/');
+        } else {
+            res.send('Passwort oder Nutzername falsch!');
+        }
+        res.end();
+            
+        } else {
+            res.send('Passwort oder Nutzername falsch!');
+        }
+    } else {
+        response.send('Please enter Username and Password!');
+		response.end();
+    }
+/*
     if(user && pw) {
         if(user == username && pw == password) { // Überprüft Login-Daten auf Übereinstimmung
             req.session.loggedin = true;
             req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wiie ein globaler Cookie)
             sess = req.session;
+            
             res.redirect('/');
         } else {
             res.send('Passwort oder Nutzername falsch!');
@@ -62,30 +90,24 @@ app.post('/login.html/auth', function(req, res) {
         response.send('Please enter Username and Password!');
 		response.end();
     }
+    */
 });
 
 //--------------------------------------------------
-function checkAuth() {
-    if(sess) {
-        console.log(sess.username + " is logged in");
-        return true;
-    }
-    return false;
-}
 
-function requireLogin(req, res, done){
-    if (sess.loggedin) {
-      var postLoginRedirectUrl = req.originalUrl;
-      // store this url somehow (session or query params?)
-      console.log('angemeldet');
-      res.redirect('/');
-      done();
+function isAuth(req, res, next) {
+    //if(!sess.loggedin) {
+    if(!req.session.loggedin) {
+        next();
     } else {
-      done();
+        //console.log('Angemeldet: ' + req.session.username);
+        res.redirect('/');
     }
 }
 
-app.get('/login.html', requireLogin);
+app.get('/login.html', isAuth);
+
+//--------------------------------------------------
 
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));
