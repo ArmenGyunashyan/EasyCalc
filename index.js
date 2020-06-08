@@ -58,7 +58,7 @@ app.post('/login.html/auth', function(req, res) {
         if(userDbIndex > -1) { //Username in der DB (Array) gefunden
             if(user == users[userDbIndex].username && pw == users[userDbIndex].password) {
                 req.session.loggedin = true;
-            req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wiie ein globaler Cookie)
+            req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wie ein globaler Cookie)
             sess = req.session;
             
             res.redirect('/');

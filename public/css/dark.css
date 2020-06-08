@@ -25,60 +25,59 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 940px;
 }
 
-p
-{
+p {
     font-size: 10pt;
     font-family: SansSerif;
     color: lightgray;
 }
 
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-.clearfix:after {
-    border: 1px solid red;
-}
 /*----------------------------------------------*/
 
 /* Navbar Style */
 
-.header .navbar
-{
+.header .navbar {
     float: right;
 }
 
-    .header .navbar > nav > ul > li
-    {
-        display: inline-block;
-        font-size: 20pt;
-        font-family: 'Orbitron', 'SansSerif';
-        text-align: right;
-        margin:7px;
-    }
-.header hr
-{
-    margin-top: 15px;
-    border:none;
-    height:1px;
+.header .navbar > div > .nav-links > li {
+    display: inline-block;
+    font-size: 20pt;
+    font-family: 'Orbitron', 'SansSerif';
+    text-align: right;
+    margin: 7px;
+}
+
+.icon {
+    display: none;
+    cursor: pointer;
+}
+
+.icon div {
+    width: 30px;
+    height: 5px;
+    background-color: lightgray;
+    margin: 6px;
+}
+
+
+.header hr {
+    border: none;
+    height: 1px;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
-a
-{
+
+a {
     color: lightgray;
     text-decoration: none;
 }
 
-    a:hover:not(.active)
-    {
-        color: gray;
-    }
+a:hover:not(.active) {
+    color: gray;
+}
 
 /* Switch Style */
 
-.header .switch
-{
+.header .switch {
     margin-top: 9px;
     position: relative;
     display: inline-block;
@@ -87,85 +86,75 @@ a
     margin-left: 5px;
 }
 
-    .header .switch input
-    {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
-        .header input:checked + .slider
-        {
-            background-color: #179180;
-        }
+.header .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-        .header input:focus + .slider
-        {
-            box-shadow: 0 0 1px #454545;
-        }
+.header input:checked + .slider {
+    background-color: #179180;
+}
 
-        .header input:checked + .slider:before
-        {
-            -webkit-transform: translateX(18px);
-            -ms-transform: translateX(18px);
-            transform: translateX(18px);
-        }
+.header input:focus + .slider {
+    box-shadow: 0 0 1px #454545;
+}
 
-.header .slider
-{
+.header input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+}
+
+.header .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color:#454545;
+    background-color: #454545;
     -webkit-transition: .4s;
     transition: .4s;
 }
 
-    .header .slider:before
-    {
-        position: absolute;
-        content:"";
-        height: 18px;
-        width: 18px;
-        left: 4px;
-        bottom: 3px;
-        background-color: lightgray;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+.header .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 3px;
+    background-color: lightgray;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
-    .header .slider.round
-    {
-        border-radius: 34px;
-    }
+.header .slider.round {
+    border-radius: 34px;
+}
 
-    .header .slider.round:before
-    {
-        border-radius: 50%;
-    }
+.header .slider.round:before {
+    border-radius: 50%;
+}
 
 /* Flip-Card Style */
 
-.flip-card-header
-{
+.flip-card-header {
 
     margin-bottom: 10px;
     font-size: 30pt;
     text-align: center;
 }
 
-.flip-card
-{
+.flip-card {
     background-color: #303030;
     width: 290px;
     height: 290px;
     perspective: 1000px;
-    float: left;
-    margin-left: 17.5px;
-    margin-top: 15px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .flip-card-inner {
@@ -175,17 +164,15 @@ a
     text-align: center;
     transition: transform 0.6s;
     transform-style: preserve-3d;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
 }
 
-    .flip-card:hover .flip-card-inner
-    {
-        transform: rotateY(180deg);
-    }
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
 
-.flip-card-front, .flip-card-back
-{
+.flip-card-front, .flip-card-back {
     background-color: #303030;
     color: lightgray;
     position: absolute;
@@ -195,70 +182,99 @@ a
     backface-visibility: hidden;
 }
 
-.flip-card-back
-{
+.flip-card-back {
     transform: rotateY(180deg);
 }
 
-.flip-card-title
-{
+.flip-card-title {
     margin-top: 20px;
     color: lightgray;
     font-size: 20pt;
     font-family: 'Orbitron', 'SansSerif';
 }
 
-.flip-card-text
-{
+.flip-card-text {
     margin-top: 20px;
     font-size: 10pt;
     font-family: 'Orbitron', 'SansSerif'
 }
 
-.flip-card-image
-{
-    width:290px;
-    height:290px;
+.flip-card-image {
+    width: 290px;
+    height: 290px;
 }
 
 /* Footer Style */
 
-div > .footer
-{
+div > .footer {
     position: relative;
 }
 
-    .footer
-    {
-        bottom: 0;
-        height: 80px;
-        position: absolute;
-    }
+.footer {
+    bottom: 0;
+    height: 80px;
+    position: absolute;
+}
 
-        .footer > p
-        {
-            margin-left: 5px;
-        }
+.footer > p {
+    margin-left: 5px;
+}
 
-        .footer > hr
-        {
-            width: 960px;
-            border:none;
-            height:1px;
-            background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
-        }
+.footer > hr {
+    border: none;
+    height: 1px;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
+}
 
-    .footer-header
-    {
-        font-size: 15pt;
-    }
+.footer-header {
+    font-size: 15pt;
+}
 
 /* Chart Style */
 
-.chart
-{
-    min-height: 370px;
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 340px;
+.chart {
+    width: auto;
+    margin: auto;
+    height: 300px;
+}
+
+/* Responsive Design */
+
+@media screen and (min-width: 940px) {
+    .flip-card {
+        float: left;
+        margin-left: 17.5px;
+        margin-top: 15px;
+        width: 290px;
+        height: 290px;
+    }
+
+    .chart {
+        margin-top: 340px;
+        width: 940px;
+        min-height: 370px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        top: 103px;
+        background-color: red;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+
+    }
+
+    .navbar li {
+        opacity: 0;
+    }
+
+    .icon {
+        display: block;
+    }
 }
