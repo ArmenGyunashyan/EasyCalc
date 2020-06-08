@@ -37,6 +37,24 @@ var chronicMeasure = [
         inchToMetric: false,
         input: 12.7,
         result: 5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 25,
+        result: 63.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 100,
+        result: 254
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 16,
+        result: 6.3
     }
 ];
 var chronicMoney = [

@@ -42,7 +42,7 @@ p
     display: table;
 }
 .clearfix:after {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
 }
 /*----------------------------------------------*/
 
@@ -264,4 +264,15 @@ div > .footer
     width: 90%;
     margin-left: 5%;
     margin-top: 340px;
+}
+
+.list li {
+    background-color: #383838;
+    padding: 4px;
+    margin: 4px auto;
+    font-family: sans-serif;
+    border: 2px solid #282828;
+    border-radius: 5px;
+    width: 85%;
+    
 }

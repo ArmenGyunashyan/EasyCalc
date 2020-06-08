@@ -10,7 +10,7 @@
     <div class="fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
-            <input type="checkbox" id="styleChecker">
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
             <span class="slider round"></span>
         </label>
         <div class="navbar">
@@ -38,7 +38,7 @@ Forms des Rechenfeldes
 -->
 <section class="fixed-size">
 
-    <div class="fixed-size">
+    <div class="fixed-size clearfix">
         
         
         <div>
@@ -49,16 +49,19 @@ Forms des Rechenfeldes
 				<input type="number" name="input" placeholder="Masseinheit" required>
 				<input type="submit" value="berechnen">
             </form>
-        <% if(activeSession.loggedin && chronic.length > 0) { %>
-            <ul> <% chronic.forEach(result=>{ %>
-                <% if(result.user == activeSession.username) { %>
-                    <% if(result.inchToMetric == true) { %>
-                        <li> <%= result.input %> inch = <%= result.result %> cm </li>
+
+        <%if(activeSession.loggedin && chronic.length > 0) { %>
+            <br><br>
+            <h1>Verlauf</h1>
+            <ul class="list"> <% var i = 0;  for(i; i < chronic.length; i++) { %>
+                <% if(chronic[i].user == activeSession.username) { %>
+                    <% if(chronic[i].inchToMetric == true) { %>
+                        <li> <%= chronic[i].input %> inch = <%= chronic[i].result %> cm </li>
                     <% } else { %>
-                        <li> <%= result.input %> cm = <%= result.result %> inch </li>
+                        <li> <%= chronic[i].input %> cm = <%= chronic[i].result %> inch </li>
                     <% } %>
                 <% } %>
-            <%}); %> </ul>
+            <%} %> </ul>
         <% } %>
 		</div>
         
@@ -96,22 +99,23 @@ Cookies Skript
     const checkBox = document.getElementById("styleChecker");
 
     var style = "<%= style %>";
-
+    /*
     if(style == 'dunkel') {
         checkBox.checked = false; 
     } else {
         checkBox.checked = true; 
     }
+    */
 
     checkBox.onclick = function() {
         if(this.checked) {
             document.cookie = "style=hell";
             stylesheet.href="css/default.css";
-            checkBox.checked = true;
+            //checkBox.checked = true;
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href="css/dark.css";
-            checkBox.checked = false;
+            //checkBox.checked = false;
         }
     }
 

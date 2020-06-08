@@ -10,7 +10,7 @@
     <div class="fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
-            <input type="checkbox" id="styleChecker">
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
             <span class="slider round"></span>
         </label>
         <div class="navbar">
@@ -75,22 +75,22 @@ Cookies Skript
     const checkBox = document.getElementById("styleChecker");
 
     var style = "<%= style %>";
-
+    /*
     if(style == 'dunkel') {
         checkBox.checked = false; 
     } else {
         checkBox.checked = true; 
     }
-
+    */
     checkBox.onclick = function() {
         if(this.checked) {
             document.cookie = "style=hell";
             stylesheet.href="css/default.css";
-            checkBox.checked = true;
+            //checkBox.checked = true;
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href="css/dark.css";
-            checkBox.checked = false;
+            //checkBox.checked = false;
         }
     }
 
