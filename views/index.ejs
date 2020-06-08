@@ -2,95 +2,100 @@
 <html>
 <head>
     <title>Home</title>
-    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
-<header class="header" >
+<header class="header">
     <div class="fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
-        <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
             <span class="slider round"></span>
         </label>
-        <div class="navbar">
-            <nav>
-                <ul>
+        <nav class="navbar">
+            <div>
+                <ul class="nav-links">
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="kurs.html">KURS</a></li>
                     <li><a href="formeln.html">FORMELN</a></li>
                     <li><% if(activeSession.loggedin) { %>
-                        <a href="logout">LOGOUT</a>
-                    <% } else { %>
-                        <a href="login.html">LOGIN</a>
-                    <% } %></li>
-                 </ul>
-            </nav>
-        </div>
+                            <a href="logout">LOGOUT</a>
+                        <% } else { %>
+                            <a href="login.html">LOGIN</a>
+                        <% } %></li>
+                </ul>
+            </div>
+            <div class="icon">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
         <hr>
     </div>
 </header>
 <section class="fixed-size">
-<!--
-===================================
-Flip Cards
-===================================
--->
-<h1 class="flip-card-header">Rechner</h1>
-<div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
-        </div>
-        <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
-            <h1 class="flip-card-title">Maßeinheiten</h1>
-            <p class="flip-card-text">Text</p>
-        </div>
-    </div>
-</div>
-<div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
-        </div>
-        <div class="flip-card-back" onclick="window.location='waehrungen-rechner.html'">
-            <h1 class="flip-card-title">Währungen</h1>
-            <p class="flip-card-text">Text</p>
+    <!--
+    ===================================
+    Flip Cards
+    ===================================
+    -->
+    <h1 class="flip-card-header">Rechner</h1>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
+            </div>
+            <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
+                <h1 class="flip-card-title">Maßeinheiten</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
         </div>
     </div>
-</div>
-<div class="flip-card">
-    <div class="flip-card-inner">
-        <div class="flip-card-front">
-            <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
-        </div>
-        <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
-            <h1 class="flip-card-title">Strom</h1>
-            <p class="flip-card-text">Text</p>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
+            </div>
+            <div class="flip-card-back" onclick="window.location='waehrungen-rechner.html'">
+                <h1 class="flip-card-title">Währungen</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
         </div>
     </div>
-</div>
-<!--
-===================================
-Charts
-===================================
--->
-<div id="chartContainer" class="chart fixed-size"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-<!--
-===================================
-Footer
-===================================
--->
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
+            </div>
+            <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
+                <h1 class="flip-card-title">Strom</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
+        </div>
+    </div>
+    <!--
+    ===================================
+    Charts
+    ===================================
+    -->
+    <div id="chartContainer" class="chart fixed-size"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--
+    ===================================
+    Footer
+    ===================================
+    -->
 </section>
 <div>
-<footer class="footer fixed-size">
-    <hr>
-    <h1><a href="impressum.html">Impressum</a></h1>
-    <p>Dennis & Armen</p>
-    <p>Münsterstraße 999 Bocholt</p>
-    <p>WHS</p>
-</footer>
+    <footer class="footer fixed-size">
+        <hr>
+        <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+        <p>Dennis & Armen</p>
+        <p>Münsterstraße 999 Bocholt</p>
+        <p>WHS</p>
+    </footer>
 </div>
 </body>
 
@@ -100,26 +105,34 @@ Chart Skript: CanvasJS
 ===================================
 -->
 <script>
-    window.onload = function() {
+    window.onload = function () {
 
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             backgroundColor: "transparent",
             color: "red",
             title: {
-                text: "Die Zahlen sprechen für sich",
+                text: "So häufig wurden die Rechner benutzt",
                 fontFamily: "Orbitron",
                 fontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>",
             },
+            legend: {
+                verticalAlign: "bottom",
+                fontColor: "lightgray",
+                markerMargin: 8,
+                fontFamily: "Orbitron",
+            },
             data: [{
                 type: "pie",
+                showInLegend: true,
                 startAngle: 240,
                 yValueFormatString: "#\"\"",
-                indexLabel: "{label} {y}",
+                indexLabel: "{y}",
+                legendText: "{name}",
                 dataPoints: [
-                    {y: <%= statistics.measure %>, color:"#179180", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Maßeinheitenrechner"},
-                    {y: <%= statistics.energy %>, color:"#2b6059", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Stromrechner"},
-                    {y: <%= statistics.money %>, color: "#0f4f46", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Währungsrechner"},
+                    {y: <%= statistics.measure %>, color:"#179180", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", name: "Maßeinheitenrechner"},
+                    {y: <%= statistics.energy %>, color:"#2b6059", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", name: "Stromrechner"},
+                    {y: <%= statistics.money %>, color: "#0f4f46", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", name: "Währungsrechner"},
                 ]
             }]
         });
@@ -129,23 +142,39 @@ Chart Skript: CanvasJS
 </script>
 <!--
 ===================================
-Cookies Skript
+Responsive Navbar Skript
 ===================================
 -->
 <script>
+    const navSlide = () => {
+        const icon = document.querySelector('.icon');
+        const nav = document.querySelector('.nav-links');
+
+        icon.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+        })
+    }
+    navSlide();
+</script>
+<!--
+===================================
+Cookies Skript
+===================================
+-->
+    <script>
     /**
      * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
      * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
-    */
+     */
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
 
     var style = "<%= style %>";
     /*
     if(style == 'dunkel') {
-        checkBox.checked = false; 
+        checkBox.checked = false;
     } else {
-        checkBox.checked = true; 
+        checkBox.checked = true;
     }
     */
     checkBox.onclick = function() {
