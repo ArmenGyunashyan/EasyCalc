@@ -50,6 +50,7 @@ Forms des Rechenfeldes
 				<input type="submit" value="berechnen">
             </form>
 
+        
         <%if(activeSession.loggedin && chronic.length > 0) { %>
             <br><br>
             <h1>Verlauf</h1>
@@ -119,5 +120,29 @@ Cookies Skript
         }
     }
 
+</script>
+<script>
+    <% //Das Array mit der Chronic wird von der RenderEngine übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+        var tmp = "[";
+        for(var i = 0; i < chronic.length; i++) {
+            if(chronic[i].user == activeSession.username) {
+                tmp = tmp + JSON.stringify(chronic[i]) + ",";
+            }
+        }
+        tmp = tmp.substring(0, tmp.length-1) + "]";
+        chronic = tmp;
+    %>
+    var chronic
+    <% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>)<% } %>; // Ich weis dass das hier sehr schwer zu verstehen ist.
+
+
+    if(chronic) {
+        // Chronic ist ein JSON-Array mit JSON-Objekten
+        // So werden die ausgelesen ->  chronic[i].user         //string
+        //                              chronic[i].inchToMetric //boolean
+        //                              chronic[i].input        //number (float bei JavaScript)
+        //                              chronic[i].result       //number (float bei JavaScript)
+        
+    }
 </script>
 </html>

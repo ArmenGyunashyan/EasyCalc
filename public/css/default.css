@@ -8,6 +8,7 @@ body, *, *:before, *:after {
 
 html, body {
     font-size: 16px;
+    font-family: sans-serif;
     height: 100%;
     background-color: lightgray;
     color: black;
@@ -16,11 +17,12 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
     font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
+    
 }
 
 .logo {
     font-size: 40pt;
+    font-family: 'Orbitron', 'SansSerif';
 }
 
 .fixed-size {
