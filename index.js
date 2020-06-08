@@ -196,10 +196,10 @@ app.get('/masseinheiten-rechner', function(req, res) {
 
 
 app.get('/login.html', function(req, res) {
-    res.render('login');
+    res.render('login', {style: req.cookies.style});
 });
 app.get('/login', function(req, res) {
-    res.render('login');
+    res.render('login', {style: req.cookies.style})
 });
 //--------------------------------------------------
 
