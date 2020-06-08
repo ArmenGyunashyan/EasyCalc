@@ -1,46 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Test</title>
-    <link rel="stylesheet" id="sheet" href="css/dark.css">
+    <title>Home</title>
+    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body  class="fixed-size">
+<body>
 <header class="header" >
-    <div>
-        <h1>EasyCalc</h1>
+    <div class="fixed-size">
+        <h1 class="logo">EasyCalc</h1>
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" id="styleChecker">
             <span class="slider round"></span>
         </label>
         <div class="navbar">
-            <ul>
-                <li><a href="index.html"> HOME</a></li>
-                <li><a href="kurs.html">KURS</a></li>
-                <li><a href="formeln.html">FORMELN</a></li>
-                <li><a href="login.html">LOGIN</a></li>
-                <li><% if(username) { %>
-                    <a href="logout">LOGOUT</a>
-               <% } else { %>
-                    <a href="login.html">LOGIN</a>
-                <% } %></li>
-            </ul>
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="kurs.html">KURS</a></li>
+                    <li><a href="formeln.html">FORMELN</a></li>
+                    <li><% if(activeSession.loggedin) { %>
+                        <a href="logout">LOGOUT</a>
+                    <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %></li>
+                 </ul>
+            </nav>
         </div>
         <hr>
     </div>
 </header>
+<section class="fixed-size">
 <!--
 ===================================
 Flip Cards
 ===================================
 -->
-<h1 class="rechner">Rechner</h1>
+<h1 class="flip-card-header">Rechner</h1>
 <div class="flip-card">
     <div class="flip-card-inner">
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Maßeinheiten</h1>
+        <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
+            <h1 class="flip-card-title">Maßeinheiten</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -50,8 +53,8 @@ Flip Cards
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Währungen</h1>
+        <div class="flip-card-back" onclick="window.location='waehrungen-rechner.html'">
+            <h1 class="flip-card-title">Währungen</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -61,8 +64,8 @@ Flip Cards
         <div class="flip-card-front">
             <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
         </div>
-        <div class="flip-card-back">
-            <h1 class="flip-card-header">Strom</h1>
+        <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
+            <h1 class="flip-card-title">Strom</h1>
             <p class="flip-card-text">Text</p>
         </div>
     </div>
@@ -72,84 +75,90 @@ Flip Cards
 Charts
 ===================================
 -->
-<h1>Hier kommt das Kuchendiagramm</h1>
+<div id="chartContainer" class="chart fixed-size"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <!--
 ===================================
 Footer
 ===================================
 -->
-
-<footer class="footer">
-    <hr class="footer-line">
-    <h1 class="footer-header">Impressum</h1>
+</section>
+<div>
+<footer class="footer fixed-size">
+    <hr>
+    <h1><a href="impressum.html">Impressum</a></h1>
     <p>Dennis & Armen</p>
     <p>Münsterstraße 999 Bocholt</p>
     <p>WHS</p>
 </footer>
+</div>
 </body>
+
 <!--
 ===================================
-Skripte
+Chart Skript: CanvasJS
 ===================================
 -->
 <script>
-   /* // FIXME: Cookies funktionieren nicht
-    const btn_style = document.getElementById("stylebutton");
-    const stylesheet = document.getElementById("sheet");
+    window.onload = function() {
 
-    if(document.cookie.length <= 0) {
-        document.cookie = "style=hell";
-    } else {
-        var kekse = document.cookie.split(";");
-        var includes = false;
-            for(i = 0; i < kekse.length; i++) {
-                if(kekse[i].includes("style")) {
-                    includes = true;
-                }
-            }
-            if(includes == false) {
-                document.cookie = "style=hell";
-            }
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            backgroundColor: "transparent",
+            color: "red",
+            title: {
+                text: "Die Zahlen sprechen für sich",
+                fontFamily: "Orbitron",
+                fontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>",
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                yValueFormatString: "#\"\"",
+                indexLabel: "{label} {y}",
+                dataPoints: [
+                    {y: <%= statistics.measure %>, color:"#179180", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Maßeinheitenrechner"},
+                    {y: <%= statistics.energy %>, color:"#2b6059", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Stromrechner"},
+                    {y: <%= statistics.money %>, color: "#0f4f46", indexLabelFontColor: "<% if(style == 'dunkel') {%>lightgray<% } else { %>black<% } %>", label: "Währungsrechner"},
+                ]
+            }]
+        });
+        chart.render();
+
     }
-    setStyle(getStyle());
+</script>
+<!--
+===================================
+Cookies Skript
+===================================
+-->
+<script>
+    /**
+     * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
+     * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
+    */
+    const stylesheet = document.getElementById("sheet");
+    const checkBox = document.getElementById("styleChecker");
 
-    btn_style.onclick = function() {
+    var style = "<%= style %>";
 
-        if(getStyle() == "style=hell") {
-            stylesheet.href="css/dark.css";
-            document.cookie = "style=dunkel";
+    if(style == 'dunkel') {
+        checkBox.checked = false; 
+    } else {
+        checkBox.checked = true; 
+    }
 
-        } else {
-            stylesheet.href="css/default.css";
+    checkBox.onclick = function() {
+        if(this.checked) {
             document.cookie = "style=hell";
-
-        }
-
-        };
-
-        function setStyle(string) {
-            
-            if(string == "style=hell") {
             stylesheet.href="css/default.css";
-          
+            checkBox.checked = true;
         } else {
+            document.cookie = "style=dunkel";
             stylesheet.href="css/dark.css";
-            
+            checkBox.checked = false;
         }
-        
-        
-        }
+    }
 
-        function getStyle() {
-            //Cookie-String wird in ein Array umgwandelt und nach dem Schlüsselwort 'style' durchsucht [=hell || =dunkel]
-            var kekse = document.cookie.split(";");
-            for(i = 0; i < kekse.length; i++) {
-                if(kekse[i].includes("style")) {
-                    //Die Rückgabe ist nun ' style=[...]'. Das Leerzeichen am Anfang muss entfernt werden.
-                    return kekse[i].substring(1, kekse[i].length);
-                }
-            }
-            return null;
-        }*/
 </script>
 </html>

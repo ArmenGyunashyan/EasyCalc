@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="header" >
+    <div class="fixed-size">
+        <h1 class="logo">EasyCalc</h1>
+        <label class="switch">
+            <input type="checkbox" id="styleChecker">
+            <span class="slider round"></span>
+        </label>
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="kurs.html">KURS</a></li>
+                    <li><a href="formeln.html">FORMELN</a></li>
+                    <li><% if(activeSession.loggedin) { %>
+                        <a href="logout">LOGOUT</a>
+                    <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %></li>
+                 </ul>
+            </nav>
+        </div>
+        <hr>
+    </div>
+</header>
+
+<!--
+===================================
+Flip Cards
+===================================
+-->
+<section class="fixed-size">
+
+    <div class="fixed-size">
+        <h1>Divisenkurs</h1>
+        <div>Hallo</div>
+    </div>
+
+</section>
+<!--
+===================================
+Footer
+===================================
+-->
+
+<div>
+<footer class="footer fixed-size">
+    <hr>
+    <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+    <p>Dennis & Armen</p>
+    <p>Münsterstraße 999 Bocholt</p>
+    <p>WHS</p>
+</footer>
+</div>
+</body>
+
+<!--
+===================================
+Cookies Skript
+===================================
+-->
+<script>
+    /**
+     * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
+     * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
+    */
+    const stylesheet = document.getElementById("sheet");
+    const checkBox = document.getElementById("styleChecker");
+
+    var style = "<%= style %>";
+
+    if(style == 'dunkel') {
+        checkBox.checked = false; 
+    } else {
+        checkBox.checked = true; 
+    }
+
+    checkBox.onclick = function() {
+        if(this.checked) {
+            document.cookie = "style=hell";
+            stylesheet.href="css/default.css";
+            checkBox.checked = true;
+        } else {
+            document.cookie = "style=dunkel";
+            stylesheet.href="css/dark.css";
+            checkBox.checked = false;
+        }
+    }
+
+</script>
+</html>

@@ -15,8 +15,12 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
-    font-size: 40pt;
+    font-size: 20pt;
     font-family: 'Orbitron', 'SansSerif';
+}
+
+.logo {
+    font-size: 40pt;
 }
 
 .fixed-size {
@@ -235,20 +239,19 @@ div > .footer
         position: absolute;
     }
 
-        .footer > p
+        .footer p
         {
             margin-left: 5px;
         }
 
-        .footer > hr
+        .footer hr
         {
-            width: 960px;
             border:none;
             height:1px;
             background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
         }
 
-    .footer-header
+    .footer h1
     {
         font-size: 15pt;
     }
