@@ -1,91 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Masseinheiten-Rechner</title>
-    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" id="sheet"
+          href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
 <body>
-<header class="header" >
+<header class="header">
     <div class="fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
-            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
+                    <% } %>
+            >
             <span class="slider round"></span>
         </label>
-        <div class="navbar">
-            <nav>
-                <ul>
+        <nav class="navbar">
+            <div>
+                <ul class="nav-links">
                     <li><a href="index.html">HOME</a></li>
                     <li><a href="kurs.html">KURS</a></li>
                     <li><a href="formeln.html">FORMELN</a></li>
-                    <li><% if(activeSession.loggedin) { %>
-                        <a href="logout">LOGOUT</a>
-                    <% } else { %>
-                        <a href="login.html">LOGIN</a>
-                    <% } %></li>
-                 </ul>
-            </nav>
-        </div>
+                    <li>
+                        <% if(activeSession.loggedin) { %>
+                            <a href="logout">LOGOUT</a>
+                        <% } else { %>
+                            <a href="login.html">LOGIN</a>
+                        <% } %>
+                    </li>
+                </ul>
+            </div>
+            <div class="icon">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
         <hr>
     </div>
 </header>
-
-<!--
-===================================
-Forms des Rechenfeldes
-===================================
--->
 <section class="fixed-size">
+    <div>
+        <h1>Maßeinheiten</h1>
 
-    <div class="fixed-size clearfix">
-        
-        
-        <div>
-            <h1>Maßeinheiten</h1>
-            <form action="masseinheiten-rechner.html" method="POST">
-                <input type="radio" name="inchToMetric" value="true" checked/>Zoll > cm<br>
-                <input type="radio" name="inchToMetric" value="false"/>cm > Zoll<br>
-				<input type="number" name="input" placeholder="Masseinheit" required>
-				<input type="submit" value="berechnen">
-            </form>
-
-        
-        <%if(activeSession.loggedin && chronic.length > 0) { %>
-            <br><br>
-            <h1>Verlauf</h1>
-            <ul class="list"> <% var i = 0;  for(i; i < chronic.length; i++) { %>
-                <% if(chronic[i].user == activeSession.username) { %>
-                    <% if(chronic[i].inchToMetric == true) { %>
-                        <li> <%= chronic[i].input %> inch = <%= chronic[i].result %> cm </li>
-                    <% } else { %>
-                        <li> <%= chronic[i].input %> cm = <%= chronic[i].result %> inch </li>
-                    <% } %>
-                <% } %>
-            <%} %> </ul>
-        <% } %>
-		</div>
-        
     </div>
+    <br>
+    <div>
+        <h1>Verlauf</h1>
+        <ul id="list">
 
+        </ul>
+        <button id="prevBTN" style="float:left;" onclick="prevRange(10)">zurück</button>
+        <button id="nextBTN" style="float:left;" onclick="nextRange(10)">weiter</button>
+        <br>
+    </div>
 </section>
-<!--
-===================================
-Footer
-===================================
--->
-
 <div>
-<footer class="footer fixed-size">
-    <hr>
-    <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
-    <p>Dennis & Armen</p>
-    <p>Münsterstraße 999 Bocholt</p>
-    <p>WHS</p>
-</footer>
+    <footer class="footer fixed-size">
+        <hr>
+        <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+        <p>Dennis & Armen</p>
+        <p>Münsterstraße 999 Bocholt</p>
+        <p>WHS</p>
+    </footer>
 </div>
 </body>
 
+
+<!--
+===================================
+Responsive Navbar Skript
+===================================
+-->
+<script>
+    const navSlide = () => {
+        const icon = document.querySelector('.icon');
+        const nav = document.querySelector('.nav-links');
+
+        icon.addEventListener('click', () => {
+            nav.classList.toggle('nav-active');
+        })
+    }
+    navSlide();
+</script>
 <!--
 ===================================
 Cookies Skript
@@ -95,32 +93,36 @@ Cookies Skript
     /**
      * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
      * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
-    */
+     */
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
 
     var style = "<%= style %>";
     /*
     if(style == 'dunkel') {
-        checkBox.checked = false; 
+        checkBox.checked = false;
     } else {
-        checkBox.checked = true; 
+        checkBox.checked = true;
     }
     */
-
-    checkBox.onclick = function() {
-        if(this.checked) {
+    checkBox.onclick = function () {
+        if (this.checked) {
             document.cookie = "style=hell";
-            stylesheet.href="css/default.css";
+            stylesheet.href = "css/default.css";
             //checkBox.checked = true;
         } else {
             document.cookie = "style=dunkel";
-            stylesheet.href="css/dark.css";
+            stylesheet.href = "css/dark.css";
             //checkBox.checked = false;
         }
     }
 
 </script>
+<!--
+===================================
+Pager
+===================================
+-->
 <script>
     <% //Das Array mit der Chronic wird von der RenderEngine übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
         var tmp = "[";
@@ -133,8 +135,107 @@ Cookies Skript
         chronic = tmp;
     %>
     var chronic
-    <% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>)<% } %>; // Ich weis dass das hier sehr schwer zu verstehen ist.
+    <% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
 
+    var left = 0;
+    var right = 0;
+    
+    const list = document.getElementById('list');
+    const nextBTN = document.getElementById('nextBTN');
+    nextBTN.style.display = 'none';
+    const prevBTN = document.getElementById('prevBTN');
+    prevBTN.style.display = 'none';
+
+
+    function addElement(inhalt) {
+        var listElement = document.createElement('li');
+            var elementLink = document.createElement('a');
+            elementLink.href = "#";
+            elementLink.appendChild(document.createTextNode(inhalt));
+            listElement.appendChild(elementLink);
+            elementLink.onclick = function() {console.log("Du hast " + listElement.textContent + " angeklickt")};
+        list.appendChild(listElement);
+    }
+
+    
+    function initializeRange() {
+        
+        right = chronic.length-1;
+        if(chronic.length < 10) {
+            left = 0;
+        } else {
+            left = chronic.length-10;
+        }
+    }
+
+
+    initializeRange(); //Legt das Pagerlimit auf 10 Elemente oder die Länge des Array, wenn dies kleiner ist.
+    renderPager(left,right);
+
+    function renderPager(left, right) {
+        list.innerHTML="";
+        
+        for(var i = right; i >= left; i--) {
+            if(chronic[i].inchToMetric) {
+                addElement(chronic[i].input + " zoll = " + chronic[i].result + "cm");
+            } else {
+                addElement(chronic[i].input + " cm = " + chronic[i].result + "zoll");
+            }
+        
+        }
+
+        //Überprüfungen, ob Buttons benötigt werden
+        if(left-1 > 0) { //Es gibt noch Elemente
+            nextBTN.style.display = 'block';
+        } else {
+            nextBTN.style.display = 'none';
+        }
+        if(right+1 < chronic.length-1) {
+            prevBTN.style.display = 'block';
+        } else {
+            prevBTN.style.display = 'none';
+        }
+
+    }
+
+    function nextRange(factor) {
+        //Right und Left werden runter gezählt (Array wird von Hinten aufgerollt)
+        right = left - 1;
+        left = left - factor;
+        if(left < 0) {left = 0;}
+        if(right < 0) {right = 0;}
+        renderPager(left,right);
+    }
+
+    function prevRange(factor) {
+        //Right und Left werden rauf gezählt (Array wird von Hinten aufgerollt)
+        left = right + 1;
+        right = right + factor;
+        if(right > chronic.length-1) {right = chronic.length-1;}
+        if(left > chronic.length-1) {left = chronic.length-1;}
+        renderPager(left,right);
+    }
+
+
+    var test = [
+        {
+            name: "Klaus",
+            zahl: 3
+        }
+    ];
+
+    /*
+    const list = document.getElementById('list');
+    
+    var listElement = document.createElement('li');
+    var elementLink = document.createElement('a');
+    var span = document.createElement('span');
+    span.textContent = "testInhalt";
+    elementLink.onclick = function() {console.log("Du hast " + span.textContent + " angeklickt")};
+    elementLink.href = "#";
+    elementLink.appendChild(span);
+    list.appendChild(elementLink);
+    */
 
     if(chronic) {
         // Chronic ist ein JSON-Array mit JSON-Objekten
@@ -142,6 +243,8 @@ Cookies Skript
         //                              chronic[i].inchToMetric //boolean
         //                              chronic[i].input        //number (float bei JavaScript)
         //                              chronic[i].result       //number (float bei JavaScript)
+
+
         
     }
 </script>

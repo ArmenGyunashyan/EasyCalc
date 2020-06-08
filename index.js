@@ -23,8 +23,8 @@ var chronicMeasure = [
     {
         user: "root",
         inchToMetric: true,
-        input: 5,
-        result: 12.7
+        input: 14,
+        result: 14.2
     },
     {
         user: "test",
@@ -35,26 +35,146 @@ var chronicMeasure = [
     {
         user: "root",
         inchToMetric: false,
-        input: 12.7,
-        result: 5
+        input: 13,
+        result: 13.6
     },
     {
         user: "root",
         inchToMetric: true,
-        input: 25,
+        input: 12,
+        result: 12.9
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 11,
+        result: 11.5
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 10,
+        result: 10.3
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 9,
         result: 63.5
     },
     {
         user: "root",
         inchToMetric: true,
-        input: 100,
-        result: 254
+        input: 8,
+        result: 8.5
     },
     {
         user: "root",
         inchToMetric: false,
-        input: 16,
-        result: 6.3
+        input: 7,
+        result: 7.3
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 6,
+        result: 6.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 5,
+        result: 5.4
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 4,
+        result: 4.7
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 3,
+        result: 3.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 2,
+        result: 2.54
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 1,
+        result: 1.1
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 11,
+        result: 11.5
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 10,
+        result: 10.3
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 9,
+        result: 63.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 8,
+        result: 8.5
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 7,
+        result: 7.3
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 6,
+        result: 6.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 5,
+        result: 5.4
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 4,
+        result: 4.7
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 3,
+        result: 3.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 2,
+        result: 2.54
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 1,
+        result: 1.1
     }
 ];
 var chronicMoney = [
