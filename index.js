@@ -3,13 +3,12 @@ const express = require('express'); // Express-Framework
 const path = require('path'); // Keine Ahnung (wird aber bei fast allem benötigt)
 const session = require('express-session'); // Session-Unterstützung für das Login-System. (Alle Infoematiionen über einen Nutzer sind später im Session-Objekt)
 const bodyParser = require('body-parser'); // Zum Extrahieren von Html-Form-Daten (Formulardaten aus z.B. Inputfeldern)
+const cookieParser = require('cookie-parser');
 
 
 
-
-//Variablen für die Session-------------------
-const username = 'root'; //veraltet
-const password = 'admin'; //veraltet
+//Variablen für die Session und die (Fake)Datenbank-------------------
+var statistics = {measure: 1120, money: 420, energy: 280};
 const users = [
     {
         username: "root",
@@ -20,18 +19,62 @@ const users = [
         password: "test"
     }
 ];
-var sess = {
-    cookie: null,
-    loggedin: false,
-    username: null
-}; //Die aktuelle Session (wenn vorhanden)
+var chronicMeasure = [
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 5,
+        result: 12.7
+    },
+    {
+        user: "test",
+        inchToMetric: false,
+        input: 5,
+        result: 12.7
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 12.7,
+        result: 5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 25,
+        result: 63.5
+    },
+    {
+        user: "root",
+        inchToMetric: true,
+        input: 100,
+        result: 254
+    },
+    {
+        user: "root",
+        inchToMetric: false,
+        input: 16,
+        result: 6.3
+    }
+];
+var chronicMoney = [
+
+];
+var chronicEnergy = [
+
+];
+
 //--------------------------------------------
 
 
 // Die Hauptanwendung wird gestartet
 const app = express();
 
-//Login-Funktionen----------------------------------
+app.use(cookieParser());
+
+//--------------------------------------------------
+//Login-Middeware (nicht die Authetifikations-Überprüfung)
+//--------------------------------------------------
 
 app.use(session({
     secret: 'secret', //Hier kommt eigentlich ein Hashwert hin
@@ -58,59 +101,108 @@ app.post('/login.html/auth', function(req, res) {
         if(userDbIndex > -1) { //Username in der DB (Array) gefunden
             if(user == users[userDbIndex].username && pw == users[userDbIndex].password) {
                 req.session.loggedin = true;
-            req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wie ein globaler Cookie)
-            sess = req.session;
-            
-            res.redirect('/');
-        } else {
-            res.send('Passwort oder Nutzername falsch!');
-        }
-        res.end();
-            
-        } else {
-            res.send('Passwort oder Nutzername falsch!');
-        }
-    } else {
-        response.send('Please enter Username and Password!');
-		response.end();
-    }
-/*
-    if(user && pw) {
-        if(user == username && pw == password) { // Überprüft Login-Daten auf Übereinstimmung
-            req.session.loggedin = true;
             req.session.username = user; //Die Variable {var req}.session ist von über all aus zugreifbar (wiie ein globaler Cookie)
-            sess = req.session;
             
             res.redirect('/');
         } else {
             res.send('Passwort oder Nutzername falsch!');
         }
         res.end();
+            
+        } else {
+            res.send('Passwort oder Nutzername falsch!');
+        }
     } else {
         response.send('Please enter Username and Password!');
 		response.end();
     }
-    */
+
 });
 
+//--------------------------------------------------
+//Authetifikations-Überprüfung
 //--------------------------------------------------
 
 function isAuth(req, res, next) {
     if(!req.session.loggedin) {
-        next();
+        next(); //Next beendet die Funktion nur (So wie z.B. return null;)
     } else {
-        //console.log('Angemeldet: ' + req.session.username);
         res.redirect('/');
     }
 }
-
+// Welche URL soll 'belauscht' werden?
+/**
+ * Wird die URL aufgerufen, wird die Funktion "isAuth()" gestartet. Diese leitet, bei aktiver Session, zur Index-Seite zurück
+ */
 app.get('/login.html', isAuth);
+app.get('/login', isAuth);
 
 //--------------------------------------------------
-
+// Router + RenderEngine + Var-Parsing
+//--------------------------------------------------
+/**
+ * Hier werden alle URL's die der Client aufrufen kann "belauscht" (Funktionen ausführen, wenn URL aufgerufen wird).
+ * Wird eine URL aufgerufen, wird die Anfrage über die RenderEngine umgeleitet, die dann ein HTML-Code für die URL
+ * generiert und übergibt. Die Seite wird also beim URL Aufruf dynamisch durch EJS generiert.
+ * Dies wird benötigt, da wir Variablen für die Webseite übergeben wollen.
+ * Dazu gehören Information zur aktuellen Session, Statistiken für PieCharts, Listen und Cookies.
+ * Zuvor wird überprüft, ob überhaupt ein Cookie existiert.
+ * 
+ * Syntax -> app.get('URL', function(req, res) {... Auszuführen beim Aufruf von URL})
+ */
 app.get('/', function(req, res) {
-    res.render('index', {username: req.session.username});
+    if(!req.cookies.style) {            //Existens des Cookies 'style' wird überprüft
+        res.cookie('style', 'hell');    //Der Cookie wird erzeugt und beim Client gespeichert (Dennoch wird er später übermittelt, da er für die RenderEngine benötigt wird -> Bessere Performance als JavaScript)
+    }
+    //res.clearCookie('style');
+    res.render('index', {activeSession: req.session, statistics, style: req.cookies.style});  // Erst jetzt kommt die Renderengine + Übergabe aller wichtigen Variablen und Objekten
 });
+app.get('/index.html', function(req, res) {
+    if(!req.cookies.style) {
+        res.cookie('style', 'hell');
+    }
+    res.render('index', {activeSession: req.session, statistics, style: req.cookies.style}); 
+});
+app.get('/index', function(req, res) {
+    if(!req.cookies.style) {
+        res.cookie('style', 'hell');
+    }
+    res.render('index', {activeSession: req.session, statistics, style: req.cookies.style}); 
+});
+app.get('/kurs.html', function(req, res) {
+    res.render('kurs', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/kurs', function(req, res) {
+    res.render('kurs', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/formeln.html', function(req, res) {
+    res.render('formeln', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/formeln', function(req, res) {
+    res.render('formeln', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/impressum.html', function(req, res) {
+    res.render('impressum', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/impressum', function(req, res) {
+    res.render('impressum', {activeSession: req.session, style: req.cookies.style}); 
+});
+app.get('/masseinheiten-rechner.html', function(req, res) {
+    res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style}); 
+});
+app.get('/masseinheiten-rechner', function(req, res) {
+    res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style}); 
+});
+
+
+app.get('/login.html', function(req, res) {
+    res.render('login');
+});
+app.get('/login', function(req, res) {
+    res.render('login');
+});
+//--------------------------------------------------
+
 
 app.get('/logout', function(req, res, done) {
     req.session.loggedin = false;

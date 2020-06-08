@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Masseinheiten-Rechner</title>
+    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="header" >
+    <div class="fixed-size">
+        <h1 class="logo">EasyCalc</h1>
+        <label class="switch">
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked<% } %>>
+            <span class="slider round"></span>
+        </label>
+        <div class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="kurs.html">KURS</a></li>
+                    <li><a href="formeln.html">FORMELN</a></li>
+                    <li><% if(activeSession.loggedin) { %>
+                        <a href="logout">LOGOUT</a>
+                    <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %></li>
+                 </ul>
+            </nav>
+        </div>
+        <hr>
+    </div>
+</header>
+
+<!--
+===================================
+Forms des Rechenfeldes
+===================================
+-->
+<section class="fixed-size">
+
+    <div class="fixed-size clearfix">
+        
+        
+        <div>
+            <h1>Maßeinheiten</h1>
+            <form action="masseinheiten-rechner.html" method="POST">
+                <input type="radio" name="inchToMetric" value="true" checked/>Zoll > cm<br>
+                <input type="radio" name="inchToMetric" value="false"/>cm > Zoll<br>
+				<input type="number" name="input" placeholder="Masseinheit" required>
+				<input type="submit" value="berechnen">
+            </form>
+
+        
+        <%if(activeSession.loggedin && chronic.length > 0) { %>
+            <br><br>
+            <h1>Verlauf</h1>
+            <ul class="list"> <% var i = 0;  for(i; i < chronic.length; i++) { %>
+                <% if(chronic[i].user == activeSession.username) { %>
+                    <% if(chronic[i].inchToMetric == true) { %>
+                        <li> <%= chronic[i].input %> inch = <%= chronic[i].result %> cm </li>
+                    <% } else { %>
+                        <li> <%= chronic[i].input %> cm = <%= chronic[i].result %> inch </li>
+                    <% } %>
+                <% } %>
+            <%} %> </ul>
+        <% } %>
+		</div>
+        
+    </div>
+
+</section>
+<!--
+===================================
+Footer
+===================================
+-->
+
+<div>
+<footer class="footer fixed-size">
+    <hr>
+    <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+    <p>Dennis & Armen</p>
+    <p>Münsterstraße 999 Bocholt</p>
+    <p>WHS</p>
+</footer>
+</div>
+</body>
+
+<!--
+===================================
+Cookies Skript
+===================================
+-->
+<script>
+    /**
+     * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
+     * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
+    */
+    const stylesheet = document.getElementById("sheet");
+    const checkBox = document.getElementById("styleChecker");
+
+    var style = "<%= style %>";
+    /*
+    if(style == 'dunkel') {
+        checkBox.checked = false; 
+    } else {
+        checkBox.checked = true; 
+    }
+    */
+
+    checkBox.onclick = function() {
+        if(this.checked) {
+            document.cookie = "style=hell";
+            stylesheet.href="css/default.css";
+            //checkBox.checked = true;
+        } else {
+            document.cookie = "style=dunkel";
+            stylesheet.href="css/dark.css";
+            //checkBox.checked = false;
+        }
+    }
+
+</script>
+<script>
+    <% //Das Array mit der Chronic wird von der RenderEngine übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+        var tmp = "[";
+        for(var i = 0; i < chronic.length; i++) {
+            if(chronic[i].user == activeSession.username) {
+                tmp = tmp + JSON.stringify(chronic[i]) + ",";
+            }
+        }
+        tmp = tmp.substring(0, tmp.length-1) + "]";
+        chronic = tmp;
+    %>
+    var chronic
+    <% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>)<% } %>; // Ich weis dass das hier sehr schwer zu verstehen ist.
+
+
+    if(chronic) {
+        // Chronic ist ein JSON-Array mit JSON-Objekten
+        // So werden die ausgelesen ->  chronic[i].user         //string
+        //                              chronic[i].inchToMetric //boolean
+        //                              chronic[i].input        //number (float bei JavaScript)
+        //                              chronic[i].result       //number (float bei JavaScript)
+        
+    }
+</script>
+</html>
