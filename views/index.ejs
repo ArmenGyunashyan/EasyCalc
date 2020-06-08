@@ -5,6 +5,7 @@
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
 <header class="header">
@@ -18,23 +19,22 @@
         </label>
         <nav class="navbar">
             <div>
-                <ul class="nav-links">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="kurs.html">KURS</a></li>
-                    <li><a href="formeln.html">FORMELN</a></li>
-                    <li>
-                        <% if(activeSession.loggedin) { %>
-                            <a href="logout">LOGOUT</a>
-                        <% } else { %>
-                            <a href="login.html">LOGIN</a>
-                        <% } %>
-                    </li>
-                </ul>
-            </div>
-            <div class="icon">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="kurs.html">KURS</a></li>
+                <li><a href="formeln.html">FORMELN</a></li>
+                <li>
+                    <% if(activeSession.loggedin) { %>
+                        <a href="logout">LOGOUT</a>
+                    <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %>
+                </li>
+            </ul>
             </div>
         </nav>
         <hr>
@@ -166,15 +166,7 @@ Responsive Navbar Skript
 ===================================
 -->
 <script>
-    const navSlide = () => {
-        const icon = document.querySelector('.icon');
-        const nav = document.querySelector('.nav-links');
 
-        icon.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
-        })
-    }
-    navSlide();
 </script>
 <!--
 ===================================
