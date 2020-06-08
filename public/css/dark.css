@@ -39,27 +39,6 @@ p {
     float: right;
 }
 
-.header .navbar > div > .nav-links > li {
-    display: inline-block;
-    font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
-    text-align: right;
-    margin: 7px;
-}
-
-.icon {
-    display: none;
-    cursor: pointer;
-}
-
-.icon div {
-    width: 30px;
-    height: 5px;
-    background-color: lightgray;
-    margin: 6px;
-}
-
-
 .header hr {
     border: none;
     height: 1px;
@@ -239,7 +218,19 @@ div > .footer {
 }
 
 /* Responsive Design */
-
+#check
+{
+    display: none;
+}
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+}
 @media screen and (min-width: 940px) {
     .flip-card {
         float: left;
@@ -256,25 +247,44 @@ div > .footer {
     }
 }
 
+@media screen and (min-width: 550px) {
+.header .navbar > div > .nav-links > li {
+    display: inline-block;
+    font-size: 20pt;
+    font-family: 'Orbitron', 'SansSerif';
+    text-align: right;
+    margin: 7px;
+}
+}
 @media screen and (max-width: 550px) {
 
-    .nav-links {
-        position: absolute;
-        right: 0px;
-        top: 103px;
-        background-color: red;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 50%;
 
-    }
-
-    .navbar li {
-        opacity: 0;
-    }
-
-    .icon {
+    .checkbtn{
         display: block;
+        margin-top: -50px;
+        margin-right: 5px;
+        color: lightgray;
+    }
+    .nav-links{
+        z-index: 100;
+        position: fixed;
+        width: auto;
+        height: 100%;
+        background-color: #179180;
+        top: 103px;
+        right: -100%;
+        text-align: center;
+        transition: all .4s;
+    }
+    nav .nav-links li{
+        display: block;
+        margin: 25px;
+        line-height: 30px;
+    }
+    nav .nav-links li a{
+        font-size: 20px;
+    }
+    #check:checked ~ ul{
+        right: 0;
     }
 }
