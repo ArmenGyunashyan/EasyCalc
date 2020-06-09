@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="public/skripts/dropdown.js"></script>
+    <script src="skripts/dropdown.js"></script>
     <title>Home</title>
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
@@ -106,77 +106,55 @@ Chart Skript: CanvasJS
 ===================================
 -->
 <script>
-    window.onload = function () {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            backgroundColor: "transparent",
-            color: "red",
-            title: {
-                text: "Nutzung der Rechner",
-                fontFamily: "Orbitron",
-                fontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
-            },
-            legend: {
-                verticalAlign: "bottom",
-                fontColor: "lightgray",
-                markerMargin: 8,
-                fontFamily: "Orbitron",
-            },
-            data: [{
-                type: "pie",
-                showInLegend: true,
-                startAngle: 240,
-                yValueFormatString: "#\"\"",
-                indexLabel: "{y}",
-                legendText: "{name}",
-                dataPoints: [
-                    {
-                        y: <%= statistics.measure %>,
-                        color: "#179180",
-                        indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
-                        name: "Maßeinheitenrechner"
-                    },
-                    {
-                        y: <%= statistics.energy %>,
-                        color: "#2b6059",
-                        indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
-                        name: "Stromrechner"
-                    },
-                    {
-                        y: <%= statistics.money %>,
-                        color: "#0f4f46",
-                        indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
-                        name: "Währungsrechner"
-                    },
-                ]
-            }]
-        });
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        backgroundColor: "transparent",
+        color: "red",
+        title: {
+            text: "Nutzung der Rechner",
+            fontFamily: "Orbitron",
+            fontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
+        },
+        legend: {
+            verticalAlign: "bottom",
+            fontColor: "lightgray",
+            markerMargin: 8,
+            fontFamily: "Orbitron",
+        },
+        data: [{
+            type: "pie",
+            showInLegend: true,
+            startAngle: 240,
+            yValueFormatString: "#\"\"",
+            indexLabel: "{y}",
+            legendText: "{name}",
+            dataPoints: [
+                {
+                    y: <%= statistics.measure %>,
+                    color: "#179180",
+                    indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
+                    name: "Maßeinheitenrechner"
+                },
+                {
+                    y: <%= statistics.energy %>,
+                    color: "#2b6059",
+                    indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
+                    name: "Stromrechner"
+                },
+                {
+                    y: <%= statistics.money %>,
+                    color: "#0f4f46",
+                    indexLabelFontColor: "<% if(style == 'dunkel') { %>lightgray<% } else { %>black<% } %>",
+                    name: "Währungsrechner"
+                },
+            ]
+        }]
+    });
+
+    chartLoad(chart);
+    function chartLoad(chart) {
         chart.render();
-
-    }
-</script>
-<!--
-===================================
-Responsive Navbar Skript
-===================================
--->
-<script>
-    function mobileNavbar() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
     }
 </script>
 <!--
@@ -192,6 +170,7 @@ Cookies Skript
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
 
+
     var style = "<%= style %>";
     /*
     if(style == 'dunkel') {
@@ -200,15 +179,107 @@ Cookies Skript
         checkBox.checked = true;
     }
     */
+
     checkBox.onclick = function () {
         if (this.checked) {
             document.cookie = "style=hell";
             stylesheet.href = "css/default.css";
-            //checkBox.checked = true;
+
+            var chartDefault = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                color: "red",
+                title: {
+                    text: "Nutzung der Rechner",
+                    fontFamily: "Orbitron",
+                    fontColor: "black",
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    fontColor: "black",
+                    markerMargin: 8,
+                    fontFamily: "Orbitron",
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    startAngle: 240,
+                    yValueFormatString: "#\"\"",
+                    indexLabel: "{y}",
+                    legendText: "{name}",
+                    dataPoints: [
+                        {
+                            y: <%= statistics.measure %>,
+                            color: "#179180",
+                            indexLabelFontColor: "black",
+                            name: "Maßeinheitenrechner"
+                        },
+                        {
+                            y: <%= statistics.energy %>,
+                            color: "#2b6059",
+                            indexLabelFontColor: "black",
+                            name: "Stromrechner"
+                        },
+                        {
+                            y: <%= statistics.money %>,
+                            color: "#0f4f46",
+                            indexLabelFontColor: "black",
+                            name: "Währungsrechner"
+                        },
+                    ]
+                }]
+            });
+            chartLoad(chartDefault);
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href = "css/dark.css";
-            //checkBox.checked = false;
+
+            var chartDark = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                backgroundColor: "transparent",
+                color: "red",
+                title: {
+                    text: "Nutzung der Rechner",
+                    fontFamily: "Orbitron",
+                    fontColor: "lightgray",
+                },
+                legend: {
+                    verticalAlign: "bottom",
+                    fontColor: "lightgray",
+                    markerMargin: 8,
+                    fontFamily: "Orbitron",
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    startAngle: 240,
+                    yValueFormatString: "#\"\"",
+                    indexLabel: "{y}",
+                    legendText: "{name}",
+                    dataPoints: [
+                        {
+                            y: <%= statistics.measure %>,
+                            color: "#179180",
+                            indexLabelFontColor: "lightgray",
+                            name: "Maßeinheitenrechner"
+                        },
+                        {
+                            y: <%= statistics.energy %>,
+                            color: "#2b6059",
+                            indexLabelFontColor: "lightgray",
+                            name: "Stromrechner"
+                        },
+                        {
+                            y: <%= statistics.money %>,
+                            color: "#0f4f46",
+                            indexLabelFontColor: "lightgray",
+                            name: "Währungsrechner"
+                        },
+                    ]
+                }]
+            });
+            chartLoad(chartDark);
+
         }
     }
 
