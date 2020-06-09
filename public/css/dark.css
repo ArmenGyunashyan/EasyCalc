@@ -31,12 +31,29 @@ p {
     color: lightgray;
 }
 
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
 /*----------------------------------------------*/
 
 /* Navbar Style */
+.dropbtn {
+    display: none;
+}
 
-.header .navbar {
+.navbar {
     float: right;
+}
+
+.navbar a {
+    display: inline-block;
+    font-size: 20pt;
+    font-family: 'Orbitron', 'SansSerif';
+    text-align: right;
+    margin: 7px;
 }
 
 .header hr {
@@ -218,19 +235,7 @@ div > .footer {
 }
 
 /* Responsive Design */
-#check
-{
-    display: none;
-}
-.checkbtn{
-    font-size: 30px;
-    color: white;
-    float: right;
-    line-height: 80px;
-    margin-right: 40px;
-    cursor: pointer;
-    display: none;
-}
+
 @media screen and (min-width: 940px) {
     .flip-card {
         float: left;
@@ -247,44 +252,52 @@ div > .footer {
     }
 }
 
-@media screen and (min-width: 550px) {
-.header .navbar > div > .nav-links > li {
-    display: inline-block;
-    font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
-    text-align: right;
-    margin: 7px;
-}
-}
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 560px) {
 
-
-    .checkbtn{
+    .dropbtn {
         display: block;
-        margin-top: -50px;
-        margin-right: 5px;
-        color: lightgray;
     }
-    .nav-links{
-        z-index: 100;
-        position: fixed;
-        width: auto;
-        height: 100%;
+
+    .dropdown-content {
+        display: none;
         background-color: #179180;
-        top: 103px;
-        right: -100%;
-        text-align: center;
-        transition: all .4s;
+        width: 100%;
+        margin-top: 50px;
     }
-    nav .nav-links li{
+
+    .dropbtn {
+        background-color: transparent;
+        color: lightgray;
+        float: right;
+        height: auto;
+        width: auto;
+        font-size: 26px;
+        border: none;
+        cursor: pointer;
+        margin-top: 4px;
+        font-family: "Orbitron";
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        padding: 12px 16px;
         display: block;
-        margin: 25px;
-        line-height: 30px;
+        text-align: center;
+        font-size: 100%;
     }
-    nav .nav-links li a{
-        font-size: 20px;
+
+    .dropdown a:hover {
+        background-color: #179180;
+        color: rgba(211, 211, 211, 0.45);
     }
-    #check:checked ~ ul{
-        right: 0;
+
+    .show {
+        display: block;
+        position: absolute;
     }
 }

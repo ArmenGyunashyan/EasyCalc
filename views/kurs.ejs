@@ -4,7 +4,6 @@
     <title>Home</title>
     <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
 <header class="header">
@@ -17,23 +16,18 @@
             <span class="slider round"></span>
         </label>
         <nav class="navbar">
-            <div>
-                <input type="checkbox" id="check">
-                <label for="check" class="checkbtn">
-                    <i class="fas fa-bars"></i>
-                </label>
-                <ul class="nav-links">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="kurs.html">KURS</a></li>
-                    <li><a href="formeln.html">FORMELN</a></li>
-                    <li>
-                        <% if(activeSession.loggedin) { %>
-                            <a href="logout">LOGOUT</a>
-                        <% } else { %>
-                            <a href="login.html">LOGIN</a>
-                        <% } %>
-                    </li>
-                </ul>
+            <div class="dropdown">
+                <button onclick="mobileNavbar()" class="dropbtn">Options</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="index.html">HOME</a>
+                    <a href="kurs.html">KURS</a>
+                    <a href="formeln.html">FORMELN</a>
+                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
+                    <% }
+                    else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %>
+                </div>
             </div>
         </nav>
         <hr>
@@ -69,6 +63,29 @@ Footer
     </footer>
 </div>
 </body>
+<!--
+===================================
+Responsive Navbar Skript
+===================================
+-->
+<script>
+    function mobileNavbar() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>
 
 <!--
 ===================================
