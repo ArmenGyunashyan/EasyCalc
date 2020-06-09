@@ -319,7 +319,7 @@ app.get('/login.html', function(req, res) {
     res.render('login', {style: req.cookies.style});
 });
 app.get('/login', function(req, res) {
-    res.render('login', {style: req.cookies.style})
+    res.render('login', {style: req.cookies.style});
 });
 //--------------------------------------------------
 

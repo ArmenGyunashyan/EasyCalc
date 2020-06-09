@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Login Form</title>
+		<link rel="stylesheet" id="sheet"
+			  href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<style>
 		html {
 			background-color: #303030;
@@ -39,6 +42,29 @@
 		</style>
 	</head>
 	<body>
+	<header class="header">
+		<div class="fixed-size">
+			<h1 class="logo">EasyCalc</h1>
+			<label class="switch">
+				<input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
+						<% } %>
+				>
+				<span class="slider round"></span>
+			</label>
+			<nav class="navbar">
+				<div class="dropdown">
+					<button onclick="mobileNavbar()" class="dropbtn"><img src="images/platzhalter.jpg"></button>
+					<div id="myDropdown" class="dropdown-content">
+						<a href="index.html">HOME</a>
+						<a href="kurs.html">KURS</a>
+						<a href="formeln.html">FORMELN</a>
+					</div>
+
+				</div>
+			</nav>
+			<hr>
+		</div>
+	</header>
 		<div class="login-form">
 			<h1>Login Form</h1>
 			<form action="login.html/auth" method="POST">
@@ -48,4 +74,33 @@
 			</form>
 		</div>
 	</body>
+	<script>
+		/**
+		 * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
+		 * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
+		 */
+		const stylesheet = document.getElementById("sheet");
+		const checkBox = document.getElementById("styleChecker");
+
+		var style = "<%= style %>";
+		/*
+        if(style == 'dunkel') {
+            checkBox.checked = false;
+        } else {
+            checkBox.checked = true;
+        }
+        */
+		checkBox.onclick = function () {
+			if (this.checked) {
+				document.cookie = "style=hell";
+				stylesheet.href = "css/default.css";
+				//checkBox.checked = true;
+			} else {
+				document.cookie = "style=dunkel";
+				stylesheet.href = "css/dark.css";
+				//checkBox.checked = false;
+			}
+		}
+
+	</script>
 </html>
