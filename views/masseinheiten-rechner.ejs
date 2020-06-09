@@ -41,9 +41,20 @@
     </div>
 </header>
 <section class="fixed-size">
+    <!--
+    =================================================================================
+       v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v
+    =================================================================================
+    -->
     <div>
-        <h1>Maßeinheiten</h1>
-
+    <h1>Maßeinheit</h1>
+        <form action="/masseinheiten-rechner.html" method="POST">
+            <input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm<br>
+            <input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll<br>
+            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0">
+            <input type="submit">
+        </form>
+        <p id="resultLabel"></p>
     </div>
     <br>
     <div>
@@ -56,6 +67,11 @@
             <button id="nextBTN" style="float:left;" onclick="nextRange(10)">>></button>
         </div>
     </div>
+    <!--
+    =================================================================================
+    ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
+    =================================================================================
+    -->
 </section>
 <div>
     <footer class="footer fixed-size">
@@ -120,12 +136,30 @@ Cookies Skript
 
 </script>
 <!--
-===================================
-Pager
-===================================
+=============================================================================================================
+  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       +       x     *       +       
+  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+=============================================================================================================
 -->
 <script>
-    <% //Das Array mit der Chronic wird von der RenderEngine übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+    //-------------------------------------------------------------------------------------------
+    // Variablen (über EJS) und DOM-Elemente
+    //-------------------------------------------------------------------------------------------
+
+    /**Chronic ist ein JSON-Array mit JSON-Objekten, welches die Fake-Query zur Chronik des Nutzers bereitstellt
+     *  Bei einer echten DB-Query würde man auch direkt nur nach dem aktuellen Nutzer filtern. Dies machen
+     *  wir "emuliert" spöter in JavaScript
+     * 
+     *  chronic[i].user         :string                             // Nutzer, der die Berechnung durchgeführt hat (Eineindeutig)
+     *  chronic[i].inchToMetric :boolean                            // Rechenmodus (zoll >> cm | cm >> zoll)
+     *  chronic[i].input        :number (float bei JavaScript)      // Eingabe zum Umwandeln
+     *  chronic[i].result       :number (float bei JavaScript)      // Das Ergebnis der Berechnung
+    */
+
+    // Das Array mit der Chronic wird von der EJS übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+    // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
+    <%
         var tmp = "[";
         for(var i = 0; i < chronic.length; i++) {
             if(chronic[i].user == activeSession.username) {
@@ -135,30 +169,70 @@ Pager
         tmp = tmp.substring(0, tmp.length-1) + "]";
         chronic = tmp;
     %>
-    var chronic
-    <% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
-
+    var chronic<% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
     var left = 0;
     var right = 0;
-    
     const list = document.getElementById('list');
     const nextBTN = document.getElementById('nextBTN');
-    nextBTN.style.display = 'none';
     const prevBTN = document.getElementById('prevBTN');
+    nextBTN.style.display = 'none';
     prevBTN.style.display = 'none';
+    //-------------------------------------------------------------------------------------------
+    // Initialisierungs-Funktionen
+    //-------------------------------------------------------------------------------------------
 
+    initializeRange();          //Beschreibung bei Funktion selbst
+    renderPager(left,right);    //Beschreibung bei Funktion selbst
 
-    function addElement(inhalt) {
+    //-------------------------------------------------------------------------------------------
+    // Funktionen (mit Beschreibung)
+    //-------------------------------------------------------------------------------------------
+
+    /**
+     * Object : addElement(input, inchToMetric, result)
+     * Erstellt ein neues <li> Element (DOM) und füllt es mit Inhalt (Text und Function() zum Laden der Parameter in das Formular)
+     * 
+     * Referenz:
+     *          input : number          -> Was hat der Nutzer bei seiner Rechnung angegeben
+     *          inchToMetric : boolean  -> Welcher der beiden Methoden (RadioButtons) war bei der Berechnung gewählt
+     *          result : number         -> Wie lautete das Ergebnis
+     * Return:
+     *          none
+     */
+    function addElement(input, inchToMetric, result) {
         var listElement = document.createElement('li');
             var elementLink = document.createElement('a');
             elementLink.href = "#";
-            elementLink.appendChild(document.createTextNode(inhalt));
+            if(inchToMetric == true) {
+                elementLink.appendChild(document.createTextNode(input + " zoll = " + result + " cm"));
+                elementLink.onclick = function() {
+                    numberField.value=input;
+                    inchToMetricRadio.checked = true;
+                };
+            } else {
+                elementLink.appendChild(document.createTextNode(input + " cm = " + result + " zoll"));
+                elementLink.onclick = function() {
+                    numberField.value=input;
+                    metricToInchRadio.checked = true;
+                };
+            }
             listElement.appendChild(elementLink);
-            elementLink.onclick = function() {console.log("Du hast " + listElement.textContent + " angeklickt")};
+            //elementLink.onclick = function() {console.log("Du hast " + listElement.textContent + " angeklickt")};
         list.appendChild(listElement);
     }
 
-    
+    /**
+     * Void : initializeRange()
+     * Legt die Pangergrenzen beim ersten Laden der Seite fest. Das Limit ist 10 Elemente pro Page.
+     * Sollte ein Array weniger als 10 Objekte haben, wird die Länge des Arrays als Obergrenze genommen.
+     * Die Variablen left und right sind global und werden nicht returnt.
+     * Hinweis: Das Array wird später rückwärts gelesen. Die Grenzen sind daran angepasst.
+     * 
+     * Return:
+     *          (Globale Variablen)
+     *          left : number
+     *          right : number
+     */  
     function initializeRange() {
         
         right = chronic.length-1;
@@ -169,20 +243,27 @@ Pager
         }
     }
 
-
-    initializeRange(); //Legt das Pagerlimit auf 10 Elemente oder die Länge des Array, wenn dies kleiner ist.
-    renderPager(left,right);
-
+    /**
+     * Void : renderPager(left, right)
+     * Eine for-Schleife die wiederholt die ein Onjekt über die Funktion "addElement" erzeugt.
+     * Das neue Objekt (Element) wird danach über die DOM an das Mutter-Element <ul> angehangen.
+     * Zu beginn werden die alten Elemente gelöscht.
+     * Wenn es noch mehr Elemente gibt in beide Grenzrichtungen, werden Buttons eingeblendet, um das
+     * Umblättern zu ermöglichen.
+     * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
+     * Der letzte/aktuellste Einrtrag soll als erstes gelistet sein.
+     * 
+     * Referenz:
+     *          left : number          -> Die untere Grenze zum Auslesen des Array (Fake-DB-Query)
+     *          right : number         -> Die obere Grenze zum Auslesen des Array (Fake-DB-Query)
+     * Return:
+     *          none
+     */
     function renderPager(left, right) {
-        list.innerHTML="";
+        list.innerHTML=""; //Löschen aller aktuelle <li>'s
         
         for(var i = right; i >= left; i--) {
-            if(chronic[i].inchToMetric) {
-                addElement(chronic[i].input + " zoll = " + chronic[i].result + "cm");
-            } else {
-                addElement(chronic[i].input + " cm = " + chronic[i].result + "zoll");
-            }
-        
+                addElement(chronic[i].input, chronic[i].inchToMetric,chronic[i].result);
         }
 
         //Überprüfungen, ob Buttons benötigt werden
@@ -198,7 +279,19 @@ Pager
         }
 
     }
-
+    /**
+     * Void : nextPage(factor)
+     * Der Bereich 'left' bis 'right' wird um (factor) Einheiten nach Links verschoben (Da die Liste rückwärts gelesen wird).
+     * Die Liste wird danach mit den neuen, globalen Werten 'left | right' neu gerendert, um
+     * die Veränderung auch sichtbar zu machen
+     * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
+     * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
+     * 
+     * Referenz:
+     *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
+     * Return:
+     *          none
+     */
     function nextRange(factor) {
         //Right und Left werden runter gezählt (Array wird von Hinten aufgerollt)
         right = left - 1;
@@ -208,6 +301,19 @@ Pager
         renderPager(left,right);
     }
 
+    /**
+     * Void : nextPage(factor)
+     * Der Bereich 'left' bis 'right' wird um (factor) Einheiten nach Rechts verschoben (Da die Liste rückwärts gelesen wird).
+     * Die Liste wird danach mit den neuen, globalen Werten 'left | right' neu gerendert, um
+     * die Veränderung auch sichtbar zu machen
+     * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
+     * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
+     * 
+     * Referenz:
+     *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
+     * Return:
+     *          none
+     */
     function prevRange(factor) {
         //Right und Left werden rauf gezählt (Array wird von Hinten aufgerollt)
         left = right + 1;
@@ -215,37 +321,47 @@ Pager
         if(right > chronic.length-1) {right = chronic.length-1;}
         if(left > chronic.length-1) {left = chronic.length-1;}
         renderPager(left,right);
-    }
+    }    
+</script>
+<!--
+=============================================================================================================
+  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +       x     *       +       
+  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+=============================================================================================================
+-->
+<script>
+    //-------------------------------------------------------------------------------------------
+    // Variablen (über EJS) und DOM-Elemente
+    //-------------------------------------------------------------------------------------------
 
+    var result; // Ergebnis vom Backend (EJS)
+    var inputSet; // JSON Array mit dem Body des POST's (um das Formular befüllt zu lassen) (EJS)
+    const resultLabel = document.getElementById('resultLabel');
+    const numberField = document.getElementById('numberField');
+    const metricToInchRadio = document.getElementById('metricToInchRadio');
+    const inchToMetricRadio = document.getElementById('inchToMetricRadio');
 
-    var test = [
-        {
-            name: "Klaus",
-            zahl: 3
+    <% if(locals.result) {%>result = <%= result%>;<%} %>
+    <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
+    //-------------------------------------------------------------------------------------------
+    // Anzeige des Ergebnisses auf dem 'resultLabel' (DOM)
+    if(result != null) {
+        if(inputSet.inchToMetric == 'true') {
+            resultLabel.innerHTML=result + " cm";
+            
+        } else {
+            resultLabel.innerHTML=result + " zoll";
         }
-    ];
-
-    /*
-    const list = document.getElementById('list');
-    
-    var listElement = document.createElement('li');
-    var elementLink = document.createElement('a');
-    var span = document.createElement('span');
-    span.textContent = "testInhalt";
-    elementLink.onclick = function() {console.log("Du hast " + span.textContent + " angeklickt")};
-    elementLink.href = "#";
-    elementLink.appendChild(span);
-    list.appendChild(elementLink);
-    */
-
-    if(chronic) {
-        // Chronic ist ein JSON-Array mit JSON-Objekten
-        // So werden die ausgelesen ->  chronic[i].user         //string
-        //                              chronic[i].inchToMetric //boolean
-        //                              chronic[i].input        //number (float bei JavaScript)
-        //                              chronic[i].result       //number (float bei JavaScript)
-
-
+    // Befüllen der Formular-Elemente------------------------------------------------------------
+    // Durch den POST wird das Formular geleert. Die Variablen lesen wir hier aber wieder ein
+        
+        numberField.value=inputSet.input;
+        if(inputSet.inchToMetric == 'true') {
+            inchToMetricRadio.checked = true;
+        } else {
+            metricToInchRadio.checked = true;
+        }
         
     }
 </script>

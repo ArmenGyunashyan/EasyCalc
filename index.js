@@ -40,7 +40,7 @@ var chronicMeasure = [
     },
     {
         user: "root",
-        inchToMetric: true,
+        inchToMetric: false,
         input: 12,
         result: 12.9
     },
@@ -244,7 +244,7 @@ app.post('/login.html/auth', function(req, res) {
 //--------------------------------------------------
 
 function isAuth(req, res, next) {
-    if(!req.session.loggedin) {
+    if(req.session.loggedin != true) {
         next(); //Next beendet die Funktion nur (So wie z.B. return null;)
     } else {
         res.redirect('/');
@@ -254,8 +254,8 @@ function isAuth(req, res, next) {
 /**
  * Wird die URL aufgerufen, wird die Funktion "isAuth()" gestartet. Diese leitet, bei aktiver Session, zur Index-Seite zurück
  */
-app.get('/login.html', isAuth);
-app.get('/login', isAuth);
+//app.get('/login.html', isAuth); //Funktion verlagert
+//app.get('/login', isAuth);
 
 //--------------------------------------------------
 // Router + RenderEngine + Var-Parsing
@@ -315,22 +315,62 @@ app.get('/masseinheiten-rechner', function(req, res) {
 });
 
 
-app.get('/login.html', function(req, res) {
+app.get('/login.html', isAuth, function(req, res) {
     res.render('login', {style: req.cookies.style});
 });
-app.get('/login', function(req, res) {
+app.get('/login', isAuth, function(req, res) {
     res.render('login', {style: req.cookies.style});
 });
 //--------------------------------------------------
 
 
-app.get('/logout', function(req, res, done) {
+app.get('/logout', function(req, res, done) { //Ausloggen über eine URL (nicht über HTTP Post)
     req.session.loggedin = false;
     req.session.username = null;
     req.session.password = null;
     res.redirect('/');
     done();
 });
+
+/**
+ * Berechnungslogik des Masseinheiten-Rechners.
+ * POST liefert:
+ *      boolean inchToMetric -> Wenn dieser 'true' ist, ist der Input in 'Zoll' und soll nach 'cm' umgerechnet werden.
+ *      number input -> Die Zahl die umgewandelt werden soll.
+ * 
+ * Es wird erwaret:
+ *      number result -> Das Ergebnis, welches über ejs übermittelt wird
+ * 
+ * Hinweis: Da das Eingabefeld steht auf 'required' und min='0' (Dennoch nutzen wir Anker)
+ */
+app.post('/masseinheiten-rechner.html', function(req, res, done) { // Masseinheiten-Rechner
+    
+    if(!req.body.input) { //Anker
+        done();
+    }
+    if(req.body.input <= 0) { //Anker
+        done();
+    }
+
+    statistics.measure = statistics.measure + 1;
+    //req.body.inchToMetric = (req.body.inchToMetric === req.body.inchToMetric); //Dieser tolle Befehl wandelt den String in einen Boolean um
+    var result = 0;    
+    if(req.body.inchToMetric == 'true') {
+        result = req.body.input * 2.54;
+    } else {
+        result = req.body.input / 2.54;
+    }
+
+    if(req.session.loggedin == true) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
+        //Write zur FakeDB
+
+    }
+
+    res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style, result: result, inputSet: req.body});
+});
+
+
+
 
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));
