@@ -313,6 +313,12 @@ app.get('/masseinheiten-rechner.html', function(req, res) {
 app.get('/masseinheiten-rechner', function(req, res) {
     res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style}); 
 });
+app.get('/waehrungen-rechner.html', function(req, res) {
+    res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style}); 
+});
+app.get('/waehrungen-rechner', function(req, res) {
+    res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style}); 
+});
 
 
 app.get('/login.html', isAuth, function(req, res) {

@@ -5,6 +5,13 @@
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
 
+    if(window.location.pathname != "/index.html") { // Statistiken werden mit Dummy-Daten gefüllt, wenn man nicht auf der STartseite ist
+        var statistics = {
+            measure: 0,
+            money: 0,
+            energy: 0
+        }
+    }
 
     
     /*
@@ -64,7 +71,9 @@
                     ]
                 }]
             });
+            if(window.location.pathname == "/index.html") { // ChartJS muss nur auf der Startseite gerendert werden
             chartLoad(chartDefault);
+            }
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href = "css/dark.css";
@@ -113,7 +122,9 @@
                     ]
                 }]
             });
-            chartLoad(chartDark);
+            if(window.location.pathname == "/index.html") { // ChartJS muss nur auf der Startseite gerendert werden
+                chartLoad(chartDark);
+                }
 
         }
     }

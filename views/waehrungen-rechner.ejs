@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <script src="skripts/dropdown.js"></script>
+    <title>Home</title>
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<body  class="fixed-size">
+<body>
 <header class="header">
     <div class="fixed-size">
         <h1 class="logo">EasyCalc</h1>
@@ -19,6 +20,7 @@
         <nav class="navbar">
             <div class="dropdown">
                 <button onclick="mobileNavbar()" class="dropbtn">Options</button>
+                <!--<input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">-->
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
@@ -29,11 +31,65 @@
                         <a href="login.html">LOGIN</a>
                     <% } %>
                 </div>
+
             </div>
         </nav>
         <hr>
     </div>
 </header>
+<section class="fixed-size">
+    <!--
+    ===================================
+    Flip Cards
+    ===================================
+    -->
+    <h1 class="flip-card-header">Rechner</h1>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Maßeinheiten">
+            </div>
+            <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
+                <h1 class="flip-card-title">Maßeinheiten</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Währungen">
+            </div>
+            <div class="flip-card-back" onclick="window.location='waehrungen-rechner.html'">
+                <h1 class="flip-card-title">Währungen</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
+        </div>
+    </div>
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
+            </div>
+            <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
+                <h1 class="flip-card-title">Strom</h1>
+                <p class="flip-card-text">Text</p>
+            </div>
+        </div>
+    </div>
+    <!--
+    ===================================
+    Charts
+    ===================================
+    -->
+    <div id="chartContainer" class="chart fixed-size"></div>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--
+    ===================================
+    Footer
+    ===================================
+    -->
+</section>
 <div>
     <footer class="footer fixed-size">
         <hr>
@@ -45,26 +101,15 @@
 </div>
 </body>
 <!--
-===================================
-Responsive Navbar Skript
-===================================
--->
+    ===================================
+    Skripte
+    ===================================
+    -->
 <script>
-    function mobileNavbar() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
 
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
+    var style = "<%= style %>";
 </script>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>
