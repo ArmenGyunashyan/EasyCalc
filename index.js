@@ -364,7 +364,7 @@ app.post('/masseinheiten-rechner.html', function(req, res, done) { // Masseinhei
     //Runden von "result : number"
     result = result.toFixed(2);
 
-    if(req.session.loggedin == true) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
+    if(req.session.loggedin == true && req.body.input > 0) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
         //Erzeugen des neuen Onjektes
         //JSON-Objekt für "chronicMeasure[]" (hier "obj")
         //
