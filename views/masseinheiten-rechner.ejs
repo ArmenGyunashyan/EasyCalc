@@ -203,17 +203,19 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
         var listElement = document.createElement('li');
             var elementLink = document.createElement('a');
             elementLink.href = "#";
-            if(inchToMetric == true) {
+            if(inchToMetric == 'true') {
                 elementLink.appendChild(document.createTextNode(input + " zoll = " + result + " cm"));
                 elementLink.onclick = function() {
                     numberField.value=input;
                     inchToMetricRadio.checked = true;
+                    resultLabel.innerHTML=""; //Reset des alten Ergebnisses im Label
                 };
             } else {
                 elementLink.appendChild(document.createTextNode(input + " cm = " + result + " zoll"));
                 elementLink.onclick = function() {
                     numberField.value=input;
                     metricToInchRadio.checked = true;
+                    resultLabel.innerHTML=""; //Reset des alten Ergebnisses im Label
                 };
             }
             listElement.appendChild(elementLink);

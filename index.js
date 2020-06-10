@@ -19,7 +19,7 @@ const users = [
         password: "test"
     }
 ];
-var chronicMeasure = [
+var chronicMeasure = [ 
     {
         user: "root",
         inchToMetric: true,
@@ -346,10 +346,10 @@ app.get('/logout', function(req, res, done) { //Ausloggen über eine URL (nicht 
 app.post('/masseinheiten-rechner.html', function(req, res, done) { // Masseinheiten-Rechner
     
     if(!req.body.input) { //Anker
-        done();
+        done(); //Es liegt kein Input vor
     }
     if(req.body.input <= 0) { //Anker
-        done();
+        done(); //Der Input  ist zu klein (negativ oder Null)
     }
 
     statistics.measure = statistics.measure + 1;
@@ -361,9 +361,29 @@ app.post('/masseinheiten-rechner.html', function(req, res, done) { // Masseinhei
         result = req.body.input / 2.54;
     }
 
-    if(req.session.loggedin == true) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
-        //Write zur FakeDB
+    //Runden von "result : number"
+    result = result.toFixed(2);
 
+    if(req.session.loggedin == true) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
+        //Erzeugen des neuen Onjektes
+        //JSON-Objekt für "chronicMeasure[]" (hier "obj")
+        //
+        //obj.user          : String    -> Username des aktuellen Nutzers
+        //obj.inchToMetric  : boolean   -> Rechenmodus
+        //obj.input         : number    -> Eingabe im Zahlenfeld
+        //obj.result        : number    -> Ergebnis der Berechnung
+
+        //var obj = JSON.parse("{user: 'klaus', inchToMetric: true, input: 12, result: 1}");
+        chronicMeasure.push({
+            "user":req.session.username,
+            "inchToMetric":req.body.inchToMetric,
+            "input":req.body.input,
+            "result":result
+        });
+
+        done();
+        
+    
     }
 
     res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style, result: result, inputSet: req.body});
