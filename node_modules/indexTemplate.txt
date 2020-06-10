@@ -26,8 +26,7 @@
                     <a href="kurs.html">KURS</a>
                     <a href="formeln.html">FORMELN</a>
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% }
-                    else { %>
+                    <% } else { %>
                         <a href="login.html">LOGIN</a>
                     <% } %>
                 </div>

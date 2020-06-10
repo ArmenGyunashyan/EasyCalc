@@ -26,8 +26,7 @@
                     <a href="kurs.html">KURS</a>
                     <a href="formeln.html">FORMELN</a>
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% }
-                    else { %>
+                    <% } else { %>
                         <a href="login.html">LOGIN</a>
                     <% } %>
                 </div>
@@ -38,8 +37,38 @@
     </div>
 </header>
 <section class="fixed-size">
+    <!--
+    =================================================================================
+       v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v
+    =================================================================================
+    -->
     <h1>Divisenkurs-Rechner</h1>
-    
+    <form action="/waehrungen-rechner.html" method="POST">
+        <label fpr="mode">Divisenkurs: </label>
+        <select name="mode" id="mode" required>
+            <optgroup label="Euro">
+                <option value="1">EUR > USD</option>
+                <option value="2">EUR > GBP</option>
+                <option value="3">EUR > YEN</option>
+            </optgroup>
+            <optgroup label="US Dollar">
+                <option value="4">USD > EUR</option>
+                <option value="5">USD > GBP</option>
+                <option value="6">USD > YEN</option>
+            </optgroup>
+            <optgroup label="Yen">
+                <option value="7">YEN > EUR</option>
+                <option value="8">YEN > USD</option>
+                <option value="9">YEN > GBP</option>
+            </optgroup>
+        </select>
+        <input type="submit" name="Yob">
+    </form>
+    <!--
+    =================================================================================
+    ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
+    =================================================================================
+    -->
 </section>
 <!--
     ===================================
@@ -61,7 +90,12 @@
     Skripte
     ===================================
     -->
+<script>
 
+    const mode = document.getElementById('mode');
+
+
+</script>
 
 
 
