@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home</title>
+    <script src="skripts/dropdown.js"></script>
+    <title>Maßeinheits-Rechner</title>
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -17,24 +18,20 @@
             <span class="slider round"></span>
         </label>
         <nav class="navbar">
-            <div>
-                <ul class="nav-links">
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="kurs.html">KURS</a></li>
-                    <li><a href="formeln.html">FORMELN</a></li>
-                    <li>
-                        <% if(activeSession.loggedin) { %>
-                            <a href="logout">LOGOUT</a>
-                        <% } else { %>
-                            <a href="login.html">LOGIN</a>
-                        <% } %>
-                    </li>
-                </ul>
-            </div>
-            <div class="icon">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
+            <div class="dropdown">
+                <button onclick="mobileNavbar()" class="dropbtn">Options</button>
+                <!--<input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">-->
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="index.html">HOME</a>
+                    <a href="kurs.html">KURS</a>
+                    <a href="formeln.html">FORMELN</a>
+                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
+                    <% }
+                    else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %>
+                </div>
+
             </div>
         </nav>
         <hr>
@@ -72,7 +69,13 @@
     ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
     =================================================================================
     -->
+    
 </section>
+<!--
+    ===================================
+    Footer
+    ===================================
+    -->
 <div>
     <footer class="footer fixed-size">
         <hr>
@@ -83,59 +86,13 @@
     </footer>
 </div>
 </body>
-
-
 <!--
-===================================
-Responsive Navbar Skript
-===================================
--->
-<script>
-    const navSlide = () => {
-        const icon = document.querySelector('.icon');
-        const nav = document.querySelector('.nav-links');
+    ===================================
+    Skripte
+    ===================================
+    -->
 
-        icon.addEventListener('click', () => {
-            nav.classList.toggle('nav-active');
-        })
-    }
-    navSlide();
-</script>
-<!--
-===================================
-Cookies Skript
-===================================
--->
-<script>
-    /**
-     * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
-     * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
-     */
-    const stylesheet = document.getElementById("sheet");
-    const checkBox = document.getElementById("styleChecker");
-
-    var style = "<%= style %>";
-    /*
-    if(style == 'dunkel') {
-        checkBox.checked = false;
-    } else {
-        checkBox.checked = true;
-    }
-    */
-    checkBox.onclick = function () {
-        if (this.checked) {
-            document.cookie = "style=hell";
-            stylesheet.href = "css/default.css";
-            //checkBox.checked = true;
-        } else {
-            document.cookie = "style=dunkel";
-            stylesheet.href = "css/dark.css";
-            //checkBox.checked = false;
-        }
-    }
-
-</script>
-<!--
+    <!--
 =============================================================================================================
   x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
 Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       +       x     *       +       
@@ -367,4 +324,14 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
         
     }
 </script>
+
+
+<script>
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
+
+    var style = "<%= style %>";
+    
+</script>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>
