@@ -44,6 +44,11 @@ p {
     display: none;
 }
 
+.threeLines
+{
+    display: none;
+}
+
 .navbar {
     float: right;
 }
@@ -254,10 +259,6 @@ div > .footer {
 
 @media screen and (max-width: 560px) {
 
-    .dropbtn {
-        display: block;
-    }
-
     .dropdown-content {
         display: none;
         background-color: #179180;
@@ -276,6 +277,7 @@ div > .footer {
         cursor: pointer;
         margin-top: 4px;
         font-family: "Orbitron";
+        display: block;
     }
 
     .dropdown {
