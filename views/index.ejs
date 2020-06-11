@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="skripts/dropdown.js"></script>
+
     <title>Home</title>
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
@@ -19,8 +19,8 @@
         </label>
         <nav class="navbar">
             <div class="dropdown">
-                <button onclick="mobileNavbar()" class="dropbtn">Options</button>
-                <!--<input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">-->
+                <script src="skripts/dropdown.js"></script>
+                <input type="image" src="<% if (style == 'hell') {%>images/ThreeLines.svg<%} else {%>images/ThreeLinesDark.svg<%}%>" class="dropbtn" onClick="mobileNavbar()">
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
@@ -33,6 +33,7 @@
 
             </div>
         </nav>
+
         <hr>
     </div>
 </header>
