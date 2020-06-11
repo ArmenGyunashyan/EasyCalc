@@ -18,19 +18,23 @@
         </label>
         <nav class="navbar">
             <div class="dropdown">
-                <input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">
+                <script src="skripts/dropdown.js"></script>
+                <input type="image"
+                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                       class="dropbtn" onClick="mobileNavbar()">
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
                     <a href="formeln.html">FORMELN</a>
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% }
-                    else { %>
+                    <% } else { %>
                         <a href="login.html">LOGIN</a>
                     <% } %>
                 </div>
+
             </div>
         </nav>
+
         <hr>
     </div>
 </header>
@@ -44,27 +48,17 @@
     </footer>
 </div>
 </body>
-<!--
-===================================
-Responsive Navbar Skript
-===================================
--->
 <script>
-    function mobileNavbar() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
 
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
+    var style = "<%= style %>";
+    <% if(locals.statistics) { %>
+    var statistics = <%- JSON.stringify(statistics) %>;
+    <% } %>
 </script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>
