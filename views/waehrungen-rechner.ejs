@@ -42,28 +42,51 @@
        v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v
     =================================================================================
     -->
+    <div>
     <h1>Divisenkurs-Rechner</h1>
-    <form action="/waehrungen-rechner.html" method="POST">
-        <label fpr="mode">Divisenkurs: </label>
-        <select name="mode" id="mode" required>
-            <optgroup label="Euro">
-                <option value="1">EUR > USD</option>
-                <option value="2">EUR > GBP</option>
-                <option value="3">EUR > YEN</option>
-            </optgroup>
-            <optgroup label="US Dollar">
-                <option value="4">USD > EUR</option>
-                <option value="5">USD > GBP</option>
-                <option value="6">USD > YEN</option>
-            </optgroup>
-            <optgroup label="Yen">
-                <option value="7">YEN > EUR</option>
-                <option value="8">YEN > USD</option>
-                <option value="9">YEN > GBP</option>
-            </optgroup>
-        </select>
-        <input type="submit" name="Yob">
-    </form>
+        <form action="/waehrungen-rechner.html" method="POST">
+            <label fpr="mode">Divisenkurs: </label>
+            <select name="mode" id="mode" required>
+                <optgroup label="Euro">
+                    <option value="1">EUR > USD</option>
+                    <option value="2">EUR > GBP</option>
+                    <option value="3">EUR > YEN</option>
+                </optgroup>
+                <optgroup label="US Dollar">
+                    <option value="4">USD > EUR</option>
+                    <option value="5">USD > GBP</option>
+                    <option value="6">USD > YEN</option>
+                </optgroup>
+                <optgroup label="UK Pfund">
+                    <option value="7">GBP > EUR</option>
+                    <option value="8">GBP > USD</option>
+                    <option value="9">GBP > YEN</option>
+                </optgroup>
+                <optgroup label="Yen">
+                    <option value="10">YEN > EUR</option>
+                    <option value="11">YEN > USD</option>
+                    <option value="12">YEN > GBP</option>
+                </optgroup>
+            </select>
+            <br><br>
+            <label>Betrag: </label>
+            <input id="numberField"  type="number" min="0" placeholder="0" step="0.01" name="input" required>
+            <input type="submit" value="Berechnen">
+        </form>
+        <br>
+        <p id="resultLabel"></p>
+    </div>
+    <br>
+    <div>
+        <h1>Verlauf</h1>
+        <ul id="list" class="chronicList">
+
+        </ul>
+        <div class="pager-btn">
+            <button id="prevBTN" style="float:left;" onclick="prevRange(10)"><<</button>
+            <button id="nextBTN" style="float:left;" onclick="nextRange(10)">>></button>
+        </div>
+    </div>
     <!--
     =================================================================================
     ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
@@ -91,9 +114,18 @@
     ===================================
     -->
 <script>
+    // Rechner
+    const mode = document.getElementById('mode');                   //Dropdown-Selektor
+    const numberField = document.getElementById('numberField');     //Eingabefeld
+    const resultLabel = document.getElementById('resultLabel');
+    // Pager
+    const list = document.getElementById('list');
+    const prevBTN = document.getElementById('prevBTN');
+    const nextBTN = document.getElementById('nextBTN');
 
-    const mode = document.getElementById('mode');
-
+    var result;
+    <% if(locals.result) {%>result = <%= result%>;<%} %>
+    console.log(result);
 
 </script>
 

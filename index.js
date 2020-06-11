@@ -9,6 +9,13 @@ const cookieParser = require('cookie-parser');
 
 //Variablen für die Session und die (Fake)Datenbank-------------------
 var statistics = {measure: 1120, money: 420, energy: 280};
+var EURtoUSD = 0.8783; //Wechselkurse: x / var
+var EURtoGBP = 0.8924; //Wechselkurse x * var
+var EURtoYEN = 121.68; //Wechselkurse x * var
+var USDtoGBP = 0.7854; //Wechselkurse x * var
+var USDtoYEN = 106.983;//Wechselkurse x * var
+var GBPtoYEN = 136.28; //Wechselkurse x * var
+
 const users = [
     {
         username: "root",
@@ -178,7 +185,12 @@ var chronicMeasure = [
     }
 ];
 var chronicMoney = [
-
+    {
+        user: "root",
+        mode: 3,
+        input: 1,
+        result: 1.1
+    }
 ];
 var chronicEnergy = [
 
@@ -337,6 +349,11 @@ app.get('/logout', function(req, res, done) { //Ausloggen über eine URL (nicht 
     res.redirect('/');
     done();
 });
+//=============================================================================================================
+//  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+//Rechner-Logiken           +       x     *       +       x     *       +       x     *       +       x     *              
+//  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+//=============================================================================================================
 
 /**
  * Berechnungslogik des Masseinheiten-Rechners.
@@ -344,8 +361,9 @@ app.get('/logout', function(req, res, done) { //Ausloggen über eine URL (nicht 
  *      boolean inchToMetric -> Wenn dieser 'true' ist, ist der Input in 'Zoll' und soll nach 'cm' umgerechnet werden.
  *      number input -> Die Zahl die umgewandelt werden soll.
  * 
- * Es wird erwaret:
- *      number result -> Das Ergebnis, welches über ejs übermittelt wird
+ * Es wird erwaret (als return):
+ *      number result   -> Das Ergebnis, welches über ejs übermittelt wird
+ *      Object inputSet -> Alle EIngaben aus dem Formular werden wieder ungefiltert zurück fesendet
  * 
  * Hinweis: Da das Eingabefeld steht auf 'required' und min='0' (Dennoch nutzen wir Anker)
  */
@@ -395,8 +413,104 @@ app.post('/masseinheiten-rechner.html', function(req, res, done) { // Masseinhei
     res.render('masseinheiten-rechner', {activeSession: req.session, chronic: chronicMeasure ,style: req.cookies.style, result: result, inputSet: req.body});
 });
 
+/**
+ * Berechnungslogik des Waehrungs-Rechners.
+ * POST liefert:
+ *      number mode -> Der Modus 1-12, der angibt welche Währung in Was umgerechnet werden soll
+ *      number input -> Die Zahl die umgewandelt werden soll.
+ * 
+ * Es wird erwaret (als return):
+ *      number result   -> Das Ergebnis, welches über ejs übermittelt wird
+ *      Object inputSet -> Alle EIngaben aus dem Formular werden wieder ungefiltert zurück fesendet
+ * 
+ * Hinweis: Da das Eingabefeld steht auf 'required' und min='0' (Dennoch nutzen wir Anker)
+ */
+app.post('/waehrungen-rechner.html', function(req, res, done) {
 
+    if(!req.body.input) {
+        done();
+    }
+    if(req.body.input <= 0) {
+        done();
+    }
+    statistics.money = statistics.money + 1;
 
+    //req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen FLoat
+
+    var result = 0;
+
+    switch(req.body.mode) {
+        case 1: //EUR > USD
+        console.log(req.body.import + " wird zu " + result);
+            result = req.body.input / EURtoUSD;
+        break;
+        case 2: //EUR > GBP
+            result = req.body.input * EURtoGBP;
+        break;
+        case 3: //EUR > YEN
+            result = req.body.input * EURtoYEN;
+        break;
+        case 4: //USD > EUR
+            result = req.body.input * EURtoUSD;
+        break;
+        case 5: //USD > GBP
+            result = req.body.input * USDtoGBP;
+        break;
+        case 6: //USD > YEN
+            result = req.body.input * USDtoYEN;
+        break;
+        case 7: //GBP > EUR
+            result = req.body.input / EURtoGBP;
+        break;
+        case 8: //GBP > USD
+            result = req.body.input / USDtoGBP;
+        break;
+        case 9: //GBP > YEN
+            result = req.body.input * GBPtoYEN;
+        break;
+        case 10: //YEN > EUR
+            result = req.body.input / EURtoYEN;
+        break;
+        case 11: //YEN > USD
+            result = req.body.input / USDtoYPN;
+        break;
+        case 12: //YEN > GBP
+            result = req.body.input / GBPtoYEN;
+        break;
+        default:
+            done();
+        break;
+    }
+
+    //Runden von "result : number"
+    result = result.toFixed(2);
+    console.log(result);
+
+    if(req.session.loggedin == true && req.body.input > 0) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
+        //Erzeugen des neuen Onjektes
+        //JSON-Objekt für "chronicMeasure[]" (hier "obj")
+        //
+        //obj.user          : String    -> Username des aktuellen Nutzers
+        //obj.mode          : number    -> Rechenmodus
+        //obj.input         : number    -> Eingabe im Zahlenfeld
+        //obj.result        : number    -> Ergebnis der Berechnung
+
+        chronicMoney.push({
+            "user":req.session.username,
+            "mode":req.body.mode,
+            "input":req.body.input,
+            "result":result
+        });
+
+        
+        
+    
+    }
+    
+    res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style, result: result, inputSet: req.body});
+});
+
+//Starten aller wichtigen Dienste
 
 //Statischen Ordner erstellen (root für die Webseite, nicht den Server)
 app.use(express.static(path.join(__dirname, 'public')));

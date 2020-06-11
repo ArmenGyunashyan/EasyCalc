@@ -47,9 +47,10 @@
         <form action="/masseinheiten-rechner.html" method="POST">
             <input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm<br>
             <input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll<br>
-            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0">
-            <input type="submit">
+            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
+            <input type="submit" value="Berechnen">
         </form>
+        <br>
         <p id="resultLabel"></p>
     </div>
     <br>
