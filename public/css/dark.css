@@ -129,8 +129,7 @@ a:hover:not(.active) {
     border-radius: 50%;
 }
 
-.header .slider:not(checked)
-{
+.header .slider:not(checked) {
     background-color: #454545;
 }
 
@@ -201,14 +200,9 @@ a:hover:not(.active) {
 
 /* Footer Style */
 
-div > .footer {
-    position: relative;
-}
-
 .footer {
     bottom: 0;
     height: 80px;
-    position: absolute;
 }
 
 .footer > p {
@@ -227,24 +221,50 @@ div > .footer {
     height: 300px;
 }
 
-/* Devisenkurs Tabelle*/
-.kurse
-{
-    margin-left: 5px;
-    margin-right: 5px;
 
+/* Devisenkurs Tabelle*/
+
+#currentDay
+{
+    font-size: 20pt;
+    padding:  5px;
+    font-weight: bold;
 }
 
-.kurse td, th
-{
+.kurse {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    font-size: 20pt;
+    font-style: italic;
+}
+
+.kurse td, th {
     border: 1px solid lightgray;
     border-collapse: collapse;
-    width: 100%;
+    width: 10%;
 }
 
-/* Responsive Design */
+.kursHeader
+{
+    text-align: center;
+    padding-top: 50px;
+    margin-bottom: 10px;
+}
+
+tr:nth-child(even)
+{
+    background-color: rgba(0, 0, 255, 0.38);
+}
+
+th
+{
+    font-weight: bold;
+}
 
 @media screen and (min-width: 940px) {
+    /* Responsive Flip Card */
     .flip-card {
         float: left;
         margin-left: 17.5px;
@@ -253,6 +273,7 @@ div > .footer {
         height: 290px;
     }
 
+    /* Responsive Chart */
     .chart {
         margin-top: 340px;
         width: 940px;
@@ -260,8 +281,9 @@ div > .footer {
     }
 }
 
-@media screen and (max-width: 580px) {
+@media screen and (max-width: 560px) {
 
+    /* Mobile Navbar */
     .dropdown-content {
         display: none;
         background-color: #179180;
@@ -304,5 +326,21 @@ div > .footer {
     .show {
         display: block;
         position: absolute;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    /* Responsive Table*/
+    .kurse
+    {
+        font-size: 12pt;
+    }
+    .kursHeader
+    {
+        font-size: 30pt;
+    }
+    #currentDay
+    {
+        font-size: 18pt;
     }
 }
