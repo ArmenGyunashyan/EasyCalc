@@ -33,17 +33,58 @@
         <hr>
     </div>
 </header>
-
-<!--
-===================================
-Flip Cards
-===================================
--->
 <section class="fixed-size">
 
     <div class="fixed-size">
-        <h1>Divisenkurs</h1>
-        <div>Hallo</div>
+        <h1>Devisen & Währungen</h1>
+        <!-- Es muss noch so geändert werden, dass hier die Kurse aus dem backend ausgelesen werden -->
+        <div class="kurse">
+            <table>
+                <tr id="currentDay" class="day"></tr>
+                <tr>
+                    <th class="wert">Wert</th>
+                    <th class="aktKurs">akt. Kurs</th>
+                    <th class="kursProzent">+/-</th>
+                    <th class="kursProzent">in %</th>
+                </tr>
+                <tr>
+                    <td>EUR/USD</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>EUR/GBP</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>EUR/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>USD/GDP</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>USD/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>GBP/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
 </section>
@@ -52,7 +93,6 @@ Flip Cards
 Footer
 ===================================
 -->
-
 <div>
     <footer class="footer fixed-size">
         <hr>
@@ -121,4 +161,11 @@ Cookies Skript
     }
 
 </script>
+
+<script>
+    var today = new Date();
+    day = today.getDay();
+    month = today.getMonth() + 1;
+    year = today.getFullYear();
+    document.getElementById("currentDay").innerHTML= day + "."+month + "." + "." + year</script>
 </html>
