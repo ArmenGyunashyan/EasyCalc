@@ -2,7 +2,8 @@
 <html>
 <head>
     <title>Home</title>
-    <link rel="stylesheet" id="sheet" href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <link rel="stylesheet" id="sheet"
+          href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -33,14 +34,57 @@
         <hr>
     </div>
 </header>
-<section class="fixed-size">
-
     <div class="fixed-size">
         <h1>Devisen & Währungen</h1>
         <!-- Es muss noch so geändert werden, dass hier die Kurse aus dem backend ausgelesen werden -->
+        <div class="kurse">
+            <table>
+                <tr id="currentDay" class="day"></tr>
+                <tr>
+                    <th class="wert">Wert</th>
+                    <th class="aktKurs">akt. Kurs</th>
+                    <th class="kursProzent">+/-</th>
+                    <th class="kursProzent">in %</th>
+                </tr>
+                <tr>
+                    <td>EUR/USD</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>EUR/GBP</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>EUR/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>USD/GDP</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>USD/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+                <tr>
+                    <td>GBP/YEN</td>
+                    <td>Zahl</td>
+                    <td>+Zahl</td>
+                    <td>+Zahl %</td>
+                </tr>
+            </table>
+        </div>
     </div>
-
-</section>
 <!--
 ===================================
 Footer
@@ -89,7 +133,7 @@ Cookies Skript
     /**
      * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
      * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
-    */
+     */
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
 
@@ -101,14 +145,14 @@ Cookies Skript
         checkBox.checked = true; 
     }
     */
-    checkBox.onclick = function() {
-        if(this.checked) {
+    checkBox.onclick = function () {
+        if (this.checked) {
             document.cookie = "style=hell";
-            stylesheet.href="css/default.css";
+            stylesheet.href = "css/default.css";
             //checkBox.checked = true;
         } else {
             document.cookie = "style=dunkel";
-            stylesheet.href="css/dark.css";
+            stylesheet.href = "css/dark.css";
             //checkBox.checked = false;
         }
     }
@@ -120,5 +164,5 @@ Cookies Skript
     day = today.getDay();
     month = today.getMonth() + 1;
     year = today.getFullYear();
-    document.getElementById("currentDay").innerHTML= day + "."+month + "." + "." + year</script>
+    document.getElementById("currentDay").innerHTML = day + "." + month + "." + "." + year</script>
 </html>
