@@ -15,7 +15,7 @@ mode.onclick = function() { // Deaktiviert das Erlauben von Nachkommastellen, we
 
 function getTime() {
     var date = new Date();
-    return ("(" + date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + ")");
+    return ("(" + date.getDate() + "." + date.getMonth() + 1 + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + ")");
 }
 
 if(inputSet && result) {

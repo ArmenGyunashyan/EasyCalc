@@ -15,6 +15,14 @@ var EURtoYEN = 121.68; //Wechselkurse x * var
 var USDtoGBP = 0.7854; //Wechselkurse x * var
 var USDtoYEN = 106.983;//Wechselkurse x * var
 var GBPtoYEN = 136.28; //Wechselkurse x * var
+var Kurse = {
+    EURtoUSD: EURtoUSD,
+    EURtoGBP: EURtoGBP,
+    EURtoYEN: EURtoYEN,
+    USDtoGBP: USDtoGBP,
+    USDtoYEN: USDtoYEN,
+    GBPtoYEN: GBPtoYEN
+};
 
 const users = [
     {
@@ -302,10 +310,10 @@ app.get('/index', function(req, res) {
     res.render('index', {activeSession: req.session, statistics, style: req.cookies.style}); 
 });
 app.get('/kurs.html', function(req, res) {
-    res.render('kurs', {activeSession: req.session, style: req.cookies.style}); 
+    res.render('kurs', {activeSession: req.session, Kurse: Kurse, style: req.cookies.style}); 
 });
 app.get('/kurs', function(req, res) {
-    res.render('kurs', {activeSession: req.session, style: req.cookies.style}); 
+    res.render('kurs', {activeSession: req.session, Kurse: Kurse, style: req.cookies.style}); 
 });
 app.get('/formeln.html', function(req, res) {
     res.render('formeln', {activeSession: req.session, style: req.cookies.style}); 

@@ -44,47 +44,83 @@
     <div class="kurse">
         <table>
             <tr>
-                <td id="currentDay" colspan="4"></td>
+                <th id="currentDay" colspan="4"></th>
             </tr>
             <tr>
-                <th>Wert</th>
-                <th>akt. Kurs</th>
-                <th>+/-</th>
-                <th>in %</th>
+                <th>Währungen</th>
+                <th>Kurs akt.</th>
+                <th>Veränderung</th>
+                <th>Veränderung %</th>
             </tr>
             <tr>
-                <td>EUR/USD</td>
-                <td>Zahl</td>
+                <td><img src="images/EU_flag.svg" width="17px"> EUR > USD <img src="images/USA_flag.svg" width="17px"></td>
+                <td id="td1">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td>EUR/GBP</td>
-                <td>Zahl</td>
+                <td><img src="images/EU_flag.svg" width="17px"> EUR > GBP <img src="images/UK_flag.svg" width="17px"></td>
+                <td id="td2">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td>EUR/YEN</td>
-                <td>Zahl</td>
+                <td><img src="images/EU_flag.svg" width="17px"> EUR > YEN <img src="images/JAP_flag.svg" width="17px"></td>
+                <td id="td3">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td>USD/GDP</td>
-                <td>Zahl</td>
+                <td><img src="images/USA_flag.svg" width="17px"> USD > GBP <img src="images/UK_flag.svg" width="17px"></td>
+                <td id="td4">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td>USD/YEN</td>
-                <td>Zahl</td>
+                <td><img src="images/USA_flag.svg" width="17px"> USD > YEN <img src="images/JAP_flag.svg" width="17px"></td>
+                <td id="td5">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td>GBP/YEN</td>
-                <td>Zahl</td>
+                <td><img src="images/UK_flag.svg" width="17px"> GBP > YEN <img src="images/JAP_flag.svg" width="17px"></td>
+                <td id="td6">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/USA_flag.svg" width="17px"> USD > EUR <img src="images/EU_flag.svg" width="17px"></td>
+                <td id="td7">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/UK_flag.svg" width="17px"> GBP > EUR <img src="images/EU_flag.svg" width="17px"></td>
+                <td id="td8">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/JAP_flag.svg" width="17px"> YEN > EUR <img src="images/EU_flag.svg" width="17px"></td>
+                <td id="td9">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/UK_flag.svg" width="17px"> GBP > USD <img src="images/USA_flag.svg" width="17px"></td>
+                <td id="td10">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/JAP_flag.svg" width="17px"> YEN > USD <img src="images/USA_flag.svg" width="17px"></td>
+                <td id="td11">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/JAP_flag.svg" width="17px"> YEN > GBP <img src="images/UK_flag.svg" width="17px"></td>
+                <td id="td12">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
@@ -150,10 +186,59 @@ Cookies Skript
 <script src="skripts/cookieStyleLoader.js"></script>
 
 <script>
+
+    var Kurse;
+    <% if(locals.Kurse) { %> Kurse = <%- JSON.stringify(Kurse)%>;<% } %>
+    const td1 = document.getElementById("td1");
+    const td2 = document.getElementById("td2");
+    const td3 = document.getElementById("td3");
+    const td4 = document.getElementById("td4");
+    const td5 = document.getElementById("td5");
+    const td6 = document.getElementById("td6");
+    const td7 = document.getElementById("td7");
+    const td8 = document.getElementById("td8");
+    const td9 = document.getElementById("td9");
+    const td10 = document.getElementById("td10");
+    const td11 = document.getElementById("td11");
+    const td12 = document.getElementById("td12");
+
+    var td1Kurs = (Number.parseFloat(Kurse.EURtoUSD)).toFixed(4);
+    var td2Kurs = (Number.parseFloat(Kurse.EURtoGBP)).toFixed(4);
+    var td3Kurs = (Number.parseFloat(Kurse.EURtoYEN)).toFixed(4);
+    var td4Kurs = (Number.parseFloat(Kurse.USDtoGBP)).toFixed(4);
+    var td5Kurs = (Number.parseFloat(Kurse.USDtoYEN)).toFixed(4);
+    var td6Kurs = (Number.parseFloat(Kurse.GBPtoYEN)).toFixed(4);
+
+    var td7Kurs = (1 / td1Kurs).toFixed(4);
+    var td8Kurs = (1 / td2Kurs).toFixed(4);
+    var td9Kurs = (1 / td3Kurs).toFixed(4);
+    var td10Kurs = (1 / td4Kurs).toFixed(4);
+    var td11Kurs = (1 / td5Kurs).toFixed(4);
+    var td12Kurs = (1 / td6Kurs).toFixed(4);
+
+    td1.innerHTML=td1Kurs;
+    td2.innerHTML=td2Kurs;
+    td3.innerHTML=td3Kurs;
+    td4.innerHTML=td4Kurs;
+    td5.innerHTML=td5Kurs;
+    td6.innerHTML=td6Kurs;
+
+    td7.innerHTML= td7Kurs;
+    td8.innerHTML= td8Kurs;
+    td9.innerHTML= td9Kurs;
+    td10.innerHTML= td10Kurs;
+    td11.innerHTML= td11Kurs;
+    td12.innerHTML= td12Kurs;
+
+    //--------------------------------------------
+    // Vorherige Kurse
+    //--------------------------------------------
+    
+
     var today = new Date();
     day = today.getDate();
     month = today.getMonth() + 1;
     year = today.getFullYear();
-    document.getElementById("currentDay").innerHTML = day + "." + month + "." + year;
+    document.getElementById("currentDay").innerHTML = " Kurse (" + day + "." + month + "." + year + ")";
 </script>
 </html>
