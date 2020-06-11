@@ -334,10 +334,10 @@ app.get('/waehrungen-rechner', function(req, res) {
 
 
 app.get('/login.html', isAuth, function(req, res) {
-    res.render('login', {style: req.cookies.style});
+    res.render('login', {activeSession: req.session, style: req.cookies.style});
 });
 app.get('/login', isAuth, function(req, res) {
-    res.render('login', {style: req.cookies.style});
+    res.render('login', {activeSession: req.session, style: req.cookies.style});
 });
 //--------------------------------------------------
 
