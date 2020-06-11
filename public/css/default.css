@@ -38,6 +38,27 @@ p {
 
 /*----------------------------------------------*/
 
+/*Username*/
+.username {
+    
+    margin: 8px;
+    margin-right: 0px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #179180;
+    float: right;
+    border-radius: 8px 0px 0px;
+    color: white;
+    font-size: 14pt;
+}
+
+.userbox {
+    margin: 0 auto;
+    max-width: 940px;
+    min-height: 50px;
+}
+
 /* Navbar Style */
 .dropbtn {
     display: none;
@@ -276,7 +297,7 @@ div > .footer {
 
 .kursHeader {
     text-align: center;
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     margin-bottom: 10px;
 }
 

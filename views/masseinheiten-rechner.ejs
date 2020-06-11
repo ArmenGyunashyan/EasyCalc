@@ -36,6 +36,7 @@
     </div>
 </header>
 <section class="fixed-size">
+    <% if(locals.activeSession) { if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } } %>
     <!--
     =================================================================================
        v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v

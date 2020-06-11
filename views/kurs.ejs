@@ -38,7 +38,8 @@
         <hr>
     </div>
 </header>
-<div class="fixed-size">
+<section class="fixed-size">
+<% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="height: 50px;"></div><% } %>
     <h1 class="kursHeader">Devisen & Währungen</h1>
     <!-- Es muss noch so geändert werden, dass hier die Kurse aus dem backend ausgelesen werden -->
     <div class="kurse">
@@ -126,7 +127,7 @@
             </tr>
         </table>
     </div>
-</div>
+</section>
 <!--
 ===================================
 Footer

@@ -6,7 +6,7 @@
     const checkBox = document.getElementById("styleChecker");
     const dropbtn = document.getElementsByClassName("dropbtn");
 
-    if(window.location.pathname != "/index.html") { // Statistiken werden mit Dummy-Daten gefüllt, wenn man nicht auf der STartseite ist
+    if(window.location.pathname != "/index.html" && window.location.pathname != "/index" && window.location.pathname != "/") { // Statistiken werden mit Dummy-Daten gefüllt, wenn man nicht auf der STartseite ist
         var statistics = {
             measure: 0,
             money: 0,
@@ -32,7 +32,7 @@
             stylesheet.href = "css/default.css";
             dropbtn[0].src="images/ThreeLines.svg";
             
-            if(window.location.pathname == "/index.html") {
+            if(window.location.pathname == "/index.html" || window.location.pathname == "/index" || window.location.pathname == "/") {
             var chartDefault = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 backgroundColor: "transparent",
@@ -86,8 +86,8 @@
             stylesheet.href = "css/dark.css";
             dropbtn[0].src="images/ThreeLinesDark.svg";
             
-            if(window.location.pathname == "/index.html") {
-
+            if(window.location.pathname == "/index.html" || window.location.pathname == "/index" || window.location.pathname == "/") {
+        
             var chartDark = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 backgroundColor: "transparent",

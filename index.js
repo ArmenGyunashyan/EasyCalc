@@ -32,6 +32,10 @@ const users = [
     {
         username: "test",
         password: "test"
+    },
+    {
+        username: "Yggdrahl",
+        password: "1234"
     }
 ];
 var chronicMeasure = [ 
@@ -456,6 +460,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 3: //EUR > YEN
             result = req.body.input * EURtoYEN;
+            result = result.toFixed(0);
         break;
         case 4: //USD > EUR
             result = req.body.input * EURtoUSD;
@@ -465,6 +470,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 6: //USD > YEN
             result = req.body.input * USDtoYEN;
+            result = result.toFixed(0);
         break;
         case 7: //GBP > EUR
             result = req.body.input / EURtoGBP;
@@ -474,6 +480,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 9: //GBP > YEN
             result = req.body.input * GBPtoYEN;
+            result = result.toFixed(0);
         break;
         case 10: //YEN > EUR
             result = req.body.input / EURtoYEN;
