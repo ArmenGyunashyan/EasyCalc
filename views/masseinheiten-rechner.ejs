@@ -331,7 +331,12 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
-    
+    <% if(locals.statistics) { %>
+        var statistics = <%-JSON.stringify(statistics)%>;
+    <% } %>
 </script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
 <script src="skripts/cookieStyleLoader.js"></script>
 </html>

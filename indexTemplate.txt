@@ -69,8 +69,12 @@
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
-    var statistics = <%-JSON.stringify(statistics)%>;   //Wird nur auf der Hauptseite benötigt
+    <% if(locals.statistics) { %>
+        var statistics = <%-JSON.stringify(statistics)%>;
+    <% } %>
 </script>
-<script src="skripts/canvasJS.js"></script>             //Wird nur auf der Hauptseite benötigt
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
 <script src="skripts/cookieStyleLoader.js"></script>
 </html>

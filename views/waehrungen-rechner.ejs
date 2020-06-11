@@ -127,49 +127,58 @@
     var inputSet;
     <% if(locals.result) {%>result = <%= result%>;<%} %>
     <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
+    
+    //----------------------------------------------------------------------------
 
-    switch(inputSet.mode) {
-        case 1: //EUR > USD
-        resultLabel.innerHTML = "EUR > USD: " + result + " USD (" + new Date() + ")";
-        break;
-        case 2: //EUR > GBP
-            
-        break;
-        case 3: //EUR > YEN
-            
-        break;
-        case 4: //USD > EUR
-            
-        break;
-        case 5: //USD > GBP
-            
-        break;
-        case 6: //USD > YEN
-            
-        break;
-        case 7: //GBP > EUR
-            
-        break;
-        case 8: //GBP > USD
-            
-        break;
-        case 9: //GBP > YEN
-            
-        break;
-        case 10: //YEN > EUR
-            
-        break;
-        case 11: //YEN > USD
-            
-        break;
-        case 12: //YEN > GBP
-            
-        break;
-        default:
-            done();
-        break;
+    function getTime() {
+        var date = new Date();
+        return ("(" + date.getDate() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + ")");
     }
 
+    if(inputSet && result) {
+
+        switch(inputSet.mode) {
+            case 1: //EUR > USD
+                resultLabel.innerHTML = inputSet.input + " EUR = " + result + " USD ";
+            break;
+            case 2: //EUR > GBP
+            
+            break;
+            case 3: //EUR > YEN
+            
+            break;
+            case 4: //USD > EUR
+            
+            break;
+            case 5: //USD > GBP
+            
+            break;
+            case 6: //USD > YEN
+            
+            break;
+            case 7: //GBP > EUR
+            
+            break;
+            case 8: //GBP > USD
+            
+            break;
+            case 9: //GBP > YEN
+            
+            break;
+            case 10: //YEN > EUR
+            
+            break;
+            case 11: //YEN > USD
+
+            break;
+            case 12: //YEN > GBP
+
+            break;
+            default:
+                done();
+            break;
+        }
+    }
 </script>
 
 
@@ -179,6 +188,12 @@
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
+    <% if(locals.statistics) { %>
+        var statistics = <%-JSON.stringify(statistics)%>;
+    <% } %>
 </script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
 <script src="skripts/cookieStyleLoader.js"></script>
 </html>

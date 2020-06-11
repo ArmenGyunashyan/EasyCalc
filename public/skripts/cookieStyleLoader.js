@@ -23,6 +23,9 @@
     */
 
     checkBox.onclick = function () {
+
+        if(window.location.pathname == "/index.html") {
+
         if (this.checked) {
             document.cookie = "style=hell";
             stylesheet.href = "css/default.css";
@@ -71,9 +74,9 @@
                     ]
                 }]
             });
-            if(window.location.pathname == "/index.html") { // ChartJS muss nur auf der Startseite gerendert werden
+            
             chartLoad(chartDefault);
-            }
+            
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href = "css/dark.css";
@@ -122,9 +125,10 @@
                     ]
                 }]
             });
-            if(window.location.pathname == "/index.html") { // ChartJS muss nur auf der Startseite gerendert werden
+            
                 chartLoad(chartDark);
-                }
+            
 
         }
+    }
     }
