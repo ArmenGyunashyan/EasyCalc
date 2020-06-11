@@ -36,7 +36,7 @@
     </div>
 </header>
 <section class="fixed-size">
-    <% if(locals.activeSession) { if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } } %>
+    <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="height: 50px;"></div><% } %>
     <!--
     =================================================================================
        v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v
@@ -118,15 +118,21 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
     <%
         var tmp = "[";
+        var match = 0;
         for(var i = 0; i < chronic.length; i++) {
             if(chronic[i].user == activeSession.username) {
                 tmp = tmp + JSON.stringify(chronic[i]) + ",";
+                ++match;
             }
         }
         tmp = tmp.substring(0, tmp.length-1) + "]";
-        chronic = tmp;
+        if(match > 0) {
+            chronic = tmp;
+        } else {
+            chronic = null; //Keine passenden Nutzerdaten gefunden
+        }
     %>
-    var chronic<% if(activeSession.loggedin && chronic.length > 0) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
     var left = 0;
     var right = 0;
     const list = document.getElementById('list');
@@ -176,7 +182,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
                 };
             }
             listElement.appendChild(elementLink);
-            //elementLink.onclick = function() {console.log("Du hast " + listElement.textContent + " angeklickt")};
+            
         list.appendChild(listElement);
     }
 
