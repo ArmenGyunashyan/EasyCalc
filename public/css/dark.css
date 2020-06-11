@@ -44,8 +44,7 @@ p {
     display: none;
 }
 
-.threeLines
-{
+.threeLines {
     display: none;
 }
 
@@ -61,9 +60,9 @@ p {
     margin: 7px;
 }
 
-.header hr {
+hr {
     border: none;
-    height: 1px;
+    height: 2px;
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
 
@@ -91,14 +90,6 @@ a:hover:not(.active) {
     opacity: 0;
     width: 0;
     height: 0;
-}
-
-.header input:checked + .slider {
-    background-color: #179180;
-}
-
-.header input:focus + .slider {
-    box-shadow: 0 0 1px #454545;
 }
 
 .header input:checked + .slider:before {
@@ -137,6 +128,11 @@ a:hover:not(.active) {
 
 .header .slider.round:before {
     border-radius: 50%;
+}
+
+.header .slider:not(checked)
+{
+    background-color: #454545;
 }
 
 /* Flip-Card Style */
@@ -221,12 +217,6 @@ div > .footer {
     margin-left: 5px;
 }
 
-.footer > hr {
-    border: none;
-    height: 1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
-}
-
 .footer-header {
     font-size: 15pt;
 }
@@ -257,7 +247,7 @@ div > .footer {
     }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 580px) {
 
     .dropdown-content {
         display: none;
@@ -270,20 +260,22 @@ div > .footer {
         background-color: transparent;
         color: lightgray;
         float: right;
-        height: auto;
-        width: auto;
+        margin-right: 5px;
+        height: 25px;
+        width: 25px;
         font-size: 26px;
         border: none;
         cursor: pointer;
-        margin-top: 4px;
+        margin-top: 10px;
         font-family: "Orbitron";
         display: block;
     }
 
     .dropdown {
-        position: relative;
         display: inline-block;
         z-index: 1;
+        position: relative;
+        width: 120px;
     }
 
     .dropdown-content a {

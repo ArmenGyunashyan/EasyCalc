@@ -9,8 +9,8 @@ body, *, *:before, *:after {
 html, body {
     font-size: 16px;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.44);
-    color: rgba(255, 255, 255, 0.61);
+    background-color: #454545;
+    color: black;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -21,14 +21,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .fixed-size {
     margin: 0 auto;
-    background-color: whitesmoke;
+    background-color: white;
     max-width: 940px;
 }
 
 p {
     font-size: 10pt;
     font-family: SansSerif;
-    color: white;
+    color: black;
 }
 
 .clearfix:before,
@@ -54,13 +54,15 @@ p {
     font-family: 'Orbitron', 'SansSerif';
     text-align: right;
     margin: 7px;
+    color: black;
 }
 
-.header hr {
+hr {
     border: none;
-    height: 1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(#303030), to(white));
+    height: 2px;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(#179180), to(#454545));
 }
+
 
 a {
     color: white;
@@ -68,7 +70,7 @@ a {
 }
 
 a:hover:not(.active) {
-    color: #179180;
+    color: gray;
 }
 
 /* Switch Style */
@@ -90,10 +92,6 @@ a:hover:not(.active) {
 
 .header input:checked + .slider {
     background-color: #179180;
-}
-
-.header input:focus + .slider {
-    box-shadow: 0 0 1px #454545;
 }
 
 .header input:checked + .slider:before {
@@ -192,7 +190,8 @@ a:hover:not(.active) {
 .flip-card-text {
     margin-top: 20px;
     font-size: 10pt;
-    font-family: 'Orbitron', 'SansSerif'
+    font-family: 'Orbitron', 'SansSerif';
+    color: white;
 }
 
 .flip-card-image {
@@ -216,14 +215,12 @@ div > .footer {
     margin-left: 5px;
 }
 
-.footer > hr {
-    border: none;
-    height: 1px;
-    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(#303030), to(white));
-}
-
 .footer-header {
     font-size: 15pt;
+}
+
+.footer-header a {
+    color: black;
 }
 
 /* Chart Style */
@@ -252,11 +249,7 @@ div > .footer {
     }
 }
 
-@media screen and (max-width: 560px) {
-
-    .dropbtn {
-        display: block;
-    }
+@media screen and (max-width: 580px) {
 
     .dropdown-content {
         display: none;
@@ -267,21 +260,24 @@ div > .footer {
 
     .dropbtn {
         background-color: transparent;
-        color: white;
+        color: lightgray;
         float: right;
-        height: auto;
-        width: auto;
+        margin-right: 5px;
+        height: 25px;
+        width: 25px;
         font-size: 26px;
         border: none;
         cursor: pointer;
-        margin-top: 4px;
+        margin-top: 10px;
         font-family: "Orbitron";
+        display: block;
     }
 
     .dropdown {
-        position: relative;
         display: inline-block;
         z-index: 1;
+        position: relative;
+        width: 120px;
     }
 
     .dropdown-content a {
@@ -289,10 +285,11 @@ div > .footer {
         display: block;
         text-align: center;
         font-size: 100%;
+        color: white;
     }
 
     .dropdown a:hover {
-        background-color: #179180;
+        background-color: lightgray;
         color: rgba(211, 211, 211, 0.45);
     }
 
