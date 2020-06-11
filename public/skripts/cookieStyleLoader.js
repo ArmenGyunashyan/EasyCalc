@@ -4,6 +4,7 @@
      */
     const stylesheet = document.getElementById("sheet");
     const checkBox = document.getElementById("styleChecker");
+    const dropbtn = document.getElementsByClassName("dropbtn");
 
     if(window.location.pathname != "/index.html") { // Statistiken werden mit Dummy-Daten gefüllt, wenn man nicht auf der STartseite ist
         var statistics = {
@@ -29,6 +30,7 @@
         if (this.checked) {
             document.cookie = "style=hell";
             stylesheet.href = "css/default.css";
+            dropbtn[0].src="images/ThreeLines.svg";
             
             if(window.location.pathname == "/index.html") {
             var chartDefault = new CanvasJS.Chart("chartContainer", {
@@ -82,7 +84,8 @@
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href = "css/dark.css";
-
+            dropbtn[0].src="images/ThreeLinesDark.svg";
+            
             if(window.location.pathname == "/index.html") {
 
             var chartDark = new CanvasJS.Chart("chartContainer", {
