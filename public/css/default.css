@@ -28,7 +28,6 @@ h1, h2, h3, h4, h5, h6 {
 p {
     font-size: 10pt;
     font-family: SansSerif;
-    color: black;
 }
 
 .clearfix:before,
@@ -142,7 +141,7 @@ a:hover:not(.active) {
 }
 
 .flip-card {
-    background-color: #303030;
+    background-color: white;
     width: 290px;
     height: 290px;
     perspective: 1000px;

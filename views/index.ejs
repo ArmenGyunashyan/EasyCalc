@@ -20,7 +20,9 @@
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
-                <input type="image" src="<% if (style == 'hell') {%>images/ThreeLines.svg<%} else {%>images/ThreeLinesDark.svg<%}%>" class="dropbtn" onClick="mobileNavbar()">
+                <input type="image"
+                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                       class="dropbtn" onClick="mobileNavbar()">
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
@@ -110,8 +112,12 @@
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
-    var statistics = <%-JSON.stringify(statistics)%>;
+    <% if(locals.statistics) { %>
+    var statistics = <%- JSON.stringify(statistics) %>;
+    <% } %>
 </script>
-<script src="skripts/canvasJS.js"></script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
 <script src="skripts/cookieStyleLoader.js"></script>
 </html>

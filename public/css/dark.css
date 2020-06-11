@@ -28,7 +28,6 @@ h1, h2, h3, h4, h5, h6 {
 p {
     font-size: 10pt;
     font-family: SansSerif;
-    color: lightgray;
 }
 
 .clearfix:before,
@@ -185,7 +184,6 @@ a:hover:not(.active) {
 
 .flip-card-title {
     margin-top: 20px;
-    color: lightgray;
     font-size: 20pt;
     font-family: 'Orbitron', 'SansSerif';
 }
@@ -228,20 +226,7 @@ div > .footer {
     margin: auto;
     height: 300px;
 }
-/* Devisenkurs Tabelle*/
-.kurse
-{
-    margin-left: 5px;
-    margin-right: 5px;
 
-}
-
-.kurse td, th
-{
-    border: 1px solid lightgray;
-    border-collapse: collapse;
-    width: 100%;
-}
 /* Responsive Design */
 
 @media screen and (min-width: 940px) {
@@ -270,18 +255,16 @@ div > .footer {
     }
 
     .dropbtn {
-        background-color: transparent;
-        color: lightgray;
+        display: block;
         float: right;
         margin-right: 5px;
         height: 25px;
         width: 25px;
-        font-size: 26px;
         border: none;
         cursor: pointer;
         margin-top: 10px;
         font-family: "Orbitron";
-        display: block;
+
     }
 
     .dropdown {
