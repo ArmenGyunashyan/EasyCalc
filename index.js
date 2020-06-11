@@ -435,13 +435,12 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
     }
     statistics.money = statistics.money + 1;
 
-    //req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen FLoat
+    req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen FLoat
 
     var result = 0;
 
     switch(req.body.mode) {
         case 1: //EUR > USD
-        console.log(req.body.import + " wird zu " + result);
             result = req.body.input / EURtoUSD;
         break;
         case 2: //EUR > GBP
@@ -472,7 +471,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
             result = req.body.input / EURtoYEN;
         break;
         case 11: //YEN > USD
-            result = req.body.input / USDtoYPN;
+            result = req.body.input / USDtoYEN;
         break;
         case 12: //YEN > GBP
             result = req.body.input / GBPtoYEN;
@@ -484,7 +483,6 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
 
     //Runden von "result : number"
     result = result.toFixed(2);
-    console.log(result);
 
     if(req.session.loggedin == true && req.body.input > 0) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
         //Erzeugen des neuen Onjektes
