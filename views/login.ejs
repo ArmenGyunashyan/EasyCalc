@@ -1,103 +1,75 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Login Form</title>
-		<link rel="stylesheet" id="sheet"
-			  href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<style>
-		.login-form {
-			width: 300px;
-			margin: 0 auto;
-			font-family: Tahoma, Geneva, sans-serif;
-		}
-		.login-form h1 {
-			text-align: center;
-			color: #4d4d4d;
-			font-size: 24px;
-			padding: 20px 0 20px 0;
-		}
-		.login-form input[type="password"],
-		.login-form input[type="text"] {
-			width: 100%;
-			padding: 15px;
-			border: 1px solid #dddddd;
-			margin-bottom: 15px;
-			box-sizing:border-box;
-		}
-		.login-form input[type="submit"] {
-			width: 100%;
-			padding: 15px;
-			background-color: #535b63;
-			border: 0;
-			box-sizing: border-box;
-			cursor: pointer;
-			font-weight: bold;
-			color: #ffffff;
-		}
-		</style>
-	</head>
-	<body>
-	<header class="header">
-		<div class="fixed-size">
-			<h1 class="logo">EasyCalc</h1>
-			<label class="switch">
-				<input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
-						<% } %>
-				>
-				<span class="slider round"></span>
-			</label>
-			<nav class="navbar">
-				<div class="dropdown">
-					<input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">
-					<div id="myDropdown" class="dropdown-content">
-						<a href="index.html">HOME</a>
-						<a href="kurs.html">KURS</a>
-						<a href="formeln.html">FORMELN</a>
-					</div>
+<head>
+    <meta charset="utf-8">
+    <title>Login Form</title>
+    <link rel="stylesheet" id="sheet"
+          href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<header class="header">
+    <div class="fixed-size">
+        <h1 class="logo">EasyCalc</h1>
+        <label class="switch">
+            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
+                    <% } %>
+            >
+            <span class="slider round"></span>
+        </label>
+        <nav class="navbar">
+            <div class="dropdown">
+                <script src="skripts/dropdown.js"></script>
+                <input type="image"
+                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                       class="dropbtn" onClick="mobileNavbar()">
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="index.html">HOME</a>
+                    <a href="kurs.html">KURS</a>
+                    <a href="formeln.html">FORMELN</a>
+                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
+                    <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                    <% } %>
+                </div>
 
-				</div>
-			</nav>
-			<hr>
-		</div>
-	</header>
-		<div class="login-form">
-			<h1>Login Form</h1>
-			<form action="login.html/auth" method="POST">
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<input type="submit">
-			</form>
-		</div>
-	</body>
-	<script>
-		/**
-		 * Der Code musste hier angepasst werden (teilweise redundant), da Chrom und Edge anders mit Cookies umgehen, als Opera.
-		 * Chrom kann in Cookies nur schreiben und Sie nicht richtig lesen.
-		 */
-		const stylesheet = document.getElementById("sheet");
-		const checkBox = document.getElementById("styleChecker");
+            </div>
+        </nav>
 
-		var style = "<%= style %>";
-		/*
-        if(style == 'dunkel') {
-            checkBox.checked = false;
-        } else {
-            checkBox.checked = true;
-        }
-        */
-		checkBox.onclick = function () {
-			if (this.checked) {
-				document.cookie = "style=hell";
-				stylesheet.href = "css/default.css";
-				//checkBox.checked = true;
-			} else {
-				document.cookie = "style=dunkel";
-				stylesheet.href = "css/dark.css";
-				//checkBox.checked = false;
-			}
-		}
+        <hr>
+    </div>
+</header>
+<section class="loginSection">
+    <div class="login-form">
+        <h1>Anmelden</h1>
+        <form action="login.html/auth" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit">
+        </form>
+    </div>
+</section>
+<div>
+    <footer class="footer fixed-size">
+        <hr>
+        <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+        <p>Dennis & Armen</p>
+        <p>Münsterstraße 999 Bocholt</p>
+        <p>WHS</p>
+    </footer>
+</div>
+</body>
+<script>
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
 
-	</script>
+    var style = "<%= style %>";
+    <% if(locals.statistics) { %>
+    var statistics = <%- JSON.stringify(statistics) %>;
+    <% } %>
+</script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>

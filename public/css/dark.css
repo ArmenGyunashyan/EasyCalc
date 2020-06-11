@@ -224,10 +224,9 @@ a:hover:not(.active) {
 
 /* Devisenkurs Tabelle*/
 
-#currentDay
-{
+#currentDay {
     font-size: 20pt;
-    padding:  5px;
+    padding: 5px;
     font-weight: bold;
 }
 
@@ -246,21 +245,63 @@ a:hover:not(.active) {
     width: 10%;
 }
 
-.kursHeader
-{
+.kursHeader {
     text-align: center;
     padding-top: 50px;
     margin-bottom: 10px;
 }
 
-tr:nth-child(even)
-{
+tr:nth-child(even) {
     background-color: rgba(0, 0, 255, 0.38);
 }
 
-th
-{
+th {
     font-weight: bold;
+}
+
+/* Login */
+.loginSection
+{
+    margin: 0 auto;
+    background-color: #303030;
+    max-width: 940px;
+}
+
+.login-form {
+    width: auto;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Tahoma, Geneva, sans-serif;
+    background-color: #303030;
+    padding-bottom: 25px;
+}
+
+.login-form h1 {
+    text-align: center;
+    color: lightgray;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+}
+
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: ghostwhite;
+}
+
+.login-form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border: 0;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #179180;
 }
 
 @media screen and (min-width: 940px) {
@@ -331,16 +372,15 @@ th
 
 @media screen and (max-width: 765px) {
     /* Responsive Table*/
-    .kurse
-    {
+    .kurse {
         font-size: 12pt;
     }
-    .kursHeader
-    {
+
+    .kursHeader {
         font-size: 30pt;
     }
-    #currentDay
-    {
+
+    #currentDay {
         font-size: 18pt;
     }
 }
