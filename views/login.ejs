@@ -27,10 +27,12 @@
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
                     <a href="formeln.html">FORMELN</a>
+                    <!--
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
                     <% } else { %>
-                        <a href="login.html">LOGIN</a>
+                        <a href="login.html" style="pointer-events: none; cursor: default;">LOGIN</a>
                     <% } %>
+                    -->
                 </div>
 
             </div>
@@ -45,7 +47,7 @@
         <form action="login.html/auth" method="POST">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
-            <input type="submit">
+            <input type="submit" value="Login">
         </form>
     </div>
 </section>

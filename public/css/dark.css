@@ -318,10 +318,12 @@ a:hover:not(.active) {
 .login-form input[type="text"] {
     width: 100%;
     padding: 15px;
-    border: 1px solid #dddddd;
+    border: 1px solid gray;
     margin-bottom: 15px;
     box-sizing: border-box;
-    background-color: ghostwhite;
+    /*background-color: ghostwhite;*/
+    background-color: #202020;
+    color: lightgray;
 }
 
 .login-form input[type="submit"] {
