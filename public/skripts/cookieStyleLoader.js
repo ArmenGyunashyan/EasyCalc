@@ -24,12 +24,13 @@
 
     checkBox.onclick = function () {
 
-        if(window.location.pathname == "/index.html") {
+        
 
         if (this.checked) {
             document.cookie = "style=hell";
             stylesheet.href = "css/default.css";
-
+            
+            if(window.location.pathname == "/index.html") {
             var chartDefault = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
                 backgroundColor: "transparent",
@@ -76,10 +77,13 @@
             });
             
             chartLoad(chartDefault);
+        }
             
         } else {
             document.cookie = "style=dunkel";
             stylesheet.href = "css/dark.css";
+
+            if(window.location.pathname == "/index.html") {
 
             var chartDark = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
@@ -127,8 +131,8 @@
             });
             
                 chartLoad(chartDark);
-            
+        }
 
         }
-    }
+    
     }
