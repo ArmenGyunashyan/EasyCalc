@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="header">
-    <div class="fixed-size">
+    <div class="header-fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
             <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
@@ -17,6 +17,7 @@
             >
             <span class="slider round"></span>
         </label>
+        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -27,12 +28,6 @@
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
                     <a href="formeln.html">FORMELN</a>
-                    <!--
-                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% } else { %>
-                        <a href="login.html" style="pointer-events: none; cursor: default;">LOGIN</a>
-                    <% } %>
-                    -->
                 </div>
 
             </div>

@@ -6,9 +6,9 @@
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body class="fixed-size">
+<body>
 <header class="header">
-    <div class="fixed-size">
+    <div class="header-fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
             <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
@@ -16,6 +16,7 @@
             >
             <span class="slider round"></span>
         </label>
+        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -38,6 +39,88 @@
         <hr>
     </div>
 </header>
+<section class="fixed-size">
+    <div class="formeln">
+        <div class="info1">
+            <h1>Herkunft und Definition von Zoll</h1>
+            <p>
+                Mit dem Begriff Zoll (gelegentlich auch als das Zoll geläufig) kann eine Vielzahl von alten Maßeinheiten
+                bezeichnet werden, die früher als Längeneinheit genutzt wurden. Der Begriff Zoll wurde ursprünglich im
+                Jahre 1101 von Heinrich I. von England eingeführt, der damals die Breite seines Daumens als
+                ausschlaggebend ansah. Später dann, im Jahre 1324, wurde die Einheit von Eduard II. von England als Maß
+                zur Längenangabe deklariert und mit dem Verlauf drei hintereinander gelegter Gerstenkörner verglichen.
+                Im Jahre 1956 erfolgte letztlich die Festlegung des Inch auf eine Länge von genau 25,4 Millimeter
+                (=2,54 Zentimeter). Der Zoll als Längeneinheit ist heutzutage eigentlich nur noch im englischen
+                Sprachraum vertreten.
+            </p>
+        </div>
+        <div class="info2">
+            <h1>Zusammenhang zwischen Zoll und cm</h1>
+            <p>
+                Zusammenhang zwischen Zoll und cm
+                Die Umrechnung zwischen Zoll, also Inches und dem metrischen System (Meter mit dem dezimalen Vielfachen
+                Zentimeter) ist eigentlich nicht schwer. Hierbei ist zu beachten, dass ein Zoll genau 2,54 Zentimeter
+                entspricht. Umgekehrt lässt sich daher sagen, dass bei einem Zentimeter von gut einem Drittel Zoll
+                ausgegangen werden kann. Für einen Zentimeter sind daher genau 0,3937 Zoll auszumessen. Als Merkregel
+                lässt sich feststellen, dass der Wert der Angabe in Zoll immer niedriger ist wie der Wert der Angabe in
+                Zentimeter. Wer sich die Zahl 2,54 gar nicht merken kann, der prägt sich einfach den 2,5fachen Faktor
+                ein.
+                Bei beispielsweise 2 Zoll können in etwa fünf Zentimeter veranschlagt werden.
+                Tatsächlich sind es 5,08 Zentimeter.
+            </p>
+        </div>
+        <div class="info3">
+            <h1>Umrechnung zwischen Zoll und cm</h1>
+            <p>Unser Kalkulator führt eine Umrechnung zwischen Zoll (inch) und cm bzw. cm und Zoll durch.
+                Falls Sie dennoch eine manuelle Berechnung zwischen Zoll und cm vornehmen wollen, finden
+                Sie anbei die Formeln für jeweils beide Ausgangswerte.<br> Zoll = Zentimeter / 2,54<br>
+                Zentimeter = Zoll * 2,54<br> Ein Zoll ist daher gleich 25,4 Millimeter, 2,54 Zentimeter,
+                0,254 Dezimeter, 0,0254 Meter bzw. 0,0000254 Kilometer. 1 Zoll = 25,4 mm, 2,54 cm, 0,254 dm, 0,0254 m
+                bzw. 0,0000254 km. Wer jedoch nur zwischen den einzelnen Werten hin- und her rechnen möchte, der
+                greift tatsächlich am besten direkt auf den Rechner zurück.</p>
+        </div>
+        <div class="info4">
+            <h1>Herkunft und Definition von Zentimeter</h1>
+            <p>
+                Bei einem Zentimeter handelt es sich um ein dezimales Vielfaches eines Meters (nämlich genau um ein
+                Hundertstel eines Meters), da der Zentimeter eine Basiseinheit im metrischen Einheitensystem bildet.
+                So wurde dieses System im 19. Jahrhundert in fast allen europäischen Ländern eingeführt, um über ein
+                durchgehendes, standardisiertes und international anerkanntes Einheitensystem zu verfügen. Mittlerweile
+                kommt das metrische System in fast allen Ländern auf dieser Welt zum Einsatz, außer eben in Ländern wie
+                den USA, England, Kanada und Japan. Hier werden weiterhin viele Größen in Zoll deklariert. Aus diesem
+                Grunde ist in vielen Bereichen eine korrekte und absolut genaue Umrechnung zwischen den beiden Einheiten
+                nötig.
+            </p>
+        </div>
+        <div class="info5">
+            <h1>Schreibweise von <br> Zoll</h1>
+            <p>
+                Der Zoll entspringt dem angelsächsischen Längensystem, auch angloamerikanisches Einheitensystem genannt.
+                Das für den Zoll festgelegte Einheitenzeichen ist "in" (=inch) bzw. das sogenannte Zollzeichen ("),
+                das einem Anführungszeichen gleicht. Eine Besonderheit bei der Angabe ist, dass neben der
+                Dezimalschreibweise auch die Schreibweise in Brüchen sehr verbreitet ist. Hierbei wird stets auf
+                Zweierbrüche gesetzt, sodass viele Größen mit Brüchen wie 1/2, 1/4 bis hin zu 1/32 angegeben werden.
+                Schreibweisen wie 3 1/2, wie sie beispielhaft bei Disketten üblich sind, sind daher keine Seltenheit
+                und kommen in der Industrie und dem Privatgebrauch ständig vor.
+            </p>
+        </div>
+        <div class="info6">
+            <h1>Eselsbrücke zum Einprägen der Formel</h1>
+            <p>
+                Es gibt verschiedene Möglichkeiten, sich den Zusammenhang am besten zu merken. Sportler können dazu zum
+                Beispiel die sogenannte Sprunghöhe heranziehen. So lässt sich diese bei Tennisbällen als
+                Qualitätskriterium
+                eines Balles dadurch ermitteln, dass ein Ball aus einer Höhe von 100 Zoll (=Inches) auf eine betonierte
+                Ebene fallen gelassen wird und im Anschluss auf eine gewisse Höhe wieder zurückspringt. (unelastischer
+                Stoß)
+                Der Normbereich liegt hierbei zwischen 134,62 cm und 147,32 cm. Eine andere Möglichkeit wäre, sich die
+                drei Ziffern in einem Zusammenhang einzuprägen und daraus einen Satz zu bilden. Beispiel: 2
+                Schornsteinfeger
+                fegen 5 Kamine auf 4 Häusern.
+            </p>
+        </div>
+    </div>
+</section>
 <div>
     <footer class="footer">
         <hr>

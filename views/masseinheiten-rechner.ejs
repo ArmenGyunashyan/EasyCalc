@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="header">
-    <div class="fixed-size">
+    <div class="header-fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
             <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
@@ -17,9 +17,13 @@
             >
             <span class="slider round"></span>
         </label>
+        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
         <nav class="navbar">
             <div class="dropdown">
-                <input type="image" src="images/ThreeLinesDark.svg" class="dropbtn" onClick="mobileNavbar()">
+                <script src="skripts/dropdown.js"></script>
+                <input type="image"
+                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                       class="dropbtn" onClick="mobileNavbar()">
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
@@ -32,11 +36,11 @@
 
             </div>
         </nav>
+
         <hr>
     </div>
 </header>
 <section class="fixed-size">
-    <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="height: 50px;"></div><% } %>
     <!--
     =================================================================================
        v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v

@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="header">
-    <div class="fixed-size">
+    <div class="header-fixed-size">
         <h1 class="logo">EasyCalc</h1>
         <label class="switch">
             <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
@@ -16,6 +16,7 @@
             >
             <span class="slider round"></span>
         </label>
+        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -39,7 +40,6 @@
     </div>
 </header>
 <section class="fixed-size">
-<% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="height: 50px;"></div><% } %>
     <h1 class="kursHeader">Devisen & Währungen</h1>
     <!-- Es muss noch so geändert werden, dass hier die Kurse aus dem backend ausgelesen werden -->
     <div class="kurse">

@@ -20,10 +20,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .fixed-size {
-    margin: 0 auto;
+    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
     background-color: #303030;
     max-width: 940px;
-    min-height: 80%;
+    min-height: 81%;
+}
+
+.header-fixed-size {
+    margin-bottom: 39px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #303030;
+    max-width: 940px;
+    height: auto;
+    position: relative;
 }
 
 p {
@@ -41,37 +53,31 @@ p {
 
 /*Username*/
 .username {
-    
-    margin: 8px;
-    margin-right: 0px;
-    padding: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 4px 8px;
     background-color: #179180;
     float: right;
     border-radius: 8px 0px 0px;
-    color: lightgray;
+    color: lightgrey;
     font-size: 14pt;
 }
 
 .userbox {
-    margin: 0 auto;
+    position: absolute;
+    top: 8px;
+    right: 5px;
     max-width: 940px;
     min-height: 50px;
 }
-
 
 /* Navbar Style */
 .dropbtn {
     display: none;
 }
 
-.threeLines {
-    display: none;
-}
-
 .navbar {
-    float: right;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 
 .navbar a {
@@ -82,8 +88,7 @@ p {
     margin: 7px;
 }
 
-.logo
-{
+.logo {
     font-size: 40pt;
 }
 
@@ -94,8 +99,7 @@ hr {
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
 
-.welcome
-{
+.welcome {
     width: auto;
     text-align: center;
     font-size: 30pt;
@@ -179,6 +183,7 @@ a:hover:not(.active) {
     font-size: 30pt;
     text-align: center;
 }
+
 .flip-card {
     background-color: #303030;
     width: 290px;
@@ -237,11 +242,6 @@ a:hover:not(.active) {
 
 /* Footer Style */
 
-div > footer
-{
-    position: relative;
-}
-
 .footer {
     margin: 0 auto;
     padding-bottom: 5px;
@@ -249,7 +249,7 @@ div > footer
     bottom: 0;
     height: auto;
     width: auto;
-    max-width:940px;
+    max-width: 940px;
 }
 
 .footer > p {
@@ -367,6 +367,41 @@ div > footer
     background-color: #179180;
 }
 
+/* Formeln */
+.formeln {
+    text-align: justify;
+    padding-top: 65px;
+}
+
+.formeln h1 {
+    font-size: 15pt;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.info1, .info2, .info3, .info4, .info5, .info6 {
+    float: left;
+    width: 30%;
+    height: 300px;
+    border: 2px solid lightgray;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.info2, .info5 {
+    margin-left: 37px;
+}
+
+.info3, .info6 {
+    float: right;
+    margin-right: 10px;
+}
+
+.info4, .info5, .info6 {
+    margin-top: 65px;
+}
+
 @media screen and (min-width: 940px) {
     /* Responsive Flip Card */
     .flip-card {
@@ -386,14 +421,14 @@ div > footer
 }
 
 /* Mobile Navbar */
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 580px) {
 
 
     .dropdown-content {
         display: none;
-        background-color:#454545;
+        background-color: #454545;
         width: 100%;
-        margin-top: 51px;
+        margin-top: 42px;
         border: 1px solid #303030;
     }
 
@@ -405,9 +440,8 @@ div > footer
         width: 25px;
         border: none;
         cursor: pointer;
-        margin-top: 10px;
+        margin-bottom: 5px;
         font-family: "Orbitron";
-
     }
 
     .dropdown {
@@ -440,19 +474,17 @@ div > footer
 /* Responsive Table*/
 @media screen and (max-width: 765px) {
 
-    .kurse
-    {
+    .kurse {
         font-size: 12pt;
     }
-    #currentDay
-    {
+
+    #currentDay {
         font-size: 18pt;
     }
 }
 
 @media screen and (max-width: 490px) {
-    .kurse
-    {
+    .kurse {
         width: auto;
         padding: 0;
         padding-bottom: 5px;
@@ -460,32 +492,31 @@ div > footer
         margin-right: 5px;
         font-size: 8pt;
     }
-    .kursHeader
-    {
+
+    .kursHeader {
         margin-top: -40px;
         font-size: 20pt;
     }
-    #currentDay
-    {
+
+    #currentDay {
         font-size: 14pt;
     }
 }
+
 @media screen and (max-width: 345px) {
-    .kurse
-    {
+    .kurse {
         font-size: 7.2pt;
     }
-    .kurse img
-    {
+
+    .kurse img {
         height: 7px;
         width: 7px;
     }
 }
 
 /* Responsive Logo*/
-@media screen and (max-width: 320px) {
-    .logo
-    {
+@media screen and (max-width: 335px) {
+    .logo {
         font-size: 30pt;
     }
 }
@@ -495,5 +526,20 @@ div > footer
     .login-form {
         margin-left: 5px;
         margin-right: 5px;
+    }
+}
+
+/* Responsive Info */
+@media screen and (max-width: 900px), (max-height: 900px) {
+    .formeln {
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+
+    .info1, .info2, .info3, .info4, .info5, .info6 {
+        float: none;
+        margin: 20px 10px;
+        width: auto;
+        height: auto;
     }
 }
