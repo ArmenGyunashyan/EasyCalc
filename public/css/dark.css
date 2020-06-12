@@ -296,7 +296,16 @@ a:hover:not(.active) {
     padding-bottom: 12px;
     text-align: center;
     background-color: #179180;
-    color: white;
+    color: lightgray;
+}
+
+.kurse #currentDay {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #303030;
+    border: none;
+    color: lightgray;
 }
 
 /* Login */

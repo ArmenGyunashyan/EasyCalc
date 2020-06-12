@@ -305,6 +305,15 @@ div > .footer {
     color: black;
 }
 
+.kurse #currentDay {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: white;
+    border: none;
+    color: black;
+}
+
 /* Login */
 .loginSection {
     margin: 0 auto;
