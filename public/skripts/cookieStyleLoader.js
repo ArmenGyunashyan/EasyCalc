@@ -58,7 +58,7 @@
                     dataPoints: [
                         {
                             y: statistics.measure,
-                            color: "#179180",
+                            color: "#4aada0",
                             indexLabelFontColor: "black",
                             name: "Maßeinheitenrechner"
                         },
@@ -113,13 +113,13 @@
                     dataPoints: [
                         {
                             y: statistics.measure,
-                            color: "#179180",
+                            color: "#5fd7c8",
                             indexLabelFontColor: "lightgray",
                             name: "Maßeinheitenrechner"
                         },
                         {
                             y: statistics.energy,
-                            color: "#2b6059",
+                            color: "#179180",
                             indexLabelFontColor: "lightgray",
                             name: "Stromrechner"
                         },

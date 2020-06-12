@@ -40,7 +40,7 @@ p {
 
 /*Username*/
 .username {
-    
+
     margin: 8px;
     margin-right: 0px;
     padding: 4px;
@@ -75,6 +75,11 @@ p {
     text-align: right;
     margin: 7px;
     color: black;
+}
+
+.logo
+{
+    font-size: 40pt;
 }
 
 hr {
@@ -260,58 +265,39 @@ div > .footer {
 }
 
 .kurse {
-    /*
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    font-size: 20pt;
-    font-style: italic;
-    */
     padding: 20px;
     font-size: 14pt;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    
+    text-align: center;
 }
 
 .kurse table {
-    /*
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    */
-    padding: 20px;
     width: 100%;
 }
 
 .kurse td, th {
     border: 1px solid lightgray;
-    /*border-collapse: collapse;
-    width: 10%;*/
     padding: 8px;
 }
 
 .kursHeader {
     text-align: center;
-    /*padding-top: 50px;*/
     margin-bottom: 10px;
 }
 
 .kurse tr:nth-child(even) {
-    /*background-color: rgba(0, 0, 255, 0.38);*/
     background-color: lightgray;
 }
 
 .kurse tr:hover {
     background-color: #999999;
+    cursor: default;
 }
 
 .kurse th {
-    /*font-weight: bold;*/
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -320,8 +306,7 @@ div > .footer {
 }
 
 /* Login */
-.loginSection
-{
+.loginSection {
     margin: 0 auto;
     background-color: white;
     max-width: 940px;
@@ -364,13 +349,11 @@ div > .footer {
     background-color: #179180;
 }
 
-.login-form input
-{
+.login-form input {
     color: black;
 }
 
-::placeholder
-{
+::placeholder {
     color: rgba(5, 0, 0, 0.29);
 }
 
@@ -392,13 +375,15 @@ div > .footer {
     }
 }
 
+/* Mobile Navbar */
 @media screen and (max-width: 560px) {
-    /* Mobile Navbar */
+
     .dropdown-content {
         display: none;
-        background-color: #179180;
+        background-color:white;
         width: 100%;
         margin-top: 51px;
+        border: 1px solid lightgray;
     }
 
     .dropbtn {
@@ -427,13 +412,15 @@ div > .footer {
         padding: 12px;
         display: block;
         text-align: center;
+        margin-left: 0;
         font-size: 100%;
-        color: white;
+        width: 100%;
+        color: black;
     }
 
     .dropdown a:hover {
-        background-color: lightgray;
-        color: rgba(211, 211, 211, 0.45);
+        background-color: #179180;
+        color: black;
     }
 
     .show {
@@ -442,18 +429,61 @@ div > .footer {
     }
 }
 
+/* Responsive Table*/
 @media screen and (max-width: 765px) {
-    /* Responsive Table*/
-    .kurse
-    {
+
+    .kurse {
         font-size: 12pt;
     }
-    .kursHeader
+
+    #currentDay {
+        font-size: 18pt;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    .kurse {
+        width: auto;
+        padding: 0;
+        padding-bottom: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 8pt;
+    }
+
+    .kursHeader {
+        margin-top: -40px;
+        font-size: 20pt;
+    }
+
+    #currentDay {
+        font-size: 14pt;
+    }
+}
+
+@media screen and (max-width: 345px) {
+    .kurse
+    {
+        font-size: 7.2pt;
+    }
+    .kurse img
+    {
+        height: 7px;
+        width: 7px;
+    }
+}
+/* Responsive Logo*/
+@media screen and (max-width: 320px) {
+    .logo
     {
         font-size: 30pt;
     }
-    #currentDay
-    {
-        font-size: 18pt;
+}
+
+/* Responsive Login*/
+@media screen and (max-width: 420px) {
+    .login-form {
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }

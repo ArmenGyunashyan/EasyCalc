@@ -49,7 +49,7 @@
             </tr>
             <tr>
                 <th>Währungen</th>
-                <th>Kurs akt.</th>
+                <th>Kurs</th>
                 <th>Veränderung</th>
                 <th>Veränderung %</th>
             </tr>
@@ -72,6 +72,11 @@
                 <td>+Zahl %</td>
             </tr>
             <tr>
+                <td><img src="images/USA_flag.svg" width="17px"> USD > EUR <img src="images/EU_flag.svg" width="17px"></td>
+                <td id="td7">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
                 <td><img src="images/USA_flag.svg" width="17px"> USD > GBP <img src="images/UK_flag.svg" width="17px"></td>
                 <td id="td4">Zahl</td>
                 <td>+Zahl</td>
@@ -84,32 +89,26 @@
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td><img src="images/UK_flag.svg" width="17px"> GBP > YEN <img src="images/JAP_flag.svg" width="17px"></td>
-                <td id="td6">Zahl</td>
-                <td>+Zahl</td>
-                <td>+Zahl %</td>
-            </tr>
-            <tr>
-                <td><img src="images/USA_flag.svg" width="17px"> USD > EUR <img src="images/EU_flag.svg" width="17px"></td>
-                <td id="td7">Zahl</td>
-                <td>+Zahl</td>
-                <td>+Zahl %</td>
-            </tr>
-            <tr>
                 <td><img src="images/UK_flag.svg" width="17px"> GBP > EUR <img src="images/EU_flag.svg" width="17px"></td>
                 <td id="td8">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td><img src="images/JAP_flag.svg" width="17px"> YEN > EUR <img src="images/EU_flag.svg" width="17px"></td>
-                <td id="td9">Zahl</td>
+                <td><img src="images/UK_flag.svg" width="17px"> GBP > USD <img src="images/USA_flag.svg" width="17px"></td>
+                <td id="td10">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
             <tr>
-                <td><img src="images/UK_flag.svg" width="17px"> GBP > USD <img src="images/USA_flag.svg" width="17px"></td>
-                <td id="td10">Zahl</td>
+                <td><img src="images/UK_flag.svg" width="17px"> GBP > YEN <img src="images/JAP_flag.svg" width="17px"></td>
+                <td id="td6">Zahl</td>
+                <td>+Zahl</td>
+                <td>+Zahl %</td>
+            </tr>
+            <tr>
+                <td><img src="images/JAP_flag.svg" width="17px"> YEN > EUR <img src="images/EU_flag.svg" width="17px"></td>
+                <td id="td9">Zahl</td>
                 <td>+Zahl</td>
                 <td>+Zahl %</td>
             </tr>
@@ -240,6 +239,6 @@ Cookies Skript
     day = today.getDate();
     month = today.getMonth() + 1;
     year = today.getFullYear();
-    document.getElementById("currentDay").innerHTML = " Kurse (" + day + "." + month + "." + year + ")";
+    document.getElementById("currentDay").innerHTML = " Stand " + day + "." + month + "." + year;
 </script>
 </html>
