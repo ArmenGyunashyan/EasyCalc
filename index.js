@@ -202,7 +202,7 @@ var chronicMoney = [
         mode: 3,
         input: 1,
         result: 1.1,
-        date: ""
+        date: null
     }
 ];
 var chronicEnergy = [
@@ -508,6 +508,8 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         //obj.mode          : number    -> Rechenmodus
         //obj.input         : number    -> Eingabe im Zahlenfeld
         //obj.result        : number    -> Ergebnis der Berechnung
+        console.log(typeof req.body.mode);
+        console.log(typeof req.body.input);
         console.log(typeof result);
         chronicMoney.push({
             "user":req.session.username,
@@ -532,7 +534,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
 //=======================================================================================
 function getTime() {
     var date = new Date();
-    return ("(" + date.getDate() + "." + Number.parseInt(date.getMonth()) + 1 + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + " Uhr)");
+    return ("(" + date.getDate() + "." + (Number.parseInt(date.getMonth()) + 1) + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + " Uhr)");
 }
 
 //Starten aller wichtigen Dienste
