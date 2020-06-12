@@ -2,7 +2,6 @@ if(style == 'hell') {
     var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     backgroundColor: "transparent",
-    color: "red",
     title: {
         text: "Nutzung der Rechner",
         fontFamily: "Orbitron",
@@ -24,13 +23,13 @@ if(style == 'hell') {
         dataPoints: [
             {
                 y: statistics.measure,
-                color: "#179180",
+                color: "#4aada0",
                 indexLabelFontColor: "black",
                 name: "Maßeinheitenrechner"
             },
             {
                 y: statistics.energy,
-                color: "#2b6059",
+                color: "#179180",
                 indexLabelFontColor: "black",
                 name: "Stromrechner"
             },
@@ -47,7 +46,6 @@ if(style == 'hell') {
     var chart = new CanvasJS.Chart("chartContainer", {
     animationEnabled: true,
     backgroundColor: "transparent",
-    color: "red",
     title: {
         text: "Nutzung der Rechner",
         fontFamily: "Orbitron",
@@ -69,13 +67,13 @@ if(style == 'hell') {
         dataPoints: [
             {
                 y: statistics.measure,
-                color: "#179180",
+                color: "#5fd7c8",
                 indexLabelFontColor: "lightgray",
                 name: "Maßeinheitenrechner"
             },
             {
                 y: statistics.energy,
-                color: "#2b6059",
+                color: "#179180",
                 indexLabelFontColor: "lightgray",
                 name: "Stromrechner"
             },
