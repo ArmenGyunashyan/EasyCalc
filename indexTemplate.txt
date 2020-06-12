@@ -46,7 +46,7 @@
     ===================================
     -->
 <div>
-    <footer class="footer fixed-size">
+    <footer class="footer">
         <hr>
         <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
         <p>Dennis & Armen</p>
@@ -54,7 +54,6 @@
         <p>WHS</p>
     </footer>
 </div>
-</body>
 <!--
     ===================================
     Skripte

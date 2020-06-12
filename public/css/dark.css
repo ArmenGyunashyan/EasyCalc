@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 auto;
     background-color: #303030;
     max-width: 940px;
+    min-height: 80%;
 }
 
 p {
@@ -164,12 +165,9 @@ a:hover:not(.active) {
 /* Flip-Card Style */
 
 .flip-card-header {
-
-    margin-bottom: 10px;
     font-size: 30pt;
     text-align: center;
 }
-
 .flip-card {
     background-color: #303030;
     width: 290px;
@@ -228,9 +226,18 @@ a:hover:not(.active) {
 
 /* Footer Style */
 
+div > footer
+{
+    position: relative;
+}
+
 .footer {
+    margin: 0 auto;
+    background-color: #303030;
     bottom: 0;
-    height: 80px;
+    height: auto;
+    width: auto;
+    max-width:940px;
 }
 
 .footer > p {
@@ -309,26 +316,19 @@ a:hover:not(.active) {
 }
 
 /* Login */
-.loginSection
-{
-    margin: 0 auto;
-    background-color: #303030;
-    max-width: 940px;
-}
-
 .login-form {
     width: auto;
     max-width: 400px;
-    margin: 0 auto;
+    margin: auto;
     font-family: Tahoma, Geneva, sans-serif;
     background-color: #303030;
-    padding-bottom: 25px;
+    padding-top: 20%;
 }
 
-.login-form h1 {
+.login-header {
     text-align: center;
     color: lightgray;
-    font-size: 24px;
+    font-size: 35px;
     padding: 20px 0 20px 0;
 }
 
