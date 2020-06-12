@@ -242,6 +242,7 @@ a:hover:not(.active) {
 
 .footer {
     margin: 0 auto;
+    padding-bottom: 5px;
     background-color: white;
     bottom: 0;
     height: auto;

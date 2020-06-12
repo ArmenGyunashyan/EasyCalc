@@ -244,6 +244,7 @@ div > footer
 
 .footer {
     margin: 0 auto;
+    padding-bottom: 5px;
     background-color: #303030;
     bottom: 0;
     height: auto;
