@@ -94,6 +94,17 @@ hr {
     background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(white), to(#303030));
 }
 
+.welcome
+{
+    width: auto;
+    text-align: center;
+    font-size: 30pt;
+    margin-top: -30px;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
 a {
     color: lightgray;
     text-decoration: none;
