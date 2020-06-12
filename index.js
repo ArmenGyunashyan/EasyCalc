@@ -201,7 +201,8 @@ var chronicMoney = [
         user: "root",
         mode: 3,
         input: 1,
-        result: 1.1
+        result: 1.1,
+        date: ""
     }
 ];
 var chronicEnergy = [
@@ -449,7 +450,7 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
 
     req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen FLoat
 
-    var result = 0;
+    var result = 0.0;
 
     switch(req.body.mode) {
         case 1: //EUR > USD
@@ -460,7 +461,6 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 3: //EUR > YEN
             result = req.body.input * EURtoYEN;
-            result = result.toFixed(0);
         break;
         case 4: //USD > EUR
             result = req.body.input * EURtoUSD;
@@ -470,7 +470,6 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 6: //USD > YEN
             result = req.body.input * USDtoYEN;
-            result = result.toFixed(0);
         break;
         case 7: //GBP > EUR
             result = req.body.input / EURtoGBP;
@@ -480,7 +479,6 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         break;
         case 9: //GBP > YEN
             result = req.body.input * GBPtoYEN;
-            result = result.toFixed(0);
         break;
         case 10: //YEN > EUR
             result = req.body.input / EURtoYEN;
@@ -497,8 +495,11 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
     }
 
     //Runden von "result : number"
-    result = result.toFixed(2);
-
+    if(req.body.mode == 3 || req.body.mode == 6 || req.body.mode == 9) {
+        result = result.toFixed(0);
+    } else {
+        result = result.toFixed(2);
+    }
     if(req.session.loggedin == true && req.body.input > 0) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
         //Erzeugen des neuen Onjektes
         //JSON-Objekt für "chronicMeasure[]" (hier "obj")
@@ -507,12 +508,13 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         //obj.mode          : number    -> Rechenmodus
         //obj.input         : number    -> Eingabe im Zahlenfeld
         //obj.result        : number    -> Ergebnis der Berechnung
-
+        console.log(typeof result);
         chronicMoney.push({
             "user":req.session.username,
-            "mode":req.body.mode,
-            "input":req.body.input,
-            "result":result
+            "mode":req.body.mode,   
+            "input":Number.parseFloat(req.body.input), //Hier wechselt JS zufällig von Number zu String ???
+            "result":Number.parseFloat(result),         //Hier wechselt JS zufällig von Number zu String ???
+            "date":getTime()
         });
 
         
@@ -522,6 +524,16 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
     
     res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style, result: result, inputSet: req.body});
 });
+
+//=======================================================================================
+// *    -   +   *   x   *   +   *    -   +   *   x   *   +   *    -   +   *   x   *   +   
+// Hilfsfunktionen     -   +   *   x   *   +   *    -   +   *   x   *   +   *    -   +   *
+// *    -   +   *   x   *   +   *    -   +   *   x   *   +   *    -   +   *   x   *   +   
+//=======================================================================================
+function getTime() {
+    var date = new Date();
+    return ("(" + date.getDate() + "." + Number.parseInt(date.getMonth()) + 1 + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes()  + " Uhr)");
+}
 
 //Starten aller wichtigen Dienste
 

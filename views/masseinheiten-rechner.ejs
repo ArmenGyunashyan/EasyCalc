@@ -119,7 +119,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     <%
         var tmp = "[";
         var match = 0;
-        for(var i = 0; i < chronic.length; i++) {
+        for(var i = chronic.length-1; i >= 0; i--) {
             if(chronic[i].user == activeSession.username) {
                 tmp = tmp + JSON.stringify(chronic[i]) + ",";
                 ++match;
@@ -200,12 +200,12 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      */  
     function initializeRange() {
         
-        right = chronic.length-1;
-        if(chronic.length < 10) {
-            left = 0;
-        } else {
-            left = chronic.length-10;
-        }
+       left = 0;
+       if(chronic.length <= 10) {
+            right = chronic.length;
+       } else {
+           right = 10;
+       }
     }
 
     /**
@@ -227,20 +227,20 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     function renderPager(left, right) {
         list.innerHTML=""; //Löschen aller aktuelle <li>'s
         
-        for(var i = right; i >= left; i--) {
+        for(var i = left; i < right; i++) {
                 addElement(chronic[i].input, chronic[i].inchToMetric,chronic[i].result);
         }
 
         //Überprüfungen, ob Buttons benötigt werden
-        if(left-1 > 0) { //Es gibt noch Elemente
-            nextBTN.style.display = 'block';
-        } else {
-            nextBTN.style.display = 'none';
-        }
-        if(right+1 < chronic.length-1) {
-            prevBTN.style.display = 'block';
-        } else {
+        if(left-1 <= 0) { //Es gibt noch Elemente
             prevBTN.style.display = 'none';
+        } else {
+            prevBTN.style.display = 'block';
+        }
+        if(right + 1 > chronic.length) {
+            nextBTN.style.display = 'none';
+        } else {
+            nextBTN.style.display = 'block';
         }
 
     }
@@ -259,10 +259,10 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      */
     function nextRange(factor) {
         //Right und Left werden runter gezählt (Array wird von Hinten aufgerollt)
-        right = left - 1;
-        left = left - factor;
-        if(left < 0) {left = 0;}
-        if(right < 0) {right = 0;}
+        left = right;
+        right = right + factor;
+        if(left > chronic.length) {left = chronic.length;}
+        if(right > chronic.length) {right = chronic.length;}
         renderPager(left,right);
     }
 
@@ -281,10 +281,10 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      */
     function prevRange(factor) {
         //Right und Left werden rauf gezählt (Array wird von Hinten aufgerollt)
-        left = right + 1;
-        right = right + factor;
-        if(right > chronic.length-1) {right = chronic.length-1;}
-        if(left > chronic.length-1) {left = chronic.length-1;}
+        right = left;
+        left = left - factor;
+        if(left < 0) {left = 0;}
+        if(right < 0) {right = 0;}
         renderPager(left,right);
     }    
 </script>

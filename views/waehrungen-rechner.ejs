@@ -118,17 +118,39 @@
     const mode = document.getElementById('mode');                   //Dropdown-Selektor
     const numberField = document.getElementById('numberField');     //Eingabefeld
     const resultLabel = document.getElementById('resultLabel');
-    // Pager
-    const list = document.getElementById('list');
-    const prevBTN = document.getElementById('prevBTN');
-    const nextBTN = document.getElementById('nextBTN');
     // Antwort vom Backend
     var result;
     var inputSet;
     <% if(locals.result) {%>result = <%= result%>;<%} %>
     <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
+    //Pager
+    <%
+        var tmp = "[";
+        var match = 0;
+        for(var i = chronic.length-1; i >= 0; i--) {
+            if(chronic[i].user == activeSession.username) {
+                tmp = tmp + JSON.stringify(chronic[i]) + ",";
+                ++match; //Wenn chronic leer ist, kann später es mit null angesetzt werden (sonst wäre es -> chronic = "]"). Es muss min. 1 match vorliegen
+            }
+        }
+        tmp = tmp.substring(0, tmp.length-1) + "]";
+        if(match > 0) {
+            chronic = tmp;
+        } else {
+            chronic = null; //Keine passenden Nutzerdaten gefunden
+        }
+    %>
+    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+    var left = 0;
+    var right = 0;
+    const list = document.getElementById('list');
+    const nextBTN = document.getElementById('nextBTN');
+    const prevBTN = document.getElementById('prevBTN');
+    nextBTN.style.display = 'none';
+    prevBTN.style.display = 'none';
 </script>
 <script src="skripts/waehrungen-rechnerLogic.js"></script>
+<script src="skripts/waehrungPager.js"></script>
 
 
 
