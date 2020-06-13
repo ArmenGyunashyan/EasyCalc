@@ -11,12 +11,12 @@ html, body {
     height: 100%;
     background-color: #454545;
     color: black;
+    font-family: 'Orbitron', 'SansSerif';
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
     font-size: 40pt;
-    font-family: 'Orbitron', 'SansSerif';
 }
 
 .fixed-size {
@@ -26,6 +26,7 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     max-width: 940px;
     min-height: 81%;
+    position: relative;
 }
 
 .header-fixed-size
@@ -36,6 +37,17 @@ h1, h2, h3, h4, h5, h6 {
     background-color: white;
     max-width: 940px;
     height: auto;
+    position: relative;
+}
+
+.map-fixed-size
+{
+    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    max-width: 940px;
+    min-height: 88.5%;
     position: relative;
 }
 
@@ -83,7 +95,6 @@ p {
 .navbar a {
     display: inline-block;
     font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
     text-align: right;
     margin: 7px;
     color: black;
@@ -104,6 +115,7 @@ hr {
     text-align: center;
     font-size: 30pt;
     margin-top: -30px;
+    padding-top: 20px;
     margin-bottom: 40px;
     padding-bottom: 10px;
     font-weight: bold;
@@ -225,7 +237,6 @@ a:hover:not(.active) {
     padding-top: 10px;
     color: white;
     font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
 }
 
 .flip-card-text {
@@ -394,7 +405,7 @@ a:hover:not(.active) {
     border: 2px solid #179180;
     margin-left: 10px;
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .info2, .info5 {
@@ -408,6 +419,18 @@ a:hover:not(.active) {
 
 .info4, .info5, .info6 {
     margin-top: 65px;
+}
+
+/* Google Maps Style */
+.map
+{
+    position: absolute;
+    width: 930px;
+    height:400px;
+    frameborder: 0;
+    scrolling: no;
+    bottom: 5px;
+    margin: 0 5px;
 }
 
 @media screen and (min-width: 940px) {
@@ -551,5 +574,14 @@ a:hover:not(.active) {
         margin: 20px 10px;
         width: auto;
         height: auto;
+    }
+}
+
+/* Google Maps Responsive */
+@media screen and (max-width: 940px) {
+    .map
+    {
+        width: 100%;
+        margin: 0;
     }
 }

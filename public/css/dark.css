@@ -11,12 +11,12 @@ html, body {
     height: 100%;
     background-color: #454545;
     color: lightgray;
+    font-family: 'Orbitron', 'SansSerif';
 }
 
 h1, h2, h3, h4, h5, h6 {
     margin-left: 5px;
     font-size: 40pt;
-    font-family: 'Orbitron', 'SansSerif';
 }
 
 .fixed-size {
@@ -35,6 +35,17 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #303030;
     max-width: 940px;
     height: auto;
+    position: relative;
+}
+
+.map-fixed-size
+{
+    margin-top: -30px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #303030;
+    max-width: 940px;
+    min-height: 88.5%;
     position: relative;
 }
 
@@ -83,7 +94,6 @@ p {
 .navbar a {
     display: inline-block;
     font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
     text-align: right;
     margin: 7px;
 }
@@ -104,6 +114,7 @@ hr {
     text-align: center;
     font-size: 30pt;
     margin-top: -30px;
+    padding-top: 20px;
     margin-bottom: 40px;
     padding-bottom: 10px;
     font-weight: bold;
@@ -224,7 +235,6 @@ a:hover:not(.active) {
 .flip-card-title {
     padding-top: 10px;
     font-size: 20pt;
-    font-family: 'Orbitron', 'SansSerif';
     text-shadow: 2px 2px 5px black;
 }
 
@@ -381,7 +391,7 @@ a:hover:not(.active) {
     border: 2px solid lightgray;
     margin-left: 10px;
     padding: 5px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .info2, .info5 {
@@ -395,6 +405,18 @@ a:hover:not(.active) {
 
 .info4, .info5, .info6 {
     margin-top: 65px;
+}
+
+/* Google Maps Style */
+.map
+{
+    position: absolute;
+    width: 930px;
+    height:400px;
+    frameborder: 0;
+    scrolling: no;
+    bottom: 5px;
+    margin: 0 5px;
 }
 
 @media screen and (min-width: 940px) {
@@ -510,10 +532,20 @@ a:hover:not(.active) {
 }
 
 /* Responsive Logo*/
-@media screen and (max-width: 335px) {
+@media screen and (max-width: 480px) {
     .logo {
         font-size: 30pt;
     }
+}
+
+@media screen and (max-width: 340px) {
+    .logo {
+        font-size: 25pt;
+    }
+    .username
+     {
+        font-size: 10pt;
+     }
 }
 
 /* Responsive Login*/
@@ -536,5 +568,20 @@ a:hover:not(.active) {
         margin: 20px 10px;
         width: auto;
         height: auto;
+    }
+}
+
+@media sceen and (min-height: 2300px){
+    .info1, .info2, .info3, .info4, .info5, .info6 {
+        height: 2000px;
+    }
+}
+
+/* Google Maps Responsive */
+@media screen and (max-width: 940px) {
+    .map
+    {
+        width: 100%;
+        margin: 0;
     }
 }
