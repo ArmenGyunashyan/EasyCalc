@@ -206,7 +206,13 @@ var chronicMoney = [
     }
 ];
 var chronicEnergy = [
-
+    {
+        user: "root",
+        mode: "volt",
+        input1: 1000,
+        input2: 4,
+        result: 250
+    }
 ];
 
 //--------------------------------------------
@@ -514,9 +520,6 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
         //obj.mode          : number    -> Rechenmodus
         //obj.input         : number    -> Eingabe im Zahlenfeld
         //obj.result        : number    -> Ergebnis der Berechnung
-        console.log(typeof req.body.mode);
-        console.log(typeof req.body.input);
-        console.log(typeof result);
         chronicMoney.push({
             "user":req.session.username,
             "mode":req.body.mode,   
@@ -531,6 +534,61 @@ app.post('/waehrungen-rechner.html', function(req, res, done) {
     }
     
     res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style, result: result, inputSet: req.body});
+});
+
+app.post('/strom-rechner.html', function(req, res, done) {
+
+    if(!req.body.input1 || !req.body.input2) {
+        done();
+    }
+
+    if(req.body.input1 <= 0 || req.body.input2 <= 0) {
+        done();
+    }
+
+    var result;
+
+    statistics.energy = statistics.energy + 1;
+
+    //----
+    switch(req.body.mode) {
+        case "volt":
+            result = req.body.input1 / req.body.input2;
+            break;
+        case "ampere":
+            result = req.body.input2 / req.body.input1;
+            break;
+        case "watt":
+            result = req.body.input1 * req.body.input2;
+            break;
+        default:
+            done();
+            break;
+    }
+
+    if(result) {
+        result = result.toFixed(2);
+    }
+
+    if(req.session.loggedin == true && req.body.input1 > 0 && req.body.input2 > 0) { // Optional: Wenn ein Nutzer angemeldet ist, wird das Ergebnis in seiner Chronik gespeichert
+        //Erzeugen des neuen Onjektes
+        //JSON-Objekt für "chronicMeasure[]" (hier "obj")
+        //
+        //obj.user          : String    -> Username des aktuellen Nutzers
+        //obj.mode          : number    -> Rechenmodus
+        //obj.input1        : number    -> Eingabe im Zahlenfeld 1
+        //obj.input2        : number    -> Eingabe im Zahlenfeld 2
+        //obj.result        : number    -> Ergebnis der Berechnung
+        chronicEnergy.push({
+            "user":req.session.username,
+            "mode":req.body.mode,   
+            "input1":Number.parseFloat(req.body.input1), //Hier wechselt JS zufällig von Number zu String ???
+            "input2":Number.parseFloat(req.body.input2), //Hier wechselt JS zufällig von Number zu String ???
+            "result":Number.parseFloat(result)         //Hier wechselt JS zufällig von Number zu String ???
+        });
+    }
+
+    res.render('strom-rechner', {activeSession: req.session, chronic: chronicEnergy ,style: req.cookies.style, result: result, inputSet: req.body});
 });
 
 //=======================================================================================

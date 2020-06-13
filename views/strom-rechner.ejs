@@ -41,33 +41,38 @@
     </div>
 </header>
 <section class="fixed-size">
-<h1>Strom-Rechner</h1>
+<div>
+    <h1>Strom-Rechner</h1>
 
-<p>Was soll bestimmt werden?</p>
-<div class="info1">
-    <!--
-        <form action="/masseinheiten-rechner.html" method="POST">
-            <input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm<br>
-            <input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll<br>
-            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
-            <input type="submit" value="Berechnen">
-        </form>
-    -->
-    <form action="/strom-rechner.html" method="POST">
-        <input id="voltBtn" name="mode" value="volt" type="radio" checked>Volt<br>
-        <input id="ampereBtn" name="mode" value="ampere" type="radio">Ampere<br>
-        <input id="wattBtn" name="mode" value="watt" type="radio">Watt<br>
-        <label id="input1Label">Zahl 1:</label>
-            <input id="numberField1"  type="number" min="0" placeholder="0" step="0.01" name="input1" required>
+    <p>Was soll bestimmt werden?</p>
+
+        <form action="/strom-rechner.html" method="POST">
+            <input id="voltBtn" name="mode" value="volt" type="radio" checked>Volt<br>
+            <input id="ampereBtn" name="mode" value="ampere" type="radio">Ampere<br>
+            <input id="wattBtn" name="mode" value="watt" type="radio">Watt<br>
+            <label id="input1Label">Zahl 1:</label>
+                <input id="numberField1"  type="number" min="0" placeholder="0" step="0.01" name="input1" required>
             <br>
-        <label id="input2Label">Zahl 2:</label>
-            <input id="numberField2"  type="number" min="0" placeholder="0" step="0.01" name="input2" required>
+            <label id="input2Label">Zahl 2:</label>
+                <input id="numberField2"  type="number" min="0" placeholder="0" step="0.01" name="input2" required>
             <br>
         <input type="submit" value="Berechnen">
 
     </form>
     <p id="resultLabel"></p>
 </div>
+<br>
+<div>
+    <h1>Verlauf</h1>
+    <ul id="list" class="chronicList">
+
+    </ul>
+    <div class="pager-btn">
+        <button id="prevBTN" style="float:left;" onclick="prevRange(10)"><<</button>
+        <button id="nextBTN" style="float:left;" onclick="nextRange(10)">>></button>
+    </div>
+</div>
+
 
 
 
@@ -91,7 +96,9 @@
     -->
 
 <script>
-    //Import aller Variablen und ELemente
+    //-------------------------------------------------------------------------------------------
+    // Variablen (über EJS) und DOM-Elemente
+    //-------------------------------------------------------------------------------------------
 
     //Html Elemente
     const voltBtn = document.getElementById('voltBtn');
@@ -106,45 +113,42 @@
 
     const resultLabel = document.getElementById('resultLabel');
 
-    //----------------------------------------------------
-    //var inputSet; //Anzeige
-    //var result;   //Anzeige
-    //var chronic;  //Pager
+    //EJS Variablen und Objekte
+    var mode;
+    var inputSet; //Anzeige
+    var result;   //Anzeige
+    <% if(locals.result) {%>result = <%= result%>;<%} %>
+    <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
 
-    //Initialisieren und weitere kleine Logic
-
-    renderForm();
-
-    voltBtn.onclick = function() {
-        renderForm();
-
-    };
-    ampereBtn.onclick = function() {
-        renderForm();
-
-    };
-    wattBtn.onclick = function() {
-        renderForm();
-
-    };
-
-    function renderForm() {
-        
-        if(voltBtn.checked) {
-            input1Label.innerHTML="Watt (W): ";
-            input2Label.innerHTML="Ampere (A): ";
-        } else if(ampereBtn.checked) {
-            input1Label.innerHTML="Volt (v): ";
-            input2Label.innerHTML="Watt (W): ";
-        } else if(wattBtn.checked) {
-            input1Label.innerHTML="Volt (v): ";
-            input2Label.innerHTML="Ampere (A): ";
+    // Das Array mit der Chronic wird von der EJS übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+    // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
+    <%
+        var tmp = "[";
+        var match = 0;
+        for(var i = chronic.length-1; i >= 0; i--) {
+            if(chronic[i].user == activeSession.username) {
+                tmp = tmp + JSON.stringify(chronic[i]) + ",";
+                ++match;
+            }
         }
-
-    }
-    
-
+        tmp = tmp.substring(0, tmp.length-1) + "]";
+        if(match > 0) {
+            chronic = tmp;
+        } else {
+            chronic = null; //Keine passenden Nutzerdaten gefunden
+        }
+    %>
+    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+    var left = 0;
+    var right = 0;
+    const list = document.getElementById('list');
+    const nextBTN = document.getElementById('nextBTN');
+    const prevBTN = document.getElementById('prevBTN');
+    nextBTN.style.display = 'none';
+    prevBTN.style.display = 'none';
 </script>
+
+<script src="skripts/strom-rechnerLogic.js"></script>
 
 <script>
     //Import der Variablen aus der RenderEngine (EJS)
