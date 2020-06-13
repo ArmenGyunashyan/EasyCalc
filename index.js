@@ -344,6 +344,12 @@ app.get('/waehrungen-rechner.html', function(req, res) {
 app.get('/waehrungen-rechner', function(req, res) {
     res.render('waehrungen-rechner', {activeSession: req.session, chronic: chronicMoney ,style: req.cookies.style}); 
 });
+app.get('/strom-rechner.html', function(req, res) {
+    res.render('strom-rechner', {activeSession: req.session, chronic: chronicEnergy ,style: req.cookies.style}); 
+});
+app.get('/strom-rechner', function(req, res) {
+    res.render('strom-rechner', {activeSession: req.session, chronic: chronicEnergy ,style: req.cookies.style}); 
+});
 
 
 app.get('/login.html', isAuth, function(req, res) {

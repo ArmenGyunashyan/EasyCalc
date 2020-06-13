@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+
+    <title>Strom-Rechner</title>
     <link rel="stylesheet" id="sheet"
           href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
-<body  class="fixed-size">
+<body>
 <header class="header">
     <div class="header-fixed-size">
         <h1 class="logo">EasyCalc</h1>
@@ -39,6 +40,40 @@
         <hr>
     </div>
 </header>
+<section class="fixed-size">
+<h1>Strom-Rechner</h1>
+
+<p>Was soll bestimmt werden?</p>
+<div class="info1">
+    <!--
+        <form action="/masseinheiten-rechner.html" method="POST">
+            <input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm<br>
+            <input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll<br>
+            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
+            <input type="submit" value="Berechnen">
+        </form>
+    -->
+    <form action="/strom-rechner.html" method="POST">
+        <input id="voltBtn" name="mode" value="volt" type="radio" checked>Volt<br>
+        <input id="ampereBtn" name="mode" value="ampere" type="radio">Ampere<br>
+        <input id="wattBtn" name="mode" value="watt" type="radio">Watt<br>
+        <label id="input1Label">Zahl 1:</label>
+            <input id="numberField1"  type="number" min="0" placeholder="0" step="0.01" name="input1" required>
+            <br>
+        <label id="input2Label">Zahl 2:</label>
+            <input id="numberField2"  type="number" min="0" placeholder="0" step="0.01" name="input2" required>
+            <br>
+        <input type="submit" value="Berechnen">
+
+    </form>
+    <p id="resultLabel"></p>
+</div>
+
+
+
+
+
+</section>
 <div>
     <footer class="footer">
         <hr>
@@ -50,26 +85,75 @@
 </div>
 </body>
 <!--
-===================================
-Responsive Navbar Skript
-===================================
--->
-<script>
-    function mobileNavbar() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+    ===================================
+    Skripte
+    ===================================
+    -->
 
-    window.onclick = function (event) {
-        if (!event.target.matches('.dropbtn')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
+<script>
+    //Import aller Variablen und ELemente
+
+    //Html Elemente
+    const voltBtn = document.getElementById('voltBtn');
+    const ampereBtn = document.getElementById('ampereBtn');
+    const wattBtn = document.getElementById('wattBtn');
+
+    const input1Label = document.getElementById('input1Label');
+    const numberField1 = document.getElementById('numberField1');
+
+    const input2Label = document.getElementById('input2Label');
+    const numberField2 = document.getElementById('numberField2');
+
+    const resultLabel = document.getElementById('resultLabel');
+
+    //var inputSet ;
+
+    //Initialisieren und weitere kleine Logic
+
+    renderForm();
+
+    voltBtn.onclick = function() {
+        renderForm();
+
+    };
+    ampereBtn.onclick = function() {
+        renderForm();
+
+    };
+    wattBtn.onclick = function() {
+        renderForm();
+
+    };
+
+    function renderForm() {
+        
+        if(voltBtn.checked) {
+            input1Label.innerHTML="Watt (W): ";
+            input2Label.innerHTML="Ampere (A): ";
+        } else if(ampereBtn.checked) {
+            input1Label.innerHTML="Volt (v): ";
+            input2Label.innerHTML="Watt (W): ";
+        } else if(wattBtn.checked) {
+            input1Label.innerHTML="Volt (v): ";
+            input2Label.innerHTML="Ampere (A): ";
         }
+
     }
+    
+
 </script>
+
+<script>
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
+
+    var style = "<%= style %>";
+    <% if(locals.statistics) { %>
+    var statistics = <%- JSON.stringify(statistics) %>;
+    <% } %>
+</script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>
