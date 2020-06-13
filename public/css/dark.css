@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: auto;
     background-color: #303030;
     max-width: 940px;
-    min-height: 81%;
+    min-height: 80.9%;
 }
 
 .header-fixed-size {
@@ -557,7 +557,7 @@ a:hover:not(.active) {
 }
 
 /* Responsive Info */
-@media screen and (max-width: 900px), (max-height: 900px) {
+@media screen and (max-width: 920px), (max-height: 900px) {
     .formeln {
         padding-bottom: 20px;
         padding-top: 20px;
