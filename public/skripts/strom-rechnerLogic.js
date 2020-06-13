@@ -26,9 +26,8 @@ wattBtn.onclick = function () {
     numberField1.value = "";
     numberField2.value = "";
 };
-/**
- * Neues Rendern aller FormularElemente, da die Auswahl des Modus die Beschriftung ändern muss
- */
+
+//Neues Rendern aller FormularElemente, da die Auswahl des Modus die Beschriftung ändern muss
 function renderForm(mode) {
 
     switch (mode) {
@@ -53,6 +52,7 @@ function renderForm(mode) {
 
 }
 
+//Anzeige der Ergebnisse
 if (inputSet && result) {
     numberField1.value = inputSet.input1;
     numberField2.value = inputSet.input2;
