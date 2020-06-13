@@ -16,7 +16,11 @@
             >
             <span class="slider round"></span>
         </label>
-        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
+        <% if(activeSession.loggedin) { %>
+            <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
+        <% } else { %>
+            <div style="display: none"></div>
+        <% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -39,8 +43,28 @@
         <hr>
     </div>
 </header>
-<section class="fixed-size">
-    hallo
+<section class="map-fixed-size">
+    <!-- https://maps-generator.com/ -->
+    <iframe class="map"
+            src="https://maps.google.com/maps?width=520&height=400&hl=en&q=M%C3%BCnsterstra%C3%9Fe%20265%20Bocholt&t=&z=12&ie=UTF8&iwloc=B&output=embed"></iframe>
 </section>
 </body>
+<!--
+    ===================================
+    Skripte
+    ===================================
+    -->
+<script>
+    //Import der Variablen aus der RenderEngine (EJS)
+    //Die Variablen werden von den nachfolgenden Skripten benötigt
+
+    var style = "<%= style %>";
+    <% if(locals.statistics) { %>
+    var statistics = <%- JSON.stringify(statistics) %>;
+    <% } %>
+</script>
+<% if(locals.statistics) { %>
+    <script src="skripts/canvasJS.js"></script>
+<% } %>
+<script src="skripts/cookieStyleLoader.js"></script>
 </html>
