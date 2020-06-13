@@ -17,7 +17,11 @@
             >
             <span class="slider round"></span>
         </label>
-        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
+        <% if(activeSession.loggedin) { %>
+            <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
+        <% } else { %>
+            <div style="display: none"></div>
+        <% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -46,7 +50,7 @@
     Flip Cards
     ===================================
     -->
-        <p class="welcome">Willkomen auf EasyCalc, wo Sie Umrechnungen zu Maßeinheiten, Währungen und Strom finden</p>
+    <p class="welcome">Willkomen auf EasyCalc, wo Sie Umrechnungen zu Maßeinheiten, Währungen und Strom finden</p>
     <h1 class="flip-card-header">Rechner</h1>
     <div class="flip-card">
         <div class="flip-card-inner">
@@ -59,7 +63,8 @@
             <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
                 <div style="background-image:url('images/MeasureBlur.jpg'); width: 100%; height: 100%;">
                     <h1 class="flip-card-title">Maßeinheiten</h1>
-                    <p class="flip-card-text">Rechnen Sie Zoll und Centimeter um. Umrechnung zwischen dem Metrischen- und dem Imperialistischen-Sytem.</p>
+                    <p class="flip-card-text">Rechnen Sie Zoll und Centimeter um. Umrechnung zwischen dem Metrischen-
+                        und dem Imperialistischen-Sytem.</p>
                 </div>
             </div>
         </div>
@@ -74,7 +79,8 @@
             <div class="flip-card-back" onclick="window.location='masseinheiten-rechner.html'">
                 <div style="background-image:url('images/MoneyBlur.jpg'); width: 100%; height: 100%;">
                     <h1 class="flip-card-title">Währungen</h1>
-                    <p class="flip-card-text">Währungsumrechner mit den tagesaktuellen Kursen der vier stabilsten Währungen. Euro, US Dollar, Pfund und Japanische Yen werden angeboten.</p>
+                    <p class="flip-card-text">Währungsumrechner mit den tagesaktuellen Kursen der vier stabilsten
+                        Währungen. Euro, US Dollar, Pfund und Japanische Yen.</p>
                 </div>
             </div>
         </div>
@@ -82,11 +88,15 @@
     <div class="flip-card">
         <div class="flip-card-inner">
             <div class="flip-card-front">
-                <img class="flip-card-image" src="images/platzhalter.jpg" alt="Strom">
+                <div style="background-image:url('images/Platzhalter.jpg'); background-size: 290px; width: 100%; height: 100%;">
+                    <h1 class="flip-card-title">Strom</h1>
+                </div>
             </div>
             <div class="flip-card-back" onclick="window.location='strom-rechner.html'">
-                <h1 class="flip-card-title">Strom</h1>
-                <p class="flip-card-text">Text</p>
+                <div style="background-image:url('images/Platzhalter.jpg'); width: 100%; height: 100%;">
+                    <h1 class="flip-card-title">Strom</h1>
+                    <p class="flip-card-text">Text</p>
+                </div>
             </div>
         </div>
     </div>

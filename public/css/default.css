@@ -185,7 +185,6 @@ a:hover:not(.active) {
 }
 
 .flip-card {
-    background-color: white;
     width: 290px;
     height: 290px;
     perspective: 1000px;
@@ -210,7 +209,6 @@ a:hover:not(.active) {
 }
 
 .flip-card-front, .flip-card-back {
-    background-color: #179180;
     color: white;
     position: absolute;
     width: 100%;
@@ -224,7 +222,7 @@ a:hover:not(.active) {
 }
 
 .flip-card-title {
-    padding-top: 20px;
+    padding-top: 10px;
     color: white;
     font-size: 20pt;
     font-family: 'Orbitron', 'SansSerif';
@@ -237,11 +235,6 @@ a:hover:not(.active) {
     text-shadow: 2px 2px 5px black;
     color: white;
     text-align: left;
-}
-
-.flip-card-image {
-    width: 290px;
-    height: 290px;
 }
 
 /* Footer Style */
