@@ -80,7 +80,7 @@ p {
     min-height: 50px;
 }
 
-/* Navbar Style */
+/* Navbar */
 .dropbtn {
     display: none;
 }
@@ -129,7 +129,7 @@ a:hover:not(.active) {
     color: gray;
 }
 
-/* Switch Style */
+/* Switch */
 
 .header .switch {
     margin-top: 9px;
@@ -188,7 +188,7 @@ a:hover:not(.active) {
     border-radius: 50%;
 }
 
-/* Flip-Card Style */
+/* Flip-Card */
 
 .flip-card-header {
     font-size: 30pt;
@@ -247,7 +247,7 @@ a:hover:not(.active) {
     text-align: left;
 }
 
-/* Footer Style */
+/* Footer */
 
 .footer {
     margin-left: auto;
@@ -273,9 +273,9 @@ a:hover:not(.active) {
     color: black;
 }
 
-/* Chart Style */
+/* Chart */
 
-/* Chart Style */
+/* Chart */
 
 .chart {
     width: auto;
@@ -409,7 +409,7 @@ a:hover:not(.active) {
     border-radius: 5px;
 }
 
-/* Google Maps Style */
+/* Google Maps */
 .map {
     position: absolute;
     width: 930px;
@@ -418,6 +418,106 @@ a:hover:not(.active) {
     scrolling: no;
     bottom: 5px;
     margin: 0 5px;
+}
+
+/* Maßeinheiten */
+.masseinheiten-header
+{
+    text-align: center;
+}
+
+.masseinheiten-form
+{
+    text-align: center;
+    padding-top: 12%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    position: relative;
+}
+
+.radiobtn
+{
+    width: auto;
+    display: inline-block;
+    margin-bottom: 3px;
+    margin-right: 5px;
+    font-size: 15pt;
+}
+
+.nmbField, .masseinheiten-berechnen
+{
+    border: 1px solid black;
+    color: black;
+    font-family: "Orbitron", "sans-serif";
+    font-size: 15pt;
+    text-align: center;
+    width: 86%;
+    height: 100%;
+    margin-bottom: 3px;
+}
+
+.masseinheiten-berechnen:hover
+{
+    background-color: rgba(128, 128, 128, 0.38);
+}
+
+.masseinheiten-result
+{
+    position: absolute;
+    margin-top: 5px;
+    left: 7%;
+    font-family: "Orbitron", "sans-serif";
+    font-size: 15pt;
+    width: 86%;
+}
+
+.verlauf-header
+{
+    text-align: center;
+    font-size: 30pt;
+    padding-bottom: 10px;
+}
+
+.chronicList
+{
+    text-align: center;
+    font-size: 15pt;
+    padding: 5px 0;
+    border: 1px solid #179180;
+    width: 26%;
+    margin: 0 auto;
+}
+
+.chronicList a
+{
+    color: black;
+}
+
+.chronicList li:nth-child(even)
+{
+    background-color: lightgray;
+}
+
+.pager-btn
+{
+    position: relative;
+    width: 26%;
+    margin: 5px auto;
+}
+
+#nextBTN
+{
+    position: absolute;
+    left: 50%;
+    width: 50%;
+}
+
+#prevBTN
+{
+    position: absolute;
+    right: 50%;
+    width: 50%;
 }
 
 /* Responsive Flip Card */
@@ -447,7 +547,7 @@ a:hover:not(.active) {
         display: none;
         background-color: white;
         width: 100%;
-        margin-top: 42px;
+        margin-top: 41px;
         border: 1px solid lightgray;
     }
 
@@ -555,5 +655,57 @@ a:hover:not(.active) {
     .map {
         width: 100%;
         margin: 0;
+    }
+}
+
+/* Responsive Maßeinheiten Rechner */
+@media screen and (max-width: 500px) {
+    .masseinheiten-header
+    {
+        font-size: 28pt;
+    }
+}
+
+@media screen and (max-width: 810px) {
+
+    .pager-btn
+    {
+        width: 96%;
+    }
+
+    .chronicList
+    {
+        font-size: 100%;
+        width: 96%;
+        height: auto;
+    }
+    .verlauf-header
+    {
+        font-size: 15pt;
+    }
+
+    .masseinheiten-form
+    {
+        width: 100%;
+    }
+
+    .nmbField, .masseinheiten-berechnen
+    {
+        width: 96%;
+        height: auto;
+        font-size: 100%;
+        display: inline-block;
+    }
+
+    .radiobtn
+    {
+        font-size: 100%;
+    }
+}
+
+@media screen and (max-height: 820px) {
+    #nextBTN
+    {
+        position: relative;
     }
 }

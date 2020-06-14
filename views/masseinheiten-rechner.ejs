@@ -47,25 +47,26 @@
     =================================================================================
     -->
     <div>
-    <h1>Maßeinheit</h1>
-        <form action="/masseinheiten-rechner.html" method="POST">
-            <input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm<br>
-            <input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll<br>
-            <input id="numberField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
-            <input type="submit" value="Berechnen">
+    <h1 class="masseinheiten-header">Maßeinheiten Rechner</h1>
+        <form class="masseinheiten-form" action="/masseinheiten-rechner.html" method="POST">
+            <div class="radiobtn"><input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm</div>
+            <div class="radiobtn"><input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll</div>
+            <input id="numberField" class="nmbField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
+            <input type="submit" value="Berechnen" class="masseinheiten-berechnen">
+            <p id="resultLabel" class="masseinheiten-result"></p>
         </form>
         <br>
-        <p id="resultLabel"></p>
+
     </div>
     <br>
     <div>
-        <h1>Verlauf</h1>
+        <h1 class="verlauf-header">Verlauf</h1>
         <ul id="list" class="chronicList">
 
         </ul>
         <div class="pager-btn">
-            <button id="prevBTN" style="float:left;" onclick="prevRange(10)"><<</button>
-            <button id="nextBTN" style="float:left;" onclick="nextRange(10)">>></button>
+            <button id="prevBTN" onclick="prevRange(15)"><<</button>
+            <button id="nextBTN" onclick="nextRange(15)">>></button>
         </div>
     </div>
     <!--
@@ -205,10 +206,10 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     function initializeRange() {
         
        left = 0;
-       if(chronic.length <= 10) {
+       if(chronic.length <= 15) {
             right = chronic.length;
        } else {
-           right = 10;
+           right = 15;
        }
     }
 
@@ -243,8 +244,10 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
         }
         if(right + 1 > chronic.length) {
             nextBTN.style.display = 'none';
+            prevBTN.style.position = 'relative';
         } else {
             nextBTN.style.display = 'block';
+            prevBTN.style.position = 'absolute';
         }
 
     }
