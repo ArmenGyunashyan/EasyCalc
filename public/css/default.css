@@ -29,8 +29,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-.header-fixed-size
-{
+.header-fixed-size {
     margin-bottom: 39px;
     margin-left: auto;
     margin-right: auto;
@@ -40,8 +39,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-.map-fixed-size
-{
+.map-fixed-size {
     margin-top: -30px;
     margin-right: auto;
     margin-left: auto;
@@ -81,6 +79,7 @@ p {
     max-width: 940px;
     min-height: 50px;
 }
+
 /* Navbar Style */
 .dropbtn {
     display: none;
@@ -251,13 +250,15 @@ a:hover:not(.active) {
 /* Footer Style */
 
 .footer {
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px;
     padding-bottom: 5px;
     background-color: white;
     bottom: 0;
     height: auto;
     width: auto;
-    max-width:940px;
+    max-width: 940px;
 }
 
 .footer > p {
@@ -389,7 +390,8 @@ a:hover:not(.active) {
 /* Formeln */
 .formeln {
     text-align: justify;
-    padding-top: 65px;
+    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 .formeln h1 {
@@ -398,43 +400,28 @@ a:hover:not(.active) {
     padding-bottom: 10px;
 }
 
-.info1, .info2, .info3, .info4, .info5, .info6 {
-    float: left;
-    width: 282px;
-    height: 310px;
+.formeln div {
+    width: auto;
+    height: auto;
     border: 2px solid #179180;
-    margin-left: 10px;
+    margin: 20px 10px;
     padding: 5px;
     border-radius: 5px;
 }
 
-.info2, .info5 {
-    margin-left: 37px;
-}
-
-.info3, .info6 {
-    float: right;
-    margin-right: 10px;
-}
-
-.info4, .info5, .info6 {
-    margin-top: 65px;
-}
-
 /* Google Maps Style */
-.map
-{
+.map {
     position: absolute;
     width: 930px;
-    height:400px;
+    height: 400px;
     frameborder: 0;
     scrolling: no;
     bottom: 5px;
     margin: 0 5px;
 }
 
+/* Responsive Flip Card */
 @media screen and (min-width: 940px) {
-    /* Responsive Flip Card */
     .flip-card {
         float: left;
         margin-left: 17.5px;
@@ -442,8 +429,10 @@ a:hover:not(.active) {
         width: 290px;
         height: 290px;
     }
+}
 
-    /* Responsive Chart */
+/* Responsive Chart */
+@media screen and (min-width: 940px) {
     .chart {
         margin-top: 340px;
         width: 940px;
@@ -451,7 +440,7 @@ a:hover:not(.active) {
     }
 }
 
-/* Mobile Navbar */
+/* Responsive Navbar */
 @media screen and (max-width: 580px) {
 
     .dropdown-content {
@@ -503,7 +492,7 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Table*/
+/* Responsive Table */
 @media screen and (max-width: 765px) {
 
     .kurse {
@@ -546,14 +535,14 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Logo*/
+/* Responsive Logo */
 @media screen and (max-width: 335px) {
     .logo {
         font-size: 30pt;
     }
 }
 
-/* Responsive Login*/
+/* Responsive Login */
 @media screen and (max-width: 420px) {
     .login-form {
         margin-left: 5px;
@@ -561,26 +550,9 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Info */
-@media screen and (max-width: 920px), (max-height: 900px) {
-    .formeln
-    {
-        padding-bottom: 20px;
-        padding-top: 20px;
-    }
-
-    .info1, .info2, .info3, .info4, .info5, .info6{
-        float: none;
-        margin: 20px 10px;
-        width: auto;
-        height: auto;
-    }
-}
-
-/* Google Maps Responsive */
+/* Responsive Google Maps */
 @media screen and (max-width: 940px) {
-    .map
-    {
+    .map {
         width: 100%;
         margin: 0;
     }
