@@ -453,11 +453,18 @@ a:hover:not(.active) {
 .masseinheiten-result
 {
     position: absolute;
-    margin-top: 5px;
+    margin-top: 1px;
+    padding: 3px;
     left: 7%;
     font-family: "Orbitron", "sans-serif";
-    font-size: 15pt;
+    font-size: 100%;
+    border: 1px solid #179180;
+    background-color: rgba(23, 145, 128, 0.25);
     width: 86%;
+}
+
+.masseinheiten-result:empty {
+    display: none;
 }
 
 .verlauf-header
@@ -480,6 +487,10 @@ a:hover:not(.active) {
 .chronicList li:nth-child(even)
 {
     background-color: #252525;
+}
+
+.chronicList:empty {
+    display: none;
 }
 
 .pager-btn
@@ -649,6 +660,12 @@ a:hover:not(.active) {
     }
 }
 
+@media screen and (max-height: 700px) {
+    .map {
+        position: relative;
+    }
+}
+
 /* Responsive Maßeinheiten Rechner */
 @media screen and (max-width: 500px) {
     .masseinheiten-header
@@ -691,6 +708,11 @@ a:hover:not(.active) {
     .radiobtn
     {
         font-size: 100%;
+    }
+
+    .masseinheiten-result {
+        width: 96%;
+        left: 2%;
     }
 }
 

@@ -27,7 +27,7 @@
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
-                    <a href="formeln.html">FORMELN</a>
+                    <a href="info.html">INFO</a>
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
                     <% } else { %>
                         <a href="login.html">LOGIN</a>
@@ -82,13 +82,13 @@
     </div>
     <br>
     <div>
-        <h1>Verlauf</h1>
+        <h1 id="verlauf-header" class="verlauf-header">Verlauf</h1>
         <ul id="list" class="chronicList">
 
         </ul>
         <div class="pager-btn">
-            <button id="prevBTN" style="float:left;" onclick="prevRange(10)"><<</button>
-            <button id="nextBTN" style="float:left;" onclick="nextRange(10)">>></button>
+            <button id="prevBTN" style="float:left;" onclick="prevRange(15)"><<</button>
+            <button id="nextBTN" style="float:left;" onclick="nextRange(15)">>></button>
         </div>
     </div>
     <!--
@@ -150,6 +150,8 @@
     const list = document.getElementById('list');
     const nextBTN = document.getElementById('nextBTN');
     const prevBTN = document.getElementById('prevBTN');
+    const verlaufHeader = document.getElementById('verlauf-header');
+    verlaufHeader.style.display = 'none';
     nextBTN.style.display = 'none';
     prevBTN.style.display = 'none';
 </script>

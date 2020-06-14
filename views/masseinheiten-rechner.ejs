@@ -27,7 +27,7 @@
                 <div id="myDropdown" class="dropdown-content">
                     <a href="index.html">HOME</a>
                     <a href="kurs.html">KURS</a>
-                    <a href="formeln.html">FORMELN</a>
+                    <a href="info.html">INFO</a>
                     <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
                     <% } else { %>
                         <a href="login.html">LOGIN</a>
@@ -60,7 +60,7 @@
     </div>
     <br>
     <div>
-        <h1 class="verlauf-header">Verlauf</h1>
+        <h1 id="verlauf-header" class="verlauf-header">Verlauf</h1>
         <ul id="list" class="chronicList">
 
         </ul>
@@ -143,13 +143,15 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     const list = document.getElementById('list');
     const nextBTN = document.getElementById('nextBTN');
     const prevBTN = document.getElementById('prevBTN');
+    const verlaufHeader = document.getElementById('verlauf-header');
+    verlaufHeader.style.display = 'none';
     nextBTN.style.display = 'none';
     prevBTN.style.display = 'none';
     //-------------------------------------------------------------------------------------------
     // Initialisierungs-Funktionen
     //-------------------------------------------------------------------------------------------
 
-    initializeRange();          //Beschreibung bei Funktion selbst
+    initializeRange(15);          //Beschreibung bei Funktion selbst
     renderPager(left,right);    //Beschreibung bei Funktion selbst
 
     //-------------------------------------------------------------------------------------------
@@ -203,10 +205,10 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      *          left : number
      *          right : number
      */  
-    function initializeRange() {
+    function initializeRange(factor) {
         
        left = 0;
-       if(chronic.length <= 15) {
+       if(chronic.length <= factor) {
             right = chronic.length;
        } else {
            right = 15;
@@ -230,6 +232,14 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      *          none
      */
     function renderPager(left, right) {
+
+        if(right == 0 && left == 0) {
+            verlaufHeader.style.display = 'none';
+        } else {
+            verlaufHeader.style.display = 'block';
+            
+        }
+
         list.innerHTML=""; //Löschen aller aktuelle <li>'s
         
         for(var i = left; i < right; i++) {
@@ -244,10 +254,8 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
         }
         if(right + 1 > chronic.length) {
             nextBTN.style.display = 'none';
-            prevBTN.style.position = 'relative';
         } else {
             nextBTN.style.display = 'block';
-            prevBTN.style.position = 'absolute';
         }
 
     }

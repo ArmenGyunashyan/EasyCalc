@@ -465,11 +465,18 @@ a:hover:not(.active) {
 .masseinheiten-result
 {
     position: absolute;
-    margin-top: 5px;
+    margin-top: 1px;
+    padding: 3px;
     left: 7%;
     font-family: "Orbitron", "sans-serif";
-    font-size: 15pt;
+    font-size: 100%;
+    border: 1px solid #179180;
+    background-color: rgba(23, 145, 128, 0.25);
     width: 86%;
+}
+
+.masseinheiten-result:empty {
+    display: none;
 }
 
 .verlauf-header
@@ -497,6 +504,10 @@ a:hover:not(.active) {
 .chronicList li:nth-child(even)
 {
     background-color: lightgray;
+}
+
+.chronicList:empty {
+    display: none;
 }
 
 .pager-btn
@@ -636,9 +647,19 @@ a:hover:not(.active) {
 }
 
 /* Responsive Logo */
-@media screen and (max-width: 335px) {
+@media screen and (max-width: 480px) {
     .logo {
         font-size: 30pt;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .logo {
+        font-size: 25pt;
+    }
+
+    .username {
+        font-size: 10pt;
     }
 }
 
@@ -655,6 +676,12 @@ a:hover:not(.active) {
     .map {
         width: 100%;
         margin: 0;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .map {
+        position: relative;
     }
 }
 
@@ -700,6 +727,11 @@ a:hover:not(.active) {
     .radiobtn
     {
         font-size: 100%;
+    }
+
+    .masseinheiten-result {
+        width: 96%;
+        left: 2%;
     }
 }
 

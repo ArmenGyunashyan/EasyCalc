@@ -326,11 +326,11 @@ app.get('/kurs.html', function(req, res) {
 app.get('/kurs', function(req, res) {
     res.render('kurs', {activeSession: req.session, Kurse: Kurse, style: req.cookies.style}); 
 });
-app.get('/formeln.html', function(req, res) {
-    res.render('formeln', {activeSession: req.session, style: req.cookies.style}); 
+app.get('/info.html', function(req, res) {
+    res.render('info', {activeSession: req.session, style: req.cookies.style}); 
 });
-app.get('/formeln', function(req, res) {
-    res.render('formeln', {activeSession: req.session, style: req.cookies.style}); 
+app.get('/info', function(req, res) {
+    res.render('info', {activeSession: req.session, style: req.cookies.style}); 
 });
 app.get('/impressum.html', function(req, res) {
     res.render('impressum', {activeSession: req.session, style: req.cookies.style}); 

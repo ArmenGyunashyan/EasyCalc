@@ -38,7 +38,7 @@
 // Initialisierungs-Funktionen
 //-------------------------------------------------------------------------------------------
 
-initializeRange();          //Beschreibung bei Funktion selbst
+initializeRange(15);          //Beschreibung bei Funktion selbst
 renderPager(left, right);    //Beschreibung bei Funktion selbst
 
 //-------------------------------------------------------------------------------------------
@@ -112,13 +112,13 @@ function addElement(input1, input2, modeChoise, result) {
  *          left : number
  *          right : number
  */
-function initializeRange() {
+function initializeRange(factor) {
 
     left = 0;
-    if (chronic.length <= 10) {
+    if (chronic.length <= factor) {
         right = chronic.length;
     } else {
-        right = 10;
+        right = factor;
     }
 }
 
@@ -139,6 +139,14 @@ function initializeRange() {
  *          none
  */
 function renderPager(left, right) {
+
+    if(right == 0 && left == 0) {
+        verlaufHeader.style.display = 'none';
+    } else {
+        verlaufHeader.style.display = 'block';
+        
+    }
+
     list.innerHTML = ""; //Löschen aller aktuelle <li>'s
 
     for (var i = left; i < right; i++) {
