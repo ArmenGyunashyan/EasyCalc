@@ -17,7 +17,11 @@
             >
             <span class="slider round"></span>
         </label>
-        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
+        <% if(activeSession.loggedin) { %>
+            <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
+        <% } else { %>
+            <div style="display: none"></div>
+        <% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -47,9 +51,8 @@
     =================================================================================
     -->
     <div>
-    <h1>Divisenkurs-Rechner</h1>
-        <form action="/waehrungen-rechner.html" method="POST">
-            <label fpr="mode">Divisenkurs: </label>
+        <h1 class="rechner-header">Devisenkurs-Rechner</h1>
+        <form action="/waehrungen-rechner.html" class="rechner-form" method="POST">
             <select name="mode" id="mode" required>
                 <optgroup label="Euro">
                     <option value="1">EUR > USD</option>
@@ -72,13 +75,12 @@
                     <option value="12">YEN > GBP</option>
                 </optgroup>
             </select>
-            <br><br>
-            <label>Betrag: </label>
-            <input id="numberField"  type="number" min="0" placeholder="0" step="0.01" name="input" required>
-            <input type="submit" value="Berechnen">
+            <input id="numberField" class="nmbField" type="number" min="0" placeholder="0" step="0.01" name="input"
+                   required>
+            <input type="submit" value="Berechnen" class="berechnenbtn">
+            <p id="resultLabel" class="resultLabel"></p>
         </form>
         <br>
-        <p id="resultLabel"></p>
     </div>
     <br>
     <div>
@@ -125,26 +127,26 @@
     // Antwort vom Backend
     var result;
     var inputSet;
-    <% if(locals.result) {%>result = <%= result%>;<%} %>
-    <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
+    <% if(locals.result) { %>result = <%= result %>;<% } %>
+    <% if(locals.inputSet) { %>inputSet = <%- JSON.stringify(inputSet) %>;<% } %>
     //Pager
     <%
-        var tmp = "[";
-        var match = 0;
-        for(var i = chronic.length-1; i >= 0; i--) {
-            if(chronic[i].user == activeSession.username) {
-                tmp = tmp + JSON.stringify(chronic[i]) + ",";
-                ++match; //Wenn chronic leer ist, kann später es mit null angesetzt werden (sonst wäre es -> chronic = "]"). Es muss min. 1 match vorliegen
-            }
+    var tmp = "[";
+    var match = 0;
+    for (var i = chronic.length - 1; i >= 0; i--) {
+        if (chronic[i].user == activeSession.username) {
+            tmp = tmp + JSON.stringify(chronic[i]) + ",";
+            ++match; //Wenn chronic leer ist, kann später es mit null angesetzt werden (sonst wäre es -> chronic = "]"). Es muss min. 1 match vorliegen
         }
-        tmp = tmp.substring(0, tmp.length-1) + "]";
-        if(match > 0) {
-            chronic = tmp;
-        } else {
-            chronic = null; //Keine passenden Nutzerdaten gefunden
-        }
+    }
+    tmp = tmp.substring(0, tmp.length - 1) + "]";
+    if (match > 0) {
+        chronic = tmp;
+    } else {
+        chronic = null; //Keine passenden Nutzerdaten gefunden
+    }
     %>
-    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%- JSON.stringify(chronic) %>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
     var left = 0;
     var right = 0;
     const list = document.getElementById('list');
@@ -157,16 +159,13 @@
 </script>
 <script src="skripts/waehrungen-rechnerLogic.js"></script>
 <script src="skripts/waehrungPager.js"></script>
-
-
-
 <script>
     //Import der Variablen aus der RenderEngine (EJS)
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
     <% if(locals.statistics) { %>
-        var statistics = <%-JSON.stringify(statistics)%>;
+    var statistics = <%- JSON.stringify(statistics) %>;
     <% } %>
 </script>
 <% if(locals.statistics) { %>

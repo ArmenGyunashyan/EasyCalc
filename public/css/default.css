@@ -420,14 +420,12 @@ a:hover:not(.active) {
     margin: 0 5px;
 }
 
-/* Maßeinheiten */
-.masseinheiten-header
-{
+/* Rechner */
+.rechner-header {
     text-align: center;
 }
 
-.masseinheiten-form
-{
+.rechner-form {
     text-align: center;
     padding-top: 12%;
     margin-left: auto;
@@ -436,17 +434,22 @@ a:hover:not(.active) {
     position: relative;
 }
 
-.radiobtn
-{
+.radiobtn {
     width: auto;
     display: inline-block;
     margin-bottom: 3px;
     margin-right: 5px;
-    font-size: 15pt;
+    font-size: 100%;
 }
 
-.nmbField, .masseinheiten-berechnen
-{
+.radiobtnStrom {
+    margin-left: 2%;
+    width: 96%;
+    margin-bottom: 10px;
+    font-size: 100%;
+}
+
+.nmbField, .berechnenbtn {
     border: 1px solid black;
     color: black;
     font-family: "Orbitron", "sans-serif";
@@ -457,13 +460,11 @@ a:hover:not(.active) {
     margin-bottom: 3px;
 }
 
-.masseinheiten-berechnen:hover
-{
+.berechnenbtn:hover {
     background-color: rgba(128, 128, 128, 0.38);
 }
 
-.masseinheiten-result
-{
+.resultLabel {
     position: absolute;
     margin-top: 1px;
     padding: 3px;
@@ -475,34 +476,29 @@ a:hover:not(.active) {
     width: 86%;
 }
 
-.masseinheiten-result:empty {
+.resultLabel:empty {
     display: none;
 }
 
-.verlauf-header
-{
+.verlauf-header {
     text-align: center;
     font-size: 30pt;
     padding-bottom: 10px;
 }
 
-.chronicList
-{
+.chronicList {
     text-align: center;
-    font-size: 15pt;
-    padding: 5px 0;
+    font-size: 100%;
     border: 1px solid #179180;
     width: 26%;
     margin: 0 auto;
 }
 
-.chronicList a
-{
+.chronicList a {
     color: black;
 }
 
-.chronicList li:nth-child(even)
-{
+.chronicList li:nth-child(even) {
     background-color: lightgray;
 }
 
@@ -510,25 +506,31 @@ a:hover:not(.active) {
     display: none;
 }
 
-.pager-btn
-{
+.pager-btn {
     position: relative;
     width: 26%;
     margin: 5px auto;
+    padding-bottom: 30px;
 }
 
-#nextBTN
-{
+#nextBTN {
     position: absolute;
     left: 50%;
     width: 50%;
 }
 
-#prevBTN
-{
+#prevBTN {
     position: absolute;
     right: 50%;
     width: 50%;
+}
+
+#mode {
+    width: 86%;
+    margin-bottom: 3px;
+    text-align-last: center;
+    border: 1px solid black;
+    font-size: 100%;
 }
 
 /* Responsive Flip Card */
@@ -687,57 +689,39 @@ a:hover:not(.active) {
 
 /* Responsive Maßeinheiten Rechner */
 @media screen and (max-width: 500px) {
-    .masseinheiten-header
-    {
+    .rechner-header {
         font-size: 28pt;
     }
 }
 
 @media screen and (max-width: 810px) {
 
-    .pager-btn
-    {
+    .pager-btn {
         width: 96%;
     }
 
-    .chronicList
-    {
-        font-size: 100%;
+    .chronicList {
         width: 96%;
         height: auto;
     }
-    .verlauf-header
-    {
+
+    .verlauf-header {
         font-size: 15pt;
     }
 
-    .masseinheiten-form
-    {
+    .rechner-form {
         width: 100%;
     }
 
-    .nmbField, .masseinheiten-berechnen
-    {
+    .nmbField, .berechnenbtn, #mode {
         width: 96%;
         height: auto;
         font-size: 100%;
         display: inline-block;
     }
 
-    .radiobtn
-    {
-        font-size: 100%;
-    }
-
-    .masseinheiten-result {
+    .resultLabel {
         width: 96%;
         left: 2%;
-    }
-}
-
-@media screen and (max-height: 820px) {
-    #nextBTN
-    {
-        position: relative;
     }
 }

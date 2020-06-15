@@ -17,7 +17,11 @@
             >
             <span class="slider round"></span>
         </label>
-        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
+        <% if(activeSession.loggedin) { %>
+            <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
+        <% } else { %>
+            <div style="display: none"></div>
+        <% } %>
         <nav class="navbar">
             <div class="dropdown">
                 <script src="skripts/dropdown.js"></script>
@@ -47,13 +51,17 @@
     =================================================================================
     -->
     <div>
-    <h1 class="masseinheiten-header">Maßeinheiten Rechner</h1>
-        <form class="masseinheiten-form" action="/masseinheiten-rechner.html" method="POST">
-            <div class="radiobtn"><input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll > cm</div>
-            <div class="radiobtn"><input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll</div>
-            <input id="numberField" class="nmbField" type="number" step="0.01" name="input" placeholder="0" min="0" required>
-            <input type="submit" value="Berechnen" class="masseinheiten-berechnen">
-            <p id="resultLabel" class="masseinheiten-result"></p>
+        <h1 class="rechner-header">Maßeinheiten -Rechner</h1>
+        <form class="rechner-form" action="/masseinheiten-rechner.html" method="POST">
+            <div class="radiobtn"><input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll
+                > cm
+            </div>
+            <div class="radiobtn"><input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll
+            </div>
+            <input id="numberField" class="nmbField" type="number" step="0.01" name="input" placeholder="0" min="0"
+                   required>
+            <input type="submit" value="Berechnen" class="berechnenbtn">
+            <p id="resultLabel" class="resultLabel"></p>
         </form>
         <br>
 
@@ -74,7 +82,7 @@
     ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
     =================================================================================
     -->
-    
+
 </section>
 <!--
     ===================================
@@ -97,11 +105,11 @@
     ===================================
     -->
 
-    <!--
+<!--
 =============================================================================================================
-  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
-Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       +       x     *       +       
-  x     *       +       x     *       +       x     *       +       x     *       +       x     *       +       
+x     *       +       x     *       +       x     *       +       x     *       +       x     *       +
+Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       +       x     *       +
+x     *       +       x     *       +       x     *       +       x     *       +       x     *       +
 =============================================================================================================
 -->
 <script>
@@ -112,32 +120,32 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     /**Chronic ist ein JSON-Array mit JSON-Objekten, welches die Fake-Query zur Chronik des Nutzers bereitstellt
      *  Bei einer echten DB-Query würde man auch direkt nur nach dem aktuellen Nutzer filtern. Dies machen
      *  wir "emuliert" spöter in JavaScript
-     * 
+     *
      *  chronic[i].user         :string                             // Nutzer, der die Berechnung durchgeführt hat (Eineindeutig)
      *  chronic[i].inchToMetric :boolean                            // Rechenmodus (zoll >> cm | cm >> zoll)
      *  chronic[i].input        :number (float bei JavaScript)      // Eingabe zum Umwandeln
      *  chronic[i].result       :number (float bei JavaScript)      // Das Ergebnis der Berechnung
-    */
+     */
 
-    // Das Array mit der Chronic wird von der EJS übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
-    // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
-    <%
-        var tmp = "[";
-        var match = 0;
-        for(var i = chronic.length-1; i >= 0; i--) {
-            if(chronic[i].user == activeSession.username) {
-                tmp = tmp + JSON.stringify(chronic[i]) + ",";
-                ++match;
+        // Das Array mit der Chronic wird von der EJS übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
+        // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
+            <%
+            var tmp = "[";
+            var match = 0;
+            for (var i = chronic.length - 1; i >= 0; i--) {
+                if (chronic[i].user == activeSession.username) {
+                    tmp = tmp + JSON.stringify(chronic[i]) + ",";
+                    ++match;
+                }
             }
-        }
-        tmp = tmp.substring(0, tmp.length-1) + "]";
-        if(match > 0) {
-            chronic = tmp;
-        } else {
-            chronic = null; //Keine passenden Nutzerdaten gefunden
-        }
-    %>
-    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%-JSON.stringify(chronic)%>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+            tmp = tmp.substring(0, tmp.length - 1) + "]";
+            if (match > 0) {
+                chronic = tmp;
+            } else {
+                chronic = null; //Keine passenden Nutzerdaten gefunden
+            }
+            %>
+    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%- JSON.stringify(chronic) %>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
     var left = 0;
     var right = 0;
     const list = document.getElementById('list');
@@ -152,7 +160,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     //-------------------------------------------------------------------------------------------
 
     initializeRange(15);          //Beschreibung bei Funktion selbst
-    renderPager(left,right);    //Beschreibung bei Funktion selbst
+    renderPager(left, right);    //Beschreibung bei Funktion selbst
 
     //-------------------------------------------------------------------------------------------
     // Funktionen (mit Beschreibung)
@@ -161,7 +169,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
     /**
      * Object : addElement(input, inchToMetric, result)
      * Erstellt ein neues <li> Element (DOM) und füllt es mit Inhalt (Text und Function() zum Laden der Parameter in das Formular)
-     * 
+     *
      * Referenz:
      *          input : number          -> Was hat der Nutzer bei seiner Rechnung angegeben
      *          inchToMetric : boolean  -> Welcher der beiden Methoden (RadioButtons) war bei der Berechnung gewählt
@@ -171,25 +179,25 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      */
     function addElement(input, inchToMetric, result) {
         var listElement = document.createElement('li');
-            var elementLink = document.createElement('a');
-            elementLink.href = "#";
-            if(inchToMetric == 'true') {
-                elementLink.appendChild(document.createTextNode(input + " zoll = " + result + " cm"));
-                elementLink.onclick = function() {
-                    numberField.value=input;
-                    inchToMetricRadio.checked = true;
-                    resultLabel.innerHTML=""; //Reset des alten Ergebnisses im Label
-                };
-            } else {
-                elementLink.appendChild(document.createTextNode(input + " cm = " + result + " zoll"));
-                elementLink.onclick = function() {
-                    numberField.value=input;
-                    metricToInchRadio.checked = true;
-                    resultLabel.innerHTML=""; //Reset des alten Ergebnisses im Label
-                };
-            }
-            listElement.appendChild(elementLink);
-            
+        var elementLink = document.createElement('a');
+        elementLink.href = "#";
+        if (inchToMetric == 'true') {
+            elementLink.appendChild(document.createTextNode(input + " zoll = " + result + " cm"));
+            elementLink.onclick = function () {
+                numberField.value = input;
+                inchToMetricRadio.checked = true;
+                resultLabel.innerHTML = ""; //Reset des alten Ergebnisses im Label
+            };
+        } else {
+            elementLink.appendChild(document.createTextNode(input + " cm = " + result + " zoll"));
+            elementLink.onclick = function () {
+                numberField.value = input;
+                metricToInchRadio.checked = true;
+                resultLabel.innerHTML = ""; //Reset des alten Ergebnisses im Label
+            };
+        }
+        listElement.appendChild(elementLink);
+
         list.appendChild(listElement);
     }
 
@@ -199,20 +207,20 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      * Sollte ein Array weniger als 10 Objekte haben, wird die Länge des Arrays als Obergrenze genommen.
      * Die Variablen left und right sind global und werden nicht returnt.
      * Hinweis: Das Array wird später rückwärts gelesen. Die Grenzen sind daran angepasst.
-     * 
+     *
      * Return:
      *          (Globale Variablen)
      *          left : number
      *          right : number
-     */  
+     */
     function initializeRange(factor) {
-        
-       left = 0;
-       if(chronic.length <= factor) {
+
+        left = 0;
+        if (chronic.length <= factor) {
             right = chronic.length;
-       } else {
-           right = 15;
-       }
+        } else {
+            right = 15;
+        }
     }
 
     /**
@@ -224,7 +232,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      * Umblättern zu ermöglichen.
      * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
      * Der letzte/aktuellste Einrtrag soll als erstes gelistet sein.
-     * 
+     *
      * Referenz:
      *          left : number          -> Die untere Grenze zum Auslesen des Array (Fake-DB-Query)
      *          right : number         -> Die obere Grenze zum Auslesen des Array (Fake-DB-Query)
@@ -233,32 +241,33 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      */
     function renderPager(left, right) {
 
-        if(right == 0 && left == 0) {
+        if (right == 0 && left == 0) {
             verlaufHeader.style.display = 'none';
         } else {
             verlaufHeader.style.display = 'block';
-            
+
         }
 
-        list.innerHTML=""; //Löschen aller aktuelle <li>'s
-        
-        for(var i = left; i < right; i++) {
-                addElement(chronic[i].input, chronic[i].inchToMetric,chronic[i].result);
+        list.innerHTML = ""; //Löschen aller aktuelle <li>'s
+
+        for (var i = left; i < right; i++) {
+            addElement(chronic[i].input, chronic[i].inchToMetric, chronic[i].result);
         }
 
         //Überprüfungen, ob Buttons benötigt werden
-        if(left-1 <= 0) { //Es gibt noch Elemente
+        if (left - 1 <= 0) { //Es gibt noch Elemente
             prevBTN.style.display = 'none';
         } else {
             prevBTN.style.display = 'block';
         }
-        if(right + 1 > chronic.length) {
+        if (right + 1 > chronic.length) {
             nextBTN.style.display = 'none';
         } else {
             nextBTN.style.display = 'block';
         }
 
     }
+
     /**
      * Void : nextPage(factor)
      * Der Bereich 'left' bis 'right' wird um (factor) Einheiten nach Links verschoben (Da die Liste rückwärts gelesen wird).
@@ -266,7 +275,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      * die Veränderung auch sichtbar zu machen
      * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
      * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
-     * 
+     *
      * Referenz:
      *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
      * Return:
@@ -276,9 +285,13 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
         //Right und Left werden runter gezählt (Array wird von Hinten aufgerollt)
         left = right;
         right = right + factor;
-        if(left > chronic.length) {left = chronic.length;}
-        if(right > chronic.length) {right = chronic.length;}
-        renderPager(left,right);
+        if (left > chronic.length) {
+            left = chronic.length;
+        }
+        if (right > chronic.length) {
+            right = chronic.length;
+        }
+        renderPager(left, right);
     }
 
     /**
@@ -288,7 +301,7 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
      * die Veränderung auch sichtbar zu machen
      * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
      * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
-     * 
+     *
      * Referenz:
      *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
      * Return:
@@ -298,10 +311,14 @@ Pager-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)      +       x     *       
         //Right und Left werden rauf gezählt (Array wird von Hinten aufgerollt)
         right = left;
         left = left - factor;
-        if(left < 0) {left = 0;}
-        if(right < 0) {right = 0;}
-        renderPager(left,right);
-    }    
+        if (left < 0) {
+            left = 0;
+        }
+        if (right < 0) {
+            right = 0;
+        }
+        renderPager(left, right);
+    }
 </script>
 <!--
 =============================================================================================================
@@ -322,8 +339,8 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
     const metricToInchRadio = document.getElementById('metricToInchRadio');
     const inchToMetricRadio = document.getElementById('inchToMetricRadio');
 
-    <% if(locals.result) {%>result = <%= result%>;<%} %>
-    <% if(locals.inputSet) {%>inputSet = <%-JSON.stringify(inputSet)%>;<% } %>
+    <% if(locals.result) { %>result = <%= result %>;<% } %>
+    <% if(locals.inputSet) { %>inputSet = <%- JSON.stringify(inputSet) %>;<% } %>
     //-------------------------------------------------------------------------------------------
 </script>
 <script src="skripts/masseinheiten-rechnerLogic.js">
@@ -336,7 +353,7 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
 
     var style = "<%= style %>";
     <% if(locals.statistics) { %>
-        var statistics = <%-JSON.stringify(statistics)%>;
+    var statistics = <%- JSON.stringify(statistics) %>;
     <% } %>
 </script>
 <% if(locals.statistics) { %>

@@ -54,40 +54,40 @@ if(inputSet && result) { //Anzeige des Ergebnisses auf der Webseite
 
     switch(inputSet.mode) {
         case 1: //EUR > USD
-            resultLabel.innerHTML = inputSet.input + " EUR = " + result + " USD ";
+            resultLabel.innerHTML = inputSet.input + " € = " + result + " $ ";
         break;
         case 2: //EUR > GBP
-            resultLabel.innerHTML = inputSet.input + " EUR = " + result + " GBP ";
+            resultLabel.innerHTML = inputSet.input + " € = " + result + " £ ";
         break;
         case 3: //EUR > YEN
-            resultLabel.innerHTML = inputSet.input + " EUR = " + result + " YEN ";
+            resultLabel.innerHTML = inputSet.input + " € = " + result + " ¥ ";
         break;
         case 4: //USD > EUR
-            resultLabel.innerHTML = inputSet.input + " USD = " + result + " EUR ";
+            resultLabel.innerHTML = inputSet.input + " $ = " + result + " € ";
         break;
         case 5: //USD > GBP
-            resultLabel.innerHTML = inputSet.input + " USD = " + result + " GBP ";
+            resultLabel.innerHTML = inputSet.input + " $ = " + result + " £ ";
         break;
         case 6: //USD > YEN
-            resultLabel.innerHTML = inputSet.input + " USD = " + result + " YEN ";
+            resultLabel.innerHTML = inputSet.input + " $ = " + result + " ¥ ";
         break;
         case 7: //GBP > EUR
-            resultLabel.innerHTML = inputSet.input + " GBP = " + result + " EUR ";
+            resultLabel.innerHTML = inputSet.input + " £ = " + result + " € ";
         break;
         case 8: //GBP > USD
-            resultLabel.innerHTML = inputSet.input + " GBP = " + result + " USD ";
+            resultLabel.innerHTML = inputSet.input + " £ = " + result + " $ ";
         break;
         case 9: //GBP > YEN
-            resultLabel.innerHTML = inputSet.input + " GBP = " + result + " YEN ";
+            resultLabel.innerHTML = inputSet.input + " £ = " + result + " ¥ ";
         break;
         case 10: //YEN > EUR
-            resultLabel.innerHTML = inputSet.input + " YEN = " + result + " EUR ";
+            resultLabel.innerHTML = inputSet.input + " ¥ = " + result + " € ";
         break;
         case 11: //YEN > USD
-            resultLabel.innerHTML = inputSet.input + " YEN = " + result + " USD ";
+            resultLabel.innerHTML = inputSet.input + " ¥ = " + result + " $ ";
         break;
         case 12: //YEN > GBP
-            resultLabel.innerHTML = inputSet.input + " YEN = " + result + " GBP ";
+            resultLabel.innerHTML = inputSet.input + " ¥ = " + result + " £ ";
         break;
         default:
             done();
