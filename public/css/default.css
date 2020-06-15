@@ -406,31 +406,41 @@ a:hover:not(.active) {
 }
 
 /* Impressum */
+.impressumContainer
+{
+    position: relative;
+    height: 150px;
+    width: auto;
+    margin: 0 auto;
+}
+
 .impressumHeader {
     text-align: center;
     padding-top: 5px;
 }
 
 .impressumText {
+    left: 25%;
+    right: 25%;
+    top: 25%;
+    bottom: 25%;
     border: 2px solid #179180;
-    margin: 75px 25%;
     padding: 5px;
     width: auto;
-    height: auto;
+    height: 100%;
     position: absolute;
 }
 
 .impressumText p {
     font-size: 100%;
+    width: 66%;
 }
 
 .impressumBild {
     position: absolute;
-    top: 133px;
-    width: 20%;
-    right: 5%;
-    left: 75%;
-    border: 2px solid #179180;
+    width: 35%;
+    top: 5%;
+    float: right;
 }
 
 .impressumBild img {
@@ -711,7 +721,7 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Maßeinheiten Rechner */
+/* Responsive Rechner */
 @media screen and (max-width: 500px) {
     .rechner-header {
         font-size: 28pt;
@@ -751,13 +761,20 @@ a:hover:not(.active) {
 }
 
 /* Responsive Impressum */
-@media screen and (max-width: 765px) {
-    .impressumText {
-        margin: 75px 5px;
-        width: 74.5%;
+@media screen and (max-width: 930px){
+    .impressumText
+    {
+        height: auto;
+        width: auto;
     }
-
-    .impressumText p {
-        font-size: 90%;
+    .impressumText p
+    {
+        font-size: 60%;
+    }
+    .impressumBild
+    {
+        float: right;
+        width: 15%;
+        right: 0;
     }
 }

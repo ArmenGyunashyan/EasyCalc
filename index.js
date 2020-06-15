@@ -24,6 +24,22 @@ var Kurse = {
     GBPtoYEN: GBPtoYEN
 };
 
+//Alter Wechselkurs
+var OldEURtoUSD = 0.8983;
+var OldEURtoGBP = 0.7924;
+var OldEURtoYEN = 122.68;
+var OldUSDtoGBP = 0.8854;
+var OldUSDtoYEN = 107.983;
+var OldGBPtoYEN = 130.28;
+var OldKurse = {
+    OldEURtoUSD: OldEURtoUSD,
+    OldEURtoGBP: OldEURtoGBP,
+    OldEURtoYEN: OldEURtoYEN,
+    OldUSDtoGBP: OldUSDtoGBP,
+    OldUSDtoYEN: OldUSDtoYEN,
+    OldGBPtoYEN: OldGBPtoYEN
+};
+
 const users = [
     {
         username: "root",
@@ -321,10 +337,10 @@ app.get('/index', function(req, res) {
     res.render('index', {activeSession: req.session, statistics, style: req.cookies.style}); 
 });
 app.get('/kurs.html', function(req, res) {
-    res.render('kurs', {activeSession: req.session, Kurse: Kurse, style: req.cookies.style}); 
+    res.render('kurs', {activeSession: req.session, Kurse: Kurse, OldKurse: OldKurse, style: req.cookies.style});
 });
 app.get('/kurs', function(req, res) {
-    res.render('kurs', {activeSession: req.session, Kurse: Kurse, style: req.cookies.style}); 
+    res.render('kurs', {activeSession: req.session, Kurse: Kurse, OldKurse: OldKurse, style: req.cookies.style});
 });
 app.get('/info.html', function(req, res) {
     res.render('info', {activeSession: req.session, style: req.cookies.style}); 

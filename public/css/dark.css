@@ -704,7 +704,7 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Maßeinheiten Rechner */
+/* Responsive Rechner */
 @media screen and (max-width: 500px) {
     .rechner-header {
         font-size: 28pt;
