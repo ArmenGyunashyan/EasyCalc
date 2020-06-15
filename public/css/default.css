@@ -274,9 +274,6 @@ a:hover:not(.active) {
 }
 
 /* Chart */
-
-/* Chart */
-
 .chart {
     width: auto;
     margin: auto;
@@ -284,7 +281,6 @@ a:hover:not(.active) {
 }
 
 /* Devisenkurs Tabelle*/
-
 #currentDay {
     font-size: 20pt;
     padding: 5px;
@@ -407,6 +403,39 @@ a:hover:not(.active) {
     margin: 20px 10px;
     padding: 5px;
     border-radius: 5px;
+}
+
+/* Impressum */
+.impressumHeader {
+    text-align: center;
+    padding-top: 5px;
+}
+
+.impressumText {
+    border: 2px solid #179180;
+    margin: 75px 25%;
+    padding: 5px;
+    width: auto;
+    height: auto;
+    position: absolute;
+}
+
+.impressumText p {
+    font-size: 100%;
+}
+
+.impressumBild {
+    position: absolute;
+    top: 133px;
+    width: 20%;
+    right: 5%;
+    left: 75%;
+    border: 2px solid #179180;
+}
+
+.impressumBild img {
+    width: 100%;
+    height: 100%;
 }
 
 /* Google Maps */
@@ -678,12 +707,7 @@ a:hover:not(.active) {
     .map {
         width: 100%;
         margin: 0;
-    }
-}
-
-@media screen and (max-height: 700px) {
-    .map {
-        position: relative;
+        height: 40%;
     }
 }
 
@@ -723,5 +747,17 @@ a:hover:not(.active) {
     .resultLabel {
         width: 96%;
         left: 2%;
+    }
+}
+
+/* Responsive Impressum */
+@media screen and (max-width: 765px) {
+    .impressumText {
+        margin: 75px 5px;
+        width: 74.5%;
+    }
+
+    .impressumText p {
+        font-size: 90%;
     }
 }
