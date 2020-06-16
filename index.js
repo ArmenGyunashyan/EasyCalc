@@ -416,7 +416,7 @@ app.get('/api/measure/', function (req, res) {
 
             var left = Number.parseInt(req.query.left);
             var right = Number.parseInt(req.query.right);
-            console.log("Anfangs -> left: " + left + "; right: " + right + ";");
+            
             if (right > resultJson.length) {
                 right = resultJson.length;
             }
@@ -426,7 +426,7 @@ app.get('/api/measure/', function (req, res) {
             if (left > right) {
                 left = right;
             }
-            console.log("Danach -> left: " + left + "; right: " + right + ";");
+            
 
             var resultFiltered = '[';
 

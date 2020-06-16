@@ -16,55 +16,53 @@
 
     <h1>Testseite</h1>
 
-    <button id="nextBtn" onclick="getNext(10)">>></button>
-    <button id="prevBtn" onclick="getPrev(10)"><<</button>
+    <button id="nextBtn" onclick="getNext(10)">next</button>
+    <button id="prevBtn" onclick="getPrev(10)">prev</button>
 </body>
 
 <script>
 
     var chronic;
-    var tmp;
+
 
     const xhr = new XMLHttpRequest();
-
-
-
-
     xhr.onreadystatechange = function () {
-
-
-
         if (xhr.readyState === 4) {
-
-
-
             if (xhr.status == 200) {
-
-
-
                 if (xhr.response) {
-
                     chronic = JSON.parse(xhr.response);
                     checkButtons(10);
-
                 }
             }
-
         }
-
     };
+
+    const checker = new XMLHttpRequest();
+    checker.onreadystatechange = function () {
+        if (checker.readyState === 4) {
+            if (checker.status == 200) {
+                if (checker.response) {
+                    tmp = JSON.parse(checker.response);
+                }
+            }
+        }
+    };
+
+    //------------------------------------
 
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
+    var factor = 10;
     var left = 0;
-    var right = 10;
-    renderFirst();
+    var right = factor + 1;
+    renderFirst(factor);
 
-    function renderFirst() {
-        xhr.open('get', '/api/measure/?left=0&right=10');
+    function renderFirst(factor) {
+        var stringURL = '/api/measure/?left=0&right=' + factor + 1; //Ein weiterer wird angefragt für den Rangecheck
+        xhr.open('get', stringURL);
         xhr.send();
-        checkButtons(10);
+        checkButtons(factor);
     }
 
     function getNext(factor) {
@@ -91,24 +89,20 @@
     }
 
     function checkButtons(factor) {
+
         if (chronic) {
-            
-            if(chronic.length < factor) {
-                nextBtn.style.display = 'none';
-            } else {
+
+            if (chronic.length > factor) {
                 nextBtn.style.display = 'block';
-            }
-
-            if(left <= 0) {
-                prevBtn.style.display='none';
             } else {
-                prevBtn.style.display='block';
+                nextBtn.style.display = 'none';
             }
 
-
-        } else {
-            prevBtn.style.display='none';
-            nextBtn.style.display='none';
+            if (left > 0) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
         }
 
     }
