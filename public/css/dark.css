@@ -395,39 +395,43 @@ a:hover:not(.active) {
 }
 
 /* Impressum */
-.impressumHeader
+.impressumContainer
 {
+    position: relative;
+    height: auto;
+    width: auto;
+    margin: 0 5px;
+    padding-top: 35%;
+}
+
+.impressumHeader {
     text-align: center;
     padding-top: 5px;
 }
 
-.impressumText
-{
-    border: 2px solid lightgray;
-    margin: 75px 25%;
+.impressumText {
+    left: 5px;
+    bottom: 25%;
+    border: 2px solid #179180;
     padding: 5px;
     width: auto;
     height: auto;
     position: absolute;
 }
 
-.impressumText p
-{
+.impressumText p {
     font-size: 100%;
+    width: 66%;
 }
 
-.impressumBild
-{
+.impressumBild {
     position: absolute;
-    top: 133px;
-    width: 20%;
-    right: 5%;
-    left: 75%;
-    border: 2px solid lightgray;
+    width: 15%;
+    top: 5%;
+    right: 5px;
 }
 
-.impressumBild img
-{
+.impressumBild img {
     width: 100%;
     height: 100%;
 }

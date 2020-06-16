@@ -409,9 +409,10 @@ a:hover:not(.active) {
 .impressumContainer
 {
     position: relative;
-    height: 150px;
+    height: auto;
     width: auto;
-    margin: 0 auto;
+    margin: 0 5px;
+    padding-top: 35%;
 }
 
 .impressumHeader {
@@ -420,27 +421,26 @@ a:hover:not(.active) {
 }
 
 .impressumText {
-    left: 25%;
-    right: 25%;
-    top: 25%;
+    left: 5px;
+    right: 5px;
     bottom: 25%;
     border: 2px solid #179180;
     padding: 5px;
     width: auto;
-    height: 100%;
+    height: auto;
     position: absolute;
 }
 
 .impressumText p {
     font-size: 100%;
-    width: 66%;
+    width: 100%;
 }
 
 .impressumBild {
     position: absolute;
-    width: 35%;
+    width: 15%;
     top: 5%;
-    float: right;
+    right: 5px;
 }
 
 .impressumBild img {
@@ -760,21 +760,3 @@ a:hover:not(.active) {
     }
 }
 
-/* Responsive Impressum */
-@media screen and (max-width: 930px){
-    .impressumText
-    {
-        height: auto;
-        width: auto;
-    }
-    .impressumText p
-    {
-        font-size: 60%;
-    }
-    .impressumBild
-    {
-        float: right;
-        width: 15%;
-        right: 0;
-    }
-}
