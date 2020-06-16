@@ -1,103 +1,107 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <script src="skripts/dropdown.js"></script>
     <title>Maßeinheits-Rechner</title>
     <link rel="stylesheet" id="sheet"
-          href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
+        href="<% if(style == 'dunkel') { %>css/dark.css<% } else { %>css/default.css<% } %>">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 </head>
+
 <body>
-<header class="header">
-    <div class="header-fixed-size">
-        <h1 class="logo">EasyCalc</h1>
-        <label class="switch">
-            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
-                    <% } %>
-            >
-            <span class="slider round"></span>
-        </label>
-        <% if(activeSession.loggedin) { %>
-            <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
-        <% } else { %>
-            <div style="display: none"></div>
-        <% } %>
-        <nav class="navbar">
-            <div class="dropdown">
-                <script src="skripts/dropdown.js"></script>
-                <input type="image"
-                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
-                       class="dropbtn" onClick="mobileNavbar()">
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="index.html">HOME</a>
-                    <a href="kurs.html">KURS</a>
-                    <a href="info.html">INFO</a>
-                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% } else { %>
-                        <a href="login.html">LOGIN</a>
-                    <% } %>
-                </div>
-
+    <header class="header">
+        <div class="header-fixed-size">
+            <h1 class="logo">EasyCalc</h1>
+            <label class="switch">
+                <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked <% } %>>
+                <span class="slider round"></span>
+            </label>
+            <% if(activeSession.loggedin) { %>
+            <div class="userbox">
+                <p class="username"><%= activeSession.username %></p><br>
             </div>
-        </nav>
+            <% } else { %>
+            <div style="display: none"></div>
+            <% } %>
+            <nav class="navbar">
+                <div class="dropdown">
+                    <script src="skripts/dropdown.js"></script>
+                    <input type="image"
+                        src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                        class="dropbtn" onClick="mobileNavbar()">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="index.html">HOME</a>
+                        <a href="kurs.html">KURS</a>
+                        <a href="info.html">INFO</a>
+                        <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
+                        <% } else { %>
+                        <a href="login.html">LOGIN</a>
+                        <% } %>
+                    </div>
 
-        <hr>
-    </div>
-</header>
-<section class="fixed-size">
-    <!--
+                </div>
+            </nav>
+
+            <hr>
+        </div>
+    </header>
+    <section class="fixed-size">
+        <!--
     =================================================================================
        v Muss beim Überarbeiten des Designs übernommen werden   v   v   v   v   v   v
     =================================================================================
     -->
-    <div>
-        <h1 class="rechner-header">Maßeinheiten -Rechner</h1>
-        <form class="rechner-form" action="/masseinheiten-rechner.html" method="POST">
-            <div class="radiobtn"><input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true" checked>zoll
-                > cm
-            </div>
-            <div class="radiobtn"><input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm > zoll
-            </div>
-            <input id="numberField" class="nmbField" type="number" step="0.01" name="input" placeholder="0" min="0"
-                   required>
-            <input type="submit" value="Berechnen" class="berechnenbtn">
-            <p id="resultLabel" class="resultLabel"></p>
-        </form>
-        <br>
+        <div>
+            <h1 class="rechner-header">Maßeinheiten -Rechner</h1>
+            <form class="rechner-form" action="/masseinheiten-rechner.html" method="POST">
+                <div class="radiobtn"><input id="inchToMetricRadio" type="radio" name="inchToMetric" value="true"
+                        checked>zoll
+                    > cm
+                </div>
+                <div class="radiobtn"><input id="metricToInchRadio" type="radio" name="inchToMetric" value="false">cm >
+                    zoll
+                </div>
+                <input id="numberField" class="nmbField" type="number" step="0.01" name="input" placeholder="0" min="0"
+                    required>
+                <input type="submit" value="Berechnen" class="berechnenbtn">
+                <p id="resultLabel" class="resultLabel"></p>
+            </form>
+            <br>
 
-    </div>
-    <br>
-    <div>
-        <h1 id="verlauf-header" class="verlauf-header">Verlauf</h1>
-        <ul id="list" class="chronicList">
-
-        </ul>
-        <div class="pager-btn">
-            <button id="prevBTN" onclick="prevRange(15)"><<</button>
-            <button id="nextBTN" onclick="nextRange(15)">>></button>
         </div>
-    </div>
-    <!--
+        <br>
+        <div>
+            <h1 id="verlauf-header" class="verlauf-header">Verlauf</h1>
+            <ul id="list" class="chronicList">
+
+            </ul>
+            <div class="pager-btn">
+                <button id="prevBTN" onclick="getPrev()"><<</button>
+                        <button id="nextBTN" onclick="getNext()">>></button>
+            </div>
+        </div>
+        <!--
     =================================================================================
     ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   ^   
     =================================================================================
     -->
 
-</section>
-<!--
+    </section>
+    <!--
     ===================================
     Footer
     ===================================
     -->
-<div>
-    <footer class="footer">
-        <hr>
-        <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
-        <p>Dennis & Armen</p>
-        <p>Münsterstraße 265 46397 Bocholt</p>
-        <p>WHS</p>
-    </footer>
-</div>
+    <div>
+        <footer class="footer">
+            <hr>
+            <h1 class="footer-header"><a href="impressum.html">Impressum</a></h1>
+            <p>Dennis & Armen</p>
+            <p>Münsterstraße 265 46397 Bocholt</p>
+            <p>WHS</p>
+        </footer>
+    </div>
 </body>
 <!--
     ===================================
@@ -113,6 +117,9 @@ x     *       +       x     *       +       x     *       +       x     *       
 =============================================================================================================
 -->
 <script>
+
+
+
     //-------------------------------------------------------------------------------------------
     // Variablen (über EJS) und DOM-Elemente
     //-------------------------------------------------------------------------------------------
@@ -127,44 +134,116 @@ x     *       +       x     *       +       x     *       +       x     *       
      *  chronic[i].result       :number (float bei JavaScript)      // Das Ergebnis der Berechnung
      */
 
-        // Das Array mit der Chronic wird von der EJS übergeben und nur nach den Einträgen des aktuellen Nutzers gefiltert und am Ende überschrieben
-        // Zunächt wird eine Hilfvariable befüllt und am Ende wird 'chronic' durch die Hilfsvariable überschrieben
-            <%
-            var tmp = "[";
-            var match = 0;
-            for (var i = chronic.length - 1; i >= 0; i--) {
-                if (chronic[i].user == activeSession.username) {
-                    tmp = tmp + JSON.stringify(chronic[i]) + ",";
-                    ++match;
-                }
-            }
-            tmp = tmp.substring(0, tmp.length - 1) + "]";
-            if (match > 0) {
-                chronic = tmp;
-            } else {
-                chronic = null; //Keine passenden Nutzerdaten gefunden
-            }
-            %>
-    var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%- JSON.stringify(chronic) %>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
+    var chronic;
+    var factor = 15;
     var left = 0;
-    var right = 0;
+    var right = factor + 1;
     const list = document.getElementById('list');
-    const nextBTN = document.getElementById('nextBTN');
-    const prevBTN = document.getElementById('prevBTN');
+    const nextBtn = document.getElementById('nextBTN');
+    const prevBtn = document.getElementById('prevBTN');
     const verlaufHeader = document.getElementById('verlauf-header');
     verlaufHeader.style.display = 'none';
-    nextBTN.style.display = 'none';
-    prevBTN.style.display = 'none';
+    nextBtn.style.display = 'none';
+    prevBtn.style.display = 'none';
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status == 200) {
+                if (xhr.response) {
+                    chronic = JSON.parse(xhr.response);
+                    checkButtons();
+
+
+                    if (chronic.length > factor) {
+                        chronic[chronic.length - 1] = null;
+                        chronic.length = chronic.length - 1;
+                    }
+                    renderPager();
+
+
+                }
+            }
+        }
+    };
     //-------------------------------------------------------------------------------------------
     // Initialisierungs-Funktionen
     //-------------------------------------------------------------------------------------------
 
-    initializeRange(15);          //Beschreibung bei Funktion selbst
-    renderPager(left, right);    //Beschreibung bei Funktion selbst
+    initializeAjax();   //Der aktuellen Elemente werden mit Ajax aus dem Backend geholt (/api/measure) + (?left & ?right)
+
+    //renderPager();
 
     //-------------------------------------------------------------------------------------------
     // Funktionen (mit Beschreibung)
     //-------------------------------------------------------------------------------------------
+
+    function initializeAjax() {
+        var stringURL = '/api/measure/?left=0&right=' + (factor + 1); //Ein weiterer wird angefragt für den Rangecheck
+        xhr.open('get', stringURL);
+        xhr.send();
+        checkButtons();
+    }
+
+    function getNext() {
+
+        left += factor;
+        right += factor;
+
+        var urlString = '/api/measure/?left=' + left + '&right=' + right;
+
+        xhr.open('get', urlString);
+        xhr.send();
+        checkButtons();
+    }
+    function getPrev() {
+
+        left -= factor;
+        right -= factor;
+
+        var urlString = '/api/measure/?left=' + left + '&right=' + right;
+
+        xhr.open('get', urlString);
+        xhr.send();
+        checkButtons();
+    }
+
+    function checkButtons() {
+
+        if (chronic) {
+
+            list.style.display = 'block';
+
+            if (chronic.length > factor) {
+                nextBtn.style.display = 'block';
+            } else {
+                nextBtn.style.display = 'none';
+            }
+
+            if (left > 0) {
+                prevBtn.style.display = 'block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+        } else {
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            list.style.display = 'none';
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * Object : addElement(input, inchToMetric, result)
@@ -181,7 +260,7 @@ x     *       +       x     *       +       x     *       +       x     *       
         var listElement = document.createElement('li');
         var elementLink = document.createElement('a');
         elementLink.href = "#";
-        if (inchToMetric == 'true') {
+        if (inchToMetric == true) {
             elementLink.appendChild(document.createTextNode(input + " zoll = " + result + " cm"));
             elementLink.onclick = function () {
                 numberField.value = input;
@@ -201,31 +280,10 @@ x     *       +       x     *       +       x     *       +       x     *       
         list.appendChild(listElement);
     }
 
-    /**
-     * Void : initializeRange()
-     * Legt die Pangergrenzen beim ersten Laden der Seite fest. Das Limit ist 10 Elemente pro Page.
-     * Sollte ein Array weniger als 10 Objekte haben, wird die Länge des Arrays als Obergrenze genommen.
-     * Die Variablen left und right sind global und werden nicht returnt.
-     * Hinweis: Das Array wird später rückwärts gelesen. Die Grenzen sind daran angepasst.
-     *
-     * Return:
-     *          (Globale Variablen)
-     *          left : number
-     *          right : number
-     */
-    function initializeRange(factor) {
-
-        left = 0;
-        if (chronic.length <= factor) {
-            right = chronic.length;
-        } else {
-            right = 15;
-        }
-    }
 
     /**
-     * Void : renderPager(left, right)
-     * Eine for-Schleife die wiederholt die ein Onjekt über die Funktion "addElement" erzeugt.
+     * Void : renderPager()
+     * Eine for-Schleife die wiederholt die ein Objekt über die Funktion "addElement" erzeugt.
      * Das neue Objekt (Element) wird danach über die DOM an das Mutter-Element <ul> angehangen.
      * Zu beginn werden die alten Elemente gelöscht.
      * Wenn es noch mehr Elemente gibt in beide Grenzrichtungen, werden Buttons eingeblendet, um das
@@ -239,7 +297,7 @@ x     *       +       x     *       +       x     *       +       x     *       
      * Return:
      *          none
      */
-    function renderPager(left, right) {
+    function renderPager() {
 
         if (right == 0 && left == 0) {
             verlaufHeader.style.display = 'none';
@@ -250,75 +308,16 @@ x     *       +       x     *       +       x     *       +       x     *       
 
         list.innerHTML = ""; //Löschen aller aktuelle <li>'s
 
-        for (var i = left; i < right; i++) {
+
+
+        for (var i = 0; i < chronic.length; i++) {
             addElement(chronic[i].input, chronic[i].inchToMetric, chronic[i].result);
+            //console.log(i + ": input -> " + chronic[i].input + " | left:" + left + "; right:" + right);
         }
 
-        //Überprüfungen, ob Buttons benötigt werden
-        if (left - 1 <= 0) { //Es gibt noch Elemente
-            prevBTN.style.display = 'none';
-        } else {
-            prevBTN.style.display = 'block';
-        }
-        if (right + 1 > chronic.length) {
-            nextBTN.style.display = 'none';
-        } else {
-            nextBTN.style.display = 'block';
-        }
 
     }
 
-    /**
-     * Void : nextPage(factor)
-     * Der Bereich 'left' bis 'right' wird um (factor) Einheiten nach Links verschoben (Da die Liste rückwärts gelesen wird).
-     * Die Liste wird danach mit den neuen, globalen Werten 'left | right' neu gerendert, um
-     * die Veränderung auch sichtbar zu machen
-     * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
-     * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
-     *
-     * Referenz:
-     *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
-     * Return:
-     *          none
-     */
-    function nextRange(factor) {
-        //Right und Left werden runter gezählt (Array wird von Hinten aufgerollt)
-        left = right;
-        right = right + factor;
-        if (left > chronic.length) {
-            left = chronic.length;
-        }
-        if (right > chronic.length) {
-            right = chronic.length;
-        }
-        renderPager(left, right);
-    }
-
-    /**
-     * Void : nextPage(factor)
-     * Der Bereich 'left' bis 'right' wird um (factor) Einheiten nach Rechts verschoben (Da die Liste rückwärts gelesen wird).
-     * Die Liste wird danach mit den neuen, globalen Werten 'left | right' neu gerendert, um
-     * die Veränderung auch sichtbar zu machen
-     * Hinweis: Das Array wird rückwärts gelesen. Die Grenzen sind daran angepasst.
-     * Würden die neuen Grenzen das Array überschreiten, werden stattdssen die entsprechenden Array-Grenzen genutzt.
-     *
-     * Referenz:
-     *          factor : number        -> Gibt an, wie viele Elemente pro Page gerendert werden soll. (Meist 10)
-     * Return:
-     *          none
-     */
-    function prevRange(factor) {
-        //Right und Left werden rauf gezählt (Array wird von Hinten aufgerollt)
-        right = left;
-        left = left - factor;
-        if (left < 0) {
-            left = 0;
-        }
-        if (right < 0) {
-            right = 0;
-        }
-        renderPager(left, right);
-    }
 </script>
 <!--
 =============================================================================================================
@@ -339,8 +338,8 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
     const metricToInchRadio = document.getElementById('metricToInchRadio');
     const inchToMetricRadio = document.getElementById('inchToMetricRadio');
 
-    <% if(locals.result) { %>result = <%= result %>;<% } %>
-    <% if(locals.inputSet) { %>inputSet = <%- JSON.stringify(inputSet) %>;<% } %>
+    <% if (locals.result) { %> result = <%= result %>;<% } %>
+    <% if (locals.inputSet) { %> inputSet = <%- JSON.stringify(inputSet) %>;<% } %>
     //-------------------------------------------------------------------------------------------
 </script>
 <script src="skripts/masseinheiten-rechnerLogic.js">
@@ -352,12 +351,13 @@ Rechner-Logik | NICHT AUSLAGERN!!! (Enthält EJS Code)   +       x     *       +
     //Die Variablen werden von den nachfolgenden Skripten benötigt
 
     var style = "<%= style %>";
-    <% if(locals.statistics) { %>
-    var statistics = <%- JSON.stringify(statistics) %>;
+    <% if (locals.statistics) { %>
+    var statistics = <% - JSON.stringify(statistics) %>;
     <% } %>
 </script>
 <% if(locals.statistics) { %>
-    <script src="skripts/canvasJS.js"></script>
+<script src="skripts/canvasJS.js"></script>
 <% } %>
 <script src="skripts/cookieStyleLoader.js"></script>
+
 </html>

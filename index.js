@@ -511,9 +511,9 @@ app.post('/masseinheiten-rechner.html', function (req, res, done) { // Masseinhe
         //var obj = JSON.parse("{user: 'klaus', inchToMetric: true, input: 12, result: 1}");
         chronicMeasure.push({
             "user": req.session.username,
-            "inchToMetric": req.body.inchToMetric,
-            "input": req.body.input,
-            "result": result
+            "inchToMetric": (req.body.inchToMetric === 'true'),
+            "input": Number.parseFloat(req.body.input),
+            "result": Number.parseFloat(result)
         });
 
         done();
@@ -546,7 +546,7 @@ app.post('/waehrungen-rechner.html', function (req, res, done) {
     }
     statistics.money = statistics.money + 1;
 
-    req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen FLoat
+    req.body.mode = parseFloat(req.body.mode); //Umwendeln des String zurück in einen Float
 
     var result = 0.0;
 
