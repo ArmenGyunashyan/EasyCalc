@@ -33,6 +33,12 @@
                 if (xhr.response) {
                     chronic = JSON.parse(xhr.response);
                     checkButtons();
+                    
+                    if(chronic.length > factor) {
+                        chronic[chronic.length-1] = null;
+                        chronic.length = chronic.length-1;
+                    }
+                    
                 }
             }
         }
