@@ -63,40 +63,40 @@
             elementLink.href = "#";
             switch(modeChoise) {
                 case 1: //EUR > USD
-                    elementLink.appendChild(document.createTextNode(input + " EUR = " + result + " USD " + date));
+                    elementLink.appendChild(document.createTextNode(input + " € = " + result + " $ " + date));
                 break;
                 case 2: //EUR > GBP
-                    elementLink.appendChild(document.createTextNode(input + " EUR = " + result + " GBP " + date));
+                    elementLink.appendChild(document.createTextNode(input + " € = " + result + " £ " + date));
                 break;
                 case 3: //EUR > YEN
-                    elementLink.appendChild(document.createTextNode(input + " EUR = " + result + " YEN " + date));
+                    elementLink.appendChild(document.createTextNode(input + " € = " + result + " ¥ " + date));
                 break;
                 case 4: //USD > EUR
-                    elementLink.appendChild(document.createTextNode(input + " USD = " + result + " EUR " + date));
+                    elementLink.appendChild(document.createTextNode(input + " $ = " + result + " € " + date));
                 break;
                 case 5: //USD > GBP
-                    elementLink.appendChild(document.createTextNode(input + " USD = " + result + " GBP " + date));
+                    elementLink.appendChild(document.createTextNode(input + " $ = " + result + " £ " + date));
                 break;
                 case 6: //USD > YEN
-                    elementLink.appendChild(document.createTextNode(input + " USD = " + result + " YEN " + date));
+                    elementLink.appendChild(document.createTextNode(input + " $ = " + result + " ¥ " + date));
                 break;
                 case 7: //GBP > EUR
-                    elementLink.appendChild(document.createTextNode(input + " GBP = " + result + " EUR " + date));
+                    elementLink.appendChild(document.createTextNode(input + " £ = " + result + " € " + date));
                 break;
                 case 8: //GBP > USD
-                    elementLink.appendChild(document.createTextNode(input + " GBP = " + result + " USD " + date));
+                    elementLink.appendChild(document.createTextNode(input + " £ = " + result + " $ " + date));
                 break;
                 case 9: //GBP > YEN
-                    elementLink.appendChild(document.createTextNode(input + " GBP = " + result + " YEN " + date));
+                    elementLink.appendChild(document.createTextNode(input + " £ = " + result + " ¥ " + date));
                 break;
                 case 10: //YEN > EUR
-                    elementLink.appendChild(document.createTextNode(input + " YEN = " + result + " EUR " + date));
+                    elementLink.appendChild(document.createTextNode(input + " ¥ = " + result + " € " + date));
                 break;
                 case 11: //YEN > USD
-                    elementLink.appendChild(document.createTextNode(input + " YEN = " + result + " USD " + date));
+                    elementLink.appendChild(document.createTextNode(input + " ¥ = " + result + " $ " + date));
                 break;
                 case 12: //YEN > GBP
-                    elementLink.appendChild(document.createTextNode(input + " YEN = " + result + " GBP " + date));
+                    elementLink.appendChild(document.createTextNode(input + " ¥ = " + result + " £ " + date));
                 break;
                 default:
                     done();
