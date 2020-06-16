@@ -15,13 +15,13 @@
     }
 
     
-    /*
+    
     if(style == 'dunkel') {
         checkBox.checked = false;
     } else {
         checkBox.checked = true;
     }
-    */
+    
 
     checkBox.onclick = function () {
 

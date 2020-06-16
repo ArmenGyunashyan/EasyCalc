@@ -54,11 +54,6 @@ p {
     font-family: sans-serif;
 }
 
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
 
 /*----------------------------------------------*/
 
@@ -306,10 +301,6 @@ a:hover:not(.active) {
     padding: 8px;
 }
 
-.kursHeader {
-    text-align: center;
-    margin-bottom: 10px;
-}
 
 .kurse tr:nth-child(even) {
     background-color: lightgray;

@@ -7,40 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<header class="header">
-    <div class="header-fixed-size">
-        <h1 class="logo">EasyCalc</h1>
-        <label class="switch">
-            <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
-                    <% } %>
-            >
-            <span class="slider round"></span>
-        </label>
-        <% if(activeSession.loggedin) { %><div class="userbox"><p class="username"><%= activeSession.username %></p><br></div><% } else { %><div style="display: none"></div><% } %>
-        <nav class="navbar">
-            <div class="dropdown">
-                <script src="skripts/dropdown.js"></script>
-                <input type="image"
-                       src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
-                       class="dropbtn" onClick="mobileNavbar()">
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="index.html">HOME</a>
-                    <a href="kurs.html">KURS</a>
-                    <a href="info.html">INFO</a>
-                    <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
-                    <% } else { %>
-                        <a href="login.html">LOGIN</a>
-                    <% } %>
+    <header class="header">
+        <div class="header-fixed-size">
+            <h1 class="logo">EasyCalc</h1>
+            <label class="switch">
+                <input type="checkbox" id="styleChecker" <% if(style == 'hell') { %>checked
+                        <% } %>
+                >
+                <span class="slider round"></span>
+            </label>
+            <% if(activeSession.loggedin) { %>
+                <div class="userbox"><p class="username"><%= activeSession.username %></p><br></div>
+            <% } else { %>
+                <div style="display: none"></div>
+            <% } %>
+            <nav class="navbar">
+                <div class="dropdown">
+                    <script src="skripts/dropdown.js"></script>
+                    <input type="image"
+                           src="<% if (style == 'hell') { %>images/ThreeLines.svg<% } else { %>images/ThreeLinesDark.svg<% } %>"
+                           class="dropbtn" onClick="mobileNavbar()">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="index.html">HOME</a>
+                        <a href="kurs.html">KURS</a>
+                        <a href="info.html">INFO</a>
+                        <% if(activeSession.loggedin) { %> <a href="logout">LOGOUT</a>
+                        <% } else { %>
+                            <a href="login.html">LOGIN</a>
+                        <% } %>
+                    </div>
+    
                 </div>
-
-            </div>
-        </nav>
-
-        <hr>
-    </div>
-</header>
+            </nav>
+    
+            <hr>
+        </div>
+    </header>
 <section class="fixed-size">
-    <h1 class="kursHeader">Devisen & Währungen</h1>
+    <h1 class="rechner-header">Devisen & Währungen</h1>
     <!-- Es muss noch so geändert werden, dass hier die Kurse aus dem backend ausgelesen werden -->
     <div class="kurse">
         <table id="table">

@@ -220,7 +220,7 @@ var chronicMoney = [
         mode: 3,
         input: 1,
         result: 1.1,
-        date: null
+        date: getTime()
     }
 ];
 var chronicEnergy = [

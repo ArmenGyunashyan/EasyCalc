@@ -53,12 +53,6 @@ p {
     font-family: sans-serif;
 }
 
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-
 /*----------------------------------------------*/
 
 /*Username*/
@@ -299,11 +293,6 @@ a:hover:not(.active) {
 .kurse td, th {
     border: 1px solid #404040;
     padding: 8px;
-}
-
-.kursHeader {
-    text-align: center;
-    margin-bottom: 10px;
 }
 
 .kurse tr:nth-child(even) {
