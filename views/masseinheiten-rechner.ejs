@@ -144,6 +144,8 @@ x     *       +       x     *       +       x     *       +       x     *       
             } else {
                 chronic = null; //Keine passenden Nutzerdaten gefunden
             }
+
+            console.log(tmp);
             %>
     var chronic<% if(activeSession.loggedin && chronic) { %> = JSON.parse(<%- JSON.stringify(chronic) %>);<% } else { %> = "";<% } %> // Ich weis dass das hier sehr schwer zu verstehen ist.
     var left = 0;

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Testseite</title>
+    <style>
+        html,
+        body {
+            background-color: #303030;
+            color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Testseite</h1>
+
+    <button id="nextBtn" onclick="getNext(10)">>></button>
+    <button id="prevBtn" onclick="getPrev(10)"><<</button>
+</body>
+
+<script>
+
+    var chronic;
+    var tmp;
+
+    const xhr = new XMLHttpRequest();
+
+
+
+
+    xhr.onreadystatechange = function () {
+
+
+
+        if (xhr.readyState === 4) {
+
+
+
+            if (xhr.status == 200) {
+
+
+
+                if (xhr.response) {
+
+                    chronic = JSON.parse(xhr.response);
+                    checkButtons(10);
+
+                }
+            }
+
+        }
+
+    };
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    var left = 0;
+    var right = 10;
+    renderFirst();
+
+    function renderFirst() {
+        xhr.open('get', '/api/measure/?left=0&right=10');
+        xhr.send();
+        checkButtons(10);
+    }
+
+    function getNext(factor) {
+
+        left += factor;
+        right += factor;
+
+        var urlString = '/api/measure/?left=' + left + '&right=' + right;
+
+        xhr.open('get', urlString);
+        xhr.send();
+        checkButtons(factor);
+    }
+    function getPrev(factor) {
+
+        left -= factor;
+        right -= factor;
+
+        var urlString = '/api/measure/?left=' + left + '&right=' + right;
+
+        xhr.open('get', urlString);
+        xhr.send();
+        checkButtons(factor);
+    }
+
+    function checkButtons(factor) {
+        if (chronic) {
+            
+            if(chronic.length < factor) {
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'block';
+            }
+
+            if(left <= 0) {
+                prevBtn.style.display='none';
+            } else {
+                prevBtn.style.display='block';
+            }
+
+
+        } else {
+            prevBtn.style.display='none';
+            nextBtn.style.display='none';
+        }
+
+    }
+</script>
+
+</html>
