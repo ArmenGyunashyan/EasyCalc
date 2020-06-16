@@ -11,7 +11,7 @@ const { url } = require('inspector');
 
 //Variablen für die Session und die (Fake)Datenbank-------------------
 var statistics = { measure: 1120, money: 420, energy: 280 };
-var EURtoUSD = 0.8783; //Wechselkurse: x / var
+var EURtoUSD = 1.1321; //Wechselkurse: x / var
 var EURtoGBP = 0.8924; //Wechselkurse x * var
 var EURtoYEN = 121.68; //Wechselkurse x * var
 var USDtoGBP = 0.7854; //Wechselkurse x * var
@@ -27,19 +27,19 @@ var Kurse = {
 };
 
 //Alter Wechselkurs
-var OldEURtoUSD = 0.8983;
+var OldEURtoUSD = 1.1083;
 var OldEURtoGBP = 0.7924;
 var OldEURtoYEN = 122.68;
 var OldUSDtoGBP = 0.8854;
 var OldUSDtoYEN = 107.983;
 var OldGBPtoYEN = 130.28;
 var OldKurse = {
-    OldEURtoUSD: OldEURtoUSD,
-    OldEURtoGBP: OldEURtoGBP,
-    OldEURtoYEN: OldEURtoYEN,
-    OldUSDtoGBP: OldUSDtoGBP,
-    OldUSDtoYEN: OldUSDtoYEN,
-    OldGBPtoYEN: OldGBPtoYEN
+    EURtoUSD: OldEURtoUSD,
+    EURtoGBP: OldEURtoGBP,
+    EURtoYEN: OldEURtoYEN,
+    USDtoGBP: OldUSDtoGBP,
+    USDtoYEN: OldUSDtoYEN,
+    GBPtoYEN: OldGBPtoYEN
 };
 
 const users = [
@@ -552,7 +552,7 @@ app.post('/waehrungen-rechner.html', function (req, res, done) {
 
     switch (req.body.mode) {
         case 1: //EUR > USD
-            result = req.body.input / EURtoUSD;
+            result = req.body.input * EURtoUSD;
             break;
         case 2: //EUR > GBP
             result = req.body.input * EURtoGBP;
