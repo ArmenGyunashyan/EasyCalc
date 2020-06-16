@@ -16,13 +16,14 @@
 
     <h1>Testseite</h1>
 
-    <button id="nextBtn" onclick="getNext(10)">next</button>
-    <button id="prevBtn" onclick="getPrev(10)">prev</button>
+    <button id="nextBtn" onclick="getNext()">next</button>
+    <button id="prevBtn" onclick="getPrev()">prev</button>
 </body>
 
 <script>
 
     var chronic;
+    var factor = 15;
 
 
     const xhr = new XMLHttpRequest();
@@ -31,7 +32,7 @@
             if (xhr.status == 200) {
                 if (xhr.response) {
                     chronic = JSON.parse(xhr.response);
-                    checkButtons(10);
+                    checkButtons();
                 }
             }
         }
@@ -53,19 +54,21 @@
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
-    var factor = 10;
+    
     var left = 0;
     var right = factor + 1;
-    renderFirst(factor);
+    renderFirst();
 
-    function renderFirst(factor) {
-        var stringURL = '/api/measure/?left=0&right=' + factor + 1; //Ein weiterer wird angefragt für den Rangecheck
+    
+
+    function renderFirst() {
+        var stringURL = '/api/measure/?left=0&right=' + (factor + 1); //Ein weiterer wird angefragt für den Rangecheck
         xhr.open('get', stringURL);
         xhr.send();
-        checkButtons(factor);
+        checkButtons();
     }
 
-    function getNext(factor) {
+    function getNext() {
 
         left += factor;
         right += factor;
@@ -74,9 +77,9 @@
 
         xhr.open('get', urlString);
         xhr.send();
-        checkButtons(factor);
+        checkButtons();
     }
-    function getPrev(factor) {
+    function getPrev() {
 
         left -= factor;
         right -= factor;
@@ -85,10 +88,10 @@
 
         xhr.open('get', urlString);
         xhr.send();
-        checkButtons(factor);
+        checkButtons();
     }
 
-    function checkButtons(factor) {
+    function checkButtons() {
 
         if (chronic) {
 
